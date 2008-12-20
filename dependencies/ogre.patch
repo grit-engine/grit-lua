@@ -1,0 +1,155 @@
+Index: OgreMain/include/OgrePass.h
+===================================================================
+--- OgreMain/include/OgrePass.h	(revision 8223)
++++ OgreMain/include/OgrePass.h	(working copy)
+@@ -135,6 +135,8 @@
+ 
+ 		// Transparent depth sorting
+ 		bool mTransparentSorting;
++		// Transparent depth sorting forced
++		bool mTransparentSortingForced;
+         //-------------------------------------------------------------------------
+ 
+         //-------------------------------------------------------------------------
+@@ -1005,6 +1007,21 @@
+         */
+ 		bool getTransparentSortingEnabled(void) const;
+ 
++        /** Sets whether or not transparent sorting is forced.
++        @param enabled
++			If true depth sorting of this material will be depend only on the value of
++            getTransparentSortingEnabled().
++        @remarks
++			By default even if transparent sorting is enabled, depth sorting will only be
++            performed when the material is transparent and depth write/check are disabled.
++            This function disables these extra conditions.
++        */
++        void setTransparentSortingForced(bool enabled);
++
++        /** Returns whether or not transparent sorting is forced.
++        */
++		bool getTransparentSortingForced(void) const;
++
+ 		/** Sets whether or not this pass should iterate per light or number of
+ 			lights which can affect the object being rendered.
+ 		@remarks
+Index: OgreMain/include/OgreTechnique.h
+===================================================================
+--- OgreMain/include/OgreTechnique.h	(revision 8223)
++++ OgreMain/include/OgreTechnique.h	(working copy)
+@@ -218,6 +218,13 @@
+ 		*/
+ 		bool isTransparentSortingEnabled(void) const;
+ 
++		/** Returns true if this Technique has transparent sorting forced. 
++		@remarks
++			This basically boils down to whether the first pass
++			has transparent sorting forced or not
++		*/
++		bool isTransparentSortingForced(void) const;
++
+         /** Internal prepare method, derived from call to Material::prepare. */
+         void _prepare(void);
+         /** Internal unprepare method, derived from call to Material::unprepare. */
+Index: OgreMain/src/OgreTechnique.cpp
+===================================================================
+--- OgreMain/src/OgreTechnique.cpp	(revision 8223)
++++ OgreMain/src/OgreTechnique.cpp	(working copy)
+@@ -495,6 +495,19 @@
+         }
+     }
+     //-----------------------------------------------------------------------------
++    bool Technique::isTransparentSortingForced(void) const
++    {
++        if (mPasses.empty())
++        {
++            return false;
++        }
++        else
++        {
++            // Base decision on the first pass
++            return mPasses[0]->getTransparentSortingForced();
++        }
++    }
++    //-----------------------------------------------------------------------------
+     bool Technique::isDepthWriteEnabled(void) const
+     {
+         if (mPasses.empty())
+Index: OgreMain/src/OgrePass.cpp
+===================================================================
+--- OgreMain/src/OgrePass.cpp	(revision 8223)
++++ OgreMain/src/OgrePass.cpp	(working copy)
+@@ -139,6 +139,7 @@
+ 		, mAlphaRejectVal(0)
+ 		, mAlphaToCoverageEnabled(false)
+ 		, mTransparentSorting(true)
++		, mTransparentSortingForced(false)
+ 		, mCullMode(CULL_CLOCKWISE)
+ 		, mManualCullMode(MANUAL_CULL_BACK)
+ 		, mLightingEnabled(true)
+@@ -233,6 +234,7 @@
+ 		mAlphaRejectVal = oth.mAlphaRejectVal;
+ 		mAlphaToCoverageEnabled = oth.mAlphaToCoverageEnabled;
+ 		mTransparentSorting = oth.mTransparentSorting;
++		mTransparentSortingForced = oth.mTransparentSortingForced;
+         mColourWrite = oth.mColourWrite;
+ 	    mDepthFunc = oth.mDepthFunc;
+         mDepthBiasConstant = oth.mDepthBiasConstant;
+@@ -875,6 +877,16 @@
+ 	{
+ 		return mTransparentSorting;
+ 	}
++	//-----------------------------------------------------------------------
++	void Pass::setTransparentSortingForced(bool enabled)
++	{
++		mTransparentSortingForced = enabled;
++	}
++	//-----------------------------------------------------------------------
++	bool Pass::getTransparentSortingForced(void) const
++	{
++		return mTransparentSortingForced;
++	}
+     //-----------------------------------------------------------------------
+ 	void Pass::setColourWriteEnabled(bool enabled)
+ 	{
+Index: OgreMain/src/OgreRenderQueueSortingGrouping.cpp
+===================================================================
+--- OgreMain/src/OgreRenderQueueSortingGrouping.cpp	(revision 8223)
++++ OgreMain/src/OgreRenderQueueSortingGrouping.cpp	(working copy)
+@@ -87,7 +87,7 @@
+         // Transparent and depth/colour settings mean depth sorting is required?
+         // Note: colour write disabled with depth check/write enabled means
+         //       setup depth buffer for other passes use.
+-        if (pTech->isTransparent() && 
++        if (pTech->isTransparentSortingForced() || pTech->isTransparent() && 
+             (!pTech->isDepthWriteEnabled() ||
+              !pTech->isDepthCheckEnabled() ||
+              pTech->hasColourWriteDisabled()))
+Index: OgreMain/src/OgreScriptTranslator.cpp
+===================================================================
+--- OgreMain/src/OgreScriptTranslator.cpp	(revision 8223)
++++ OgreMain/src/OgreScriptTranslator.cpp	(working copy)
+@@ -1340,11 +1340,19 @@
+ 					else
+ 					{
+ 						bool val = true;
+-						if(getBoolean(prop->values.front(), &val))
++						if(getBoolean(prop->values.front(), &val)) {
+ 							mPass->setTransparentSortingEnabled(val);
+-						else
+-							compiler->addError(ScriptCompiler::CE_INVALIDPARAMETERS, prop->file, prop->line,
+-								prop->values.front()->getValue() + " is not a valid boolean");
++                            mPass->setTransparentSortingForced(false);
++                        } else {
++                            String val2;
++                            if (getString(prop->values.front(), &val2) && val2=="force") {
++                                mPass->setTransparentSortingEnabled(true);
++                                mPass->setTransparentSortingForced(true);
++                            } else {
++                                compiler->addError(ScriptCompiler::CE_INVALIDPARAMETERS, prop->file, prop->line,
++                                    prop->values.front()->getValue() + " must be boolean or force");
++                            }
++                        }    
+ 					}
+ 					break;
+ 				case ID_ILLUMINATION_STAGE:
