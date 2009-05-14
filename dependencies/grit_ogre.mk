@@ -27,12 +27,16 @@ DEVIL=-DOGRE_NO_DEVIL=1
 #use freeimage (on by default because devil is off, and we need *something*)
 FREEIMAGE=-DOGRE_NO_FREEIMAGE=0
 
+#don't use nedmalloc
+ALLOCATOR=-DOGRE_MEMORY_ALLOCATOR=1
 
 #version code
 VERSION=-DVERSION=1.6.0_grit
 
 #general compiler flags - note optimisation flags, and architecture
-CFLAGS=-Wno-deprecated -g -DNDEBUG -O3  -Wfatal-errors -ffast-math -march=native -mtune=native $(shell pkg-config --cflags freetype2)
+#OPT=-DNDEBUG -O3 -ffast-math -march=native -mtune=native
+OPT=-ffast-math -march=native -mtune=native
+CFLAGS=-g $(OPT) -Wno-deprecated -Wfatal-errors $(shell pkg-config --cflags freetype2)
 
 
 
@@ -60,7 +64,7 @@ INCLUDE_DIRS=-IOgreMain/include \
              -IPlugIns/OctreeSceneManager/include
 
 
-CFLAGS+=$(GUI) $(ENDIAN) $(PRECISION) $(DEVIL) $(FREEIMAGE) $(VERSION) $(YACC) $(INCLUDE_DIRS)
+CFLAGS+=$(GUI) $(ENDIAN) $(PRECISION) $(DEVIL) $(FREEIMAGE) $(ALLOCATOR) $(VERSION) $(YACC) $(INCLUDE_DIRS)
 
 
 
