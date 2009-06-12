@@ -6,7 +6,7 @@ diff -ur ./src/Makefile ../../../grit/dependencies/lua-5.1.4/src/Makefile
  
  CC= gcc
 -CFLAGS= -O2 -Wall $(MYCFLAGS)
-+CFLAGS= -O3 -Wall $(MYCFLAGS)
++CFLAGS=-g -O3 -Wall $(MYCFLAGS)
  AR= ar rcu
  RANLIB= ranlib
  RM= rm -f
