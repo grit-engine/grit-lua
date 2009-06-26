@@ -35,8 +35,8 @@ VERSION=-DVERSION=1.6.0_grit
 
 #general compiler flags - note optimisation flags, and architecture
 OPT=-DNDEBUG -O3
-#OPT=
-CFLAGS=-g $(OPT) -ffast-math -march=pentium4 -Wno-deprecated -Wfatal-errors $(shell pkg-config --cflags freetype2)
+DBG=
+CFLAGS=-g -ffast-math -march=pentium4 -Wno-deprecated -Wfatal-errors $(shell pkg-config --cflags freetype2)
 
 
 
@@ -106,6 +106,7 @@ CORE_SOURCE=OgreMain/src/OgreAlignedAllocator.cpp \
             OgreMain/src/OgreDDSCodec.cpp \
             OgreMain/src/OgreDefaultHardwareBufferManager.cpp \
             OgreMain/src/OgreDefaultSceneQueries.cpp \
+            OgreMain/src/OgreDistanceLodStrategy.cpp \
             OgreMain/src/OgreDynLib.cpp \
             OgreMain/src/OgreDynLibManager.cpp \
             OgreMain/src/OgreEdgeListBuilder.cpp \
@@ -121,6 +122,7 @@ CORE_SOURCE=OgreMain/src/OgreAlignedAllocator.cpp \
             OgreMain/src/OgreGpuProgram.cpp \
             OgreMain/src/OgreGpuProgramManager.cpp \
             OgreMain/src/OgreGpuProgramUsage.cpp \
+            OgreMain/src/OgreGpuProgramParams.cpp \
             OgreMain/src/OgreHardwareBufferManager.cpp \
             OgreMain/src/OgreHardwareIndexBuffer.cpp \
             OgreMain/src/OgreHardwareOcclusionQuery.cpp \
@@ -132,6 +134,8 @@ CORE_SOURCE=OgreMain/src/OgreAlignedAllocator.cpp \
             OgreMain/src/OgreInstancedGeometry.cpp \
             OgreMain/src/OgreKeyFrame.cpp \
             OgreMain/src/OgreLight.cpp \
+            OgreMain/src/OgreLodStrategy.cpp \
+            OgreMain/src/OgreLodStrategyManager.cpp \
             OgreMain/src/OgreLog.cpp \
             OgreMain/src/OgreLogManager.cpp \
             OgreMain/src/OgreManualObject.cpp \
@@ -169,6 +173,7 @@ CORE_SOURCE=OgreMain/src/OgreAlignedAllocator.cpp \
             OgreMain/src/OgrePass.cpp \
             OgreMain/src/OgrePatchMesh.cpp \
             OgreMain/src/OgrePatchSurface.cpp \
+            OgreMain/src/OgrePixelCountLodStrategy.cpp \
             OgreMain/src/OgrePixelFormat.cpp \
             OgreMain/src/OgrePlane.cpp \
             OgreMain/src/OgrePlatformInformation.cpp \
@@ -242,6 +247,7 @@ CORE_SOURCE=OgreMain/src/OgreAlignedAllocator.cpp \
             OgreMain/src/OgreVector4.cpp \
             OgreMain/src/OgreVertexIndexData.cpp \
             OgreMain/src/OgreViewport.cpp \
+            OgreMain/src/OgreWorkQueue.cpp \
             OgreMain/src/OgreWindowEventUtilities.cpp \
             OgreMain/src/OgreWireBoundingBox.cpp \
             OgreMain/src/OgreZip.cpp
@@ -394,36 +400,28 @@ ALL_SOURCE=$(CORE_SOURCE) $(GL_SOURCE) $(PARTICLEFX_SOURCE) $(OCTREE_SOURCE)
 # $(CG_SOURCE) $(CG_WIN32_SOURCE)
 ALL_SOURCE+=$(POSIX_TIMER_SOURCE) $(CONFIG_GLX_SOURCE) $(GL_GLX_SOURCE) $(OCTREE_GLX_SOURCE)
 
-$(NEW_OBJ_DIR)/semithreaded/%.o: %.cpp
+$(NEW_OBJ_DIR)/opt/semithreaded/%.o: %.cpp
 	@mkdir -p `dirname "$@"`
-	@echo "Compiling: \"$@\""
-	@$(COMPILER) $(CFLAGS) -DOGRE_THREAD_SUPPORT=2 -c "$<" -o "$@"
+	@echo "Compiling (optimised): \"$@\""
+	@$(COMPILER) $(CFLAGS) $(OPT) -DOGRE_THREAD_SUPPORT=2 -c "$<" -o "$@"
 
-$(NEW_OBJ_DIR)/threaded/%.o: %.cpp
+$(NEW_OBJ_DIR)/dbg/semithreaded/%.o: %.cpp
 	@mkdir -p `dirname "$@"`
-	@echo "Compiling: \"$@\""
-	@$(COMPILER) $(CFLAGS) -DOGRE_THREAD_SUPPORT=1 -c "$<" -o "$@"
-
-$(NEW_OBJ_DIR)/unthreaded/%.o: %.cpp
-	@mkdir -p `dirname "$@"`
-	@echo "Compiling: \"$@\""
-	@$(COMPILER) $(CFLAGS) -c "$<" -o "$@"
+	@echo "Compiling (debug): \"$@\""
+	@$(COMPILER) $(CFLAGS) $(DBG) -DOGRE_THREAD_SUPPORT=2 -c "$<" -o "$@"
 
 
-# create the files in $(ALL_SOURCE) where *.cpp is replaced with $(NEW_OBJ_DIR)/semithreaded/*.o
-$(NEW_OBJ_DIR)/libogre_semithreaded.a: $(patsubst %.cpp,$(NEW_OBJ_DIR)/semithreaded/%.o,$(ALL_SOURCE))
+
+# create the files in $(ALL_SOURCE) where *.cpp is replaced with $(NEW_OBJ_DIR)/opt/semithreaded/*.o
+$(NEW_OBJ_DIR)/opt/libogre_semithreaded.a: $(patsubst %.cpp,$(NEW_OBJ_DIR)/opt/semithreaded/%.o,$(ALL_SOURCE))
 	@rm -f $@
 	@ar rs $@ $^
 
-# create the files in $(ALL_SOURCE) where *.cpp is replaced with $(NEW_OBJ_DIR)/threaded/*.o
-$(NEW_OBJ_DIR)/libogre_threaded.a: $(patsubst %.cpp,$(NEW_OBJ_DIR)/threaded/%.o,$(ALL_SOURCE))
+# create the files in $(ALL_SOURCE) where *.cpp is replaced with $(NEW_OBJ_DIR)/dbg/semithreaded/*.o
+$(NEW_OBJ_DIR)/dbg/libogre_semithreaded.a: $(patsubst %.cpp,$(NEW_OBJ_DIR)/dbg/semithreaded/%.o,$(ALL_SOURCE))
 	@rm -f $@
 	@ar rs $@ $^
 
-# create the files in $(ALL_SOURCE) where *.cpp is replaced with $(NEW_OBJ_DIR)/unthreaded/*.o
-$(NEW_OBJ_DIR)/libogre_unthreaded.a: $(patsubst %.cpp,$(NEW_OBJ_DIR)/unthreaded/%.o,$(ALL_SOURCE))
-	@rm -f $@
-	@ar rs $@ $^
 
 
 
@@ -432,7 +430,7 @@ $(NEW_OBJ_DIR)/libogre_unthreaded.a: $(patsubst %.cpp,$(NEW_OBJ_DIR)/unthreaded/
 clean:
 	find $(NEW_OBJ_DIR) -name *.o -o -name *.a | xargs rm -v
 
-all: $(NEW_OBJ_DIR)/libogre_semithreaded.a
+all: $(NEW_OBJ_DIR)/dbg/libogre_semithreaded.a $(NEW_OBJ_DIR)/opt/libogre_semithreaded.a
 
 .DEFAULT_GOAL := all
 
@@ -446,3 +444,5 @@ depend:
 	rm $(TEMPFILE)
 
 -include $(THISFILE).depend
+
+# vim: sw=8:ts=8:noet

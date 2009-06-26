@@ -151,127 +151,127 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\lua-5.1.4\src\lapi.c"
+				RelativePath=".\lua-5.1.4\lapi.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lauxlib.c"
+				RelativePath=".\lua-5.1.4\lauxlib.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lbaselib.c"
+				RelativePath=".\lua-5.1.4\lbaselib.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lcode.c"
+				RelativePath=".\lua-5.1.4\lcode.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\ldblib.c"
+				RelativePath=".\lua-5.1.4\ldblib.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\ldebug.c"
+				RelativePath=".\lua-5.1.4\ldebug.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\ldo.c"
+				RelativePath=".\lua-5.1.4\ldo.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\ldump.c"
+				RelativePath=".\lua-5.1.4\ldump.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lfunc.c"
+				RelativePath=".\lua-5.1.4\lfunc.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lgc.c"
+				RelativePath=".\lua-5.1.4\lgc.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\linit.c"
+				RelativePath=".\lua-5.1.4\linit.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\liolib.c"
+				RelativePath=".\lua-5.1.4\liolib.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\llex.c"
+				RelativePath=".\lua-5.1.4\llex.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lmathlib.c"
+				RelativePath=".\lua-5.1.4\lmathlib.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lmem.c"
+				RelativePath=".\lua-5.1.4\lmem.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\loadlib.c"
+				RelativePath=".\lua-5.1.4\loadlib.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lobject.c"
+				RelativePath=".\lua-5.1.4\lobject.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lopcodes.c"
+				RelativePath=".\lua-5.1.4\lopcodes.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\loslib.c"
+				RelativePath=".\lua-5.1.4\loslib.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lparser.c"
+				RelativePath=".\lua-5.1.4\lparser.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lstate.c"
+				RelativePath=".\lua-5.1.4\lstate.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lstring.c"
+				RelativePath=".\lua-5.1.4\lstring.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lstrlib.c"
+				RelativePath=".\lua-5.1.4\lstrlib.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\ltable.c"
+				RelativePath=".\lua-5.1.4\ltable.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\ltablib.c"
+				RelativePath=".\lua-5.1.4\ltablib.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\ltm.c"
+				RelativePath=".\lua-5.1.4\ltm.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lua.c"
+				RelativePath=".\lua-5.1.4\lua.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lundump.c"
+				RelativePath=".\lua-5.1.4\lundump.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lvm.c"
+				RelativePath=".\lua-5.1.4\lvm.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lzio.c"
+				RelativePath=".\lua-5.1.4\lzio.c"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\print.c"
+				RelativePath=".\lua-5.1.4\print.c"
 				>
 			</File>
 		</Filter>
@@ -281,95 +281,95 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\lua-5.1.4\src\lapi.h"
+				RelativePath=".\lua-5.1.4\lapi.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lauxlib.h"
+				RelativePath=".\lua-5.1.4\lauxlib.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lcode.h"
+				RelativePath=".\lua-5.1.4\lcode.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\ldebug.h"
+				RelativePath=".\lua-5.1.4\ldebug.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\ldo.h"
+				RelativePath=".\lua-5.1.4\ldo.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lfunc.h"
+				RelativePath=".\lua-5.1.4\lfunc.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lgc.h"
+				RelativePath=".\lua-5.1.4\lgc.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\llex.h"
+				RelativePath=".\lua-5.1.4\llex.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\llimits.h"
+				RelativePath=".\lua-5.1.4\llimits.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lmem.h"
+				RelativePath=".\lua-5.1.4\lmem.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lobject.h"
+				RelativePath=".\lua-5.1.4\lobject.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lopcodes.h"
+				RelativePath=".\lua-5.1.4\lopcodes.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lparser.h"
+				RelativePath=".\lua-5.1.4\lparser.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lstate.h"
+				RelativePath=".\lua-5.1.4\lstate.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lstring.h"
+				RelativePath=".\lua-5.1.4\lstring.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\ltable.h"
+				RelativePath=".\lua-5.1.4\ltable.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\ltm.h"
+				RelativePath=".\lua-5.1.4\ltm.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lua.h"
+				RelativePath=".\lua-5.1.4\lua.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\luaconf.h"
+				RelativePath=".\lua-5.1.4\luaconf.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lualib.h"
+				RelativePath=".\lua-5.1.4\lualib.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lundump.h"
+				RelativePath=".\lua-5.1.4\lundump.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lvm.h"
+				RelativePath=".\lua-5.1.4\lvm.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\src\lzio.h"
+				RelativePath=".\lua-5.1.4\lzio.h"
 				>
 			</File>
 		</Filter>
