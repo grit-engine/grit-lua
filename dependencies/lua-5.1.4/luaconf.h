@@ -216,8 +216,6 @@
 ** ===================================================================
 */
 
-#if defined(lua_c) || defined(luaall_c)
-
 /*
 @@ lua_stdin_is_tty detects whether the standard input is a 'tty' (that
 @* is, whether we're running lua interactively).
@@ -285,8 +283,6 @@
 	fgets(b, LUA_MAXINPUT, stdin) != NULL)  /* get line */
 #define lua_saveline(L,idx)	{ (void)L; (void)idx; }
 #define lua_freeline(L,b)	{ (void)L; (void)b; }
-#endif
-
 #endif
 
 /* }================================================================== */
@@ -528,7 +524,6 @@
 /*
 @@ The luai_num* macros define the primitive operations over numbers.
 */
-#if defined(LUA_CORE)
 #include <math.h>
 #define luai_numadd(a,b)	((a)+(b))
 #define luai_numsub(a,b)	((a)-(b))
@@ -541,7 +536,6 @@
 #define luai_numlt(a,b)		((a)<(b))
 #define luai_numle(a,b)		((a)<=(b))
 #define luai_numisnan(a)	(isnan(a))
-#endif
 
 
 /*
@@ -641,7 +635,6 @@ union luai_Cast { double l_d; long l_l; };
 ** insecure) or if you want the original tmpnam anyway.  By default, Lua
 ** uses tmpnam except when POSIX is available, where it uses mkstemp.
 */
-#if defined(loslib_c) || defined(luaall_c)
 
 #if defined(LUA_USE_MKSTEMP)
 #include <unistd.h>
@@ -655,8 +648,6 @@ union luai_Cast { double l_d; long l_l; };
 #else
 #define LUA_TMPNAMBUFSIZE	L_tmpnam
 #define lua_tmpnam(b,e)		{ e = (tmpnam(b) == NULL); }
-#endif
-
 #endif
 
 
