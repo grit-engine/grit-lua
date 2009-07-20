@@ -218,6 +218,7 @@ CORE_SOURCE=OgreMain/src/OgreAlignedAllocator.cpp \
             OgreMain/src/OgreShadowCameraSetupFocused.cpp \
             OgreMain/src/OgreShadowCameraSetupLiSPSM.cpp \
             OgreMain/src/OgreShadowCameraSetupPlaneOptimal.cpp \
+            OgreMain/src/OgreShadowCameraSetupPSSM.cpp \
             OgreMain/src/OgreShadowCaster.cpp \
             OgreMain/src/OgreShadowTextureManager.cpp \
             OgreMain/src/OgreShadowVolumeExtrudeProgram.cpp \
