@@ -255,10 +255,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\lua-5.1.4\lua.c"
-				>
-			</File>
-			<File
 				RelativePath=".\lua-5.1.4\lundump.c"
 				>
 			</File>
@@ -268,10 +264,6 @@
 			</File>
 			<File
 				RelativePath=".\lua-5.1.4\lzio.c"
-				>
-			</File>
-			<File
-				RelativePath=".\lua-5.1.4\print.c"
 				>
 			</File>
 		</Filter>

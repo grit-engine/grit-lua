@@ -535,8 +535,12 @@
 #define luai_numeq(a,b)		((a)==(b))
 #define luai_numlt(a,b)		((a)<(b))
 #define luai_numle(a,b)		((a)<=(b))
+#ifdef WIN32
+#include <float.h>
+#define luai_numisnan(a)	(_isnan(a))
+#else
 #define luai_numisnan(a)	(isnan(a))
-
+#endif
 
 /*
 @@ lua_number2int is a macro to convert lua_Number to int.
