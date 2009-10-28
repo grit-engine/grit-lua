@@ -1,51 +1,8 @@
-Index: Tools/XMLConverter/src/OgreXMLMeshSerializer.cpp
-===================================================================
---- Tools/XMLConverter/src/OgreXMLMeshSerializer.cpp	(revision 8748)
-+++ Tools/XMLConverter/src/OgreXMLMeshSerializer.cpp	(working copy)
-@@ -519,6 +519,12 @@
-     						dataNode->SetAttribute("v", StringConverter::toString(*pFloat++));
-     						dataNode->SetAttribute("w", StringConverter::toString(*pFloat++));
-                             break;
-+                        case VET_FLOAT4:
-+    						dataNode->SetAttribute("u", StringConverter::toString(*pFloat++));
-+    						dataNode->SetAttribute("v", StringConverter::toString(*pFloat++));
-+    						dataNode->SetAttribute("w", StringConverter::toString(*pFloat++));
-+    						dataNode->SetAttribute("x", StringConverter::toString(*pFloat++));
-+                            break;
-                         default:
-                             break;
-                         }
-@@ -1053,6 +1059,11 @@
-                             *pFloat++ = StringConverter::parseReal(
-                                 xmlElem->Attribute("w"));
-                         }
-+                        if (VertexElement::getTypeCount(elem.getType()) > 3)
-+                        {
-+                            *pFloat++ = StringConverter::parseReal(
-+                                xmlElem->Attribute("x"));
-+                        }
- 
-                         break;
-                     default:
-Index: Tools/XMLConverter/docs/ogremeshxml.dtd
-===================================================================
---- Tools/XMLConverter/docs/ogremeshxml.dtd	(revision 8748)
-+++ Tools/XMLConverter/docs/ogremeshxml.dtd	(working copy)
-@@ -111,7 +111,8 @@
- <!ATTLIST texcoord
- 	u	CDATA	#REQUIRED	
- 	v	CDATA	"0"	
--	w	CDATA	"0" >
-+	w	CDATA	"0"	
-+	x	CDATA	"0" >
- <!ELEMENT submeshnames (submeshname+)>
- <!ELEMENT submeshname EMPTY>
- <!ATTLIST submeshname 
 Index: RenderSystems/GL/src/GLSL/src/OgreGLSLLinkProgram.cpp
 ===================================================================
---- RenderSystems/GL/src/GLSL/src/OgreGLSLLinkProgram.cpp	(revision 8748)
+--- RenderSystems/GL/src/GLSL/src/OgreGLSLLinkProgram.cpp	(revision 9227)
 +++ RenderSystems/GL/src/GLSL/src/OgreGLSLLinkProgram.cpp	(working copy)
-@@ -175,8 +175,13 @@
+@@ -174,8 +174,13 @@
  					if (pos != String::npos)
  					{
  						String::size_type startpos = vpSource.find("attribute", pos-20);

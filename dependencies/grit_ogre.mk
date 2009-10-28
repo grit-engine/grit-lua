@@ -106,6 +106,7 @@ CORE_SOURCE=OgreMain/src/OgreAlignedAllocator.cpp \
             OgreMain/src/OgreDDSCodec.cpp \
             OgreMain/src/OgreDefaultHardwareBufferManager.cpp \
             OgreMain/src/OgreDefaultSceneQueries.cpp \
+            OgreMain/src/Threading/OgreDefaultWorkQueueStandard.cpp \
             OgreMain/src/OgreDistanceLodStrategy.cpp \
             OgreMain/src/OgreDynLib.cpp \
             OgreMain/src/OgreDynLibManager.cpp \
@@ -242,7 +243,7 @@ CORE_SOURCE=OgreMain/src/OgreAlignedAllocator.cpp \
             OgreMain/src/OgreTextureManager.cpp \
             OgreMain/src/OgreTextureUnitState.cpp \
             OgreMain/src/OgreUnifiedHighLevelGpuProgram.cpp \
-            OgreMain/src/OgreUserDefinedObject.cpp \
+            OgreMain/src/OgreUserObjectBindings.cpp \
             OgreMain/src/OgreVector2.cpp \
             OgreMain/src/OgreVector3.cpp \
             OgreMain/src/OgreVector4.cpp \
@@ -404,12 +405,12 @@ ALL_SOURCE+=$(POSIX_TIMER_SOURCE) $(CONFIG_GLX_SOURCE) $(GL_GLX_SOURCE) $(OCTREE
 $(NEW_OBJ_DIR)/opt/semithreaded/%.o: %.cpp
 	@mkdir -p `dirname "$@"`
 	@echo "Compiling (optimised): \"$@\""
-	@$(COMPILER) $(CFLAGS) $(OPT) -DOGRE_THREAD_SUPPORT=2 -c "$<" -o "$@"
+	@$(COMPILER) $(CFLAGS) $(OPT) -DOGRE_THREAD_SUPPORT=2 -DOGRE_THREAD_PROVIDER=1 -c "$<" -o "$@"
 
 $(NEW_OBJ_DIR)/dbg/semithreaded/%.o: %.cpp
 	@mkdir -p `dirname "$@"`
 	@echo "Compiling (debug): \"$@\""
-	@$(COMPILER) $(CFLAGS) $(DBG) -DOGRE_THREAD_SUPPORT=2 -c "$<" -o "$@"
+	@$(COMPILER) $(CFLAGS) $(DBG) -DOGRE_THREAD_SUPPORT=2 -DOGRE_THREAD_PROVIDER=1 -c "$<" -o "$@"
 
 
 
