@@ -18,10 +18,10 @@
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(OutDir)"
+			IntermediateDirectory="$(OutDir)\int"
 			ConfigurationType="4"
 			CharacterSet="2"
-			BuildLogFile="$(IntDir)\$(ProjectName)_BuildLog.htm"
+			BuildLogFile="$(OutDir)\$(TargetName)_BuildLog.htm"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -50,6 +50,7 @@
 				EnableFunctionLevelLinking="true"
 				FloatingPointModel="0"
 				DisableLanguageExtensions="false"
+				ProgramDataBaseFileName="$(OutDir)\$(TargetName).pdb"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -84,11 +85,11 @@
 		<Configuration
 			Name="Normal|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(OutDir)"
+			IntermediateDirectory="$(OutDir)\int"
 			ConfigurationType="4"
 			CharacterSet="2"
 			WholeProgramOptimization="0"
-			BuildLogFile="$(IntDir)\$(ProjectName)_BuildLog.htm"
+			BuildLogFile="$(OutDir)\$(TargetName)_BuildLog.htm"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -124,6 +125,7 @@
 				EnableEnhancedInstructionSet="2"
 				FloatingPointModel="0"
 				DisableLanguageExtensions="false"
+				ProgramDataBaseFileName="$(OutDir)\$(TargetName).pdb"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -158,11 +160,11 @@
 		<Configuration
 			Name="Optimised|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(OutDir)"
+			IntermediateDirectory="$(OutDir)\int"
 			ConfigurationType="4"
 			CharacterSet="2"
 			WholeProgramOptimization="1"
-			BuildLogFile="$(IntDir)\$(ProjectName)_BuildLog.htm"
+			BuildLogFile="$(OutDir)\$(TargetName)_BuildLog.htm"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -198,6 +200,7 @@
 				EnableEnhancedInstructionSet="2"
 				FloatingPointModel="0"
 				DisableLanguageExtensions="false"
+				ProgramDataBaseFileName="$(OutDir)\$(TargetName).pdb"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
