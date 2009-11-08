@@ -38,6 +38,18 @@ OPT=-DNDEBUG -O3
 DBG=
 CFLAGS=-g -ffast-math -march=pentium4 -Wno-deprecated -Wfatal-errors $(shell pkg-config --cflags freetype2)
 
+LIBS=-lpthread \
+     /usr/lib/libboost_thread-mt.a \
+     /usr/lib/libfreeimage.a \
+     /usr/lib/libzzip.a \
+     /usr/lib/libfreetype.a \
+     /usr/lib/libGLU.a \
+     /usr/lib/libGLEW.a \
+     /usr/lib/libXrandr.a \
+     /usr/lib/libXrender.a \
+     /usr/lib/libz.a \
+     -lGL -lXaw
+
 
 
 NEW_OBJ_DIR=grit_ogre_obj
@@ -353,6 +365,13 @@ OCTREE_SOURCE=PlugIns/OctreeSceneManager/src/OgreHeightmapTerrainPageSource.cpp 
               PlugIns/OctreeSceneManager/src/OgreTerrainSceneManager.cpp \
               PlugIns/OctreeSceneManager/src/OgreTerrainVertexProgram.cpp
 
+XMLCONVERTER_SOURCE=Tools/XMLConverter/src/main.cpp \
+                    Tools/XMLConverter/src/OgreXMLSkeletonSerializer.cpp \
+                    Tools/XMLConverter/src/OgreXMLMeshSerializer.cpp \
+                    Tools/XMLConverter/src/tinyxml.cpp \
+                    Tools/XMLConverter/src/tinyxmlparser.cpp \
+                    Tools/XMLConverter/src/tinyxmlerror.cpp \
+                    Tools/XMLConverter/src/tinystr.cpp
 
 
 ################################################################################
@@ -424,6 +443,8 @@ $(NEW_OBJ_DIR)/dbg/libogre_semithreaded.a: $(patsubst %.cpp,$(NEW_OBJ_DIR)/dbg/s
 	@rm -f $@
 	@ar rs $@ $^
 
+$(NEW_OBJ_DIR)/opt/OgreXMLConverter: $(XMLCONVERTER_SOURCE)
+	@$(COMPILER) -DTIXML_USE_STL -I Tools/XMLConverter/include $(CFLAGS) $(OPT) -DOGRE_THREAD_SUPPORT=2 -DOGRE_THREAD_PROVIDER=1 $^ -o "$@" -L $(NEW_OBJ_DIR)/opt -logre_semithreaded $(LIBS)
 
 
 
