@@ -73,7 +73,8 @@ INCLUDE_DIRS=-IOgreMain/include \
              -IRenderSystems/GL/include/GLX \
              -IPlugIns/CgProgramManager/include \
              -IPlugIns/ParticleFX/include \
-             -IPlugIns/OctreeSceneManager/include
+             -IPlugIns/OctreeSceneManager/include \
+             -I..
 
 
 CFLAGS+=$(GUI) $(ENDIAN) $(PRECISION) $(DEVIL) $(FREEIMAGE) $(ALLOCATOR) $(VERSION) $(YACC) $(INCLUDE_DIRS)
@@ -461,9 +462,12 @@ TEMPFILE:=$(shell tempfile)
 
 depend:
 	makedepend -Y $(INCLUDE_DIRS) -f $(TEMPFILE) $(CORE_SOURCE) $(GL_SOURCE) $(PARTICLEFX_SOURCE) $(CG_SOURCE) $(OCTREE_SOURCE) $(POSIX_TIMER_SOURCE) $(CONFIG_GLX_SOURCE) $(GL_GLX_SOURCE) $(OCTREE_GLX_SOURCE) $(GL_WIN32_SOURCE) $(CG_WIN32_SOURCE) $(PARTICLEFX_WIN32_SOURCE) $(OCTREE_WIN32_SOURCE)
-	cat $(TEMPFILE) | sed 's/^\([^:]*\): /$(NEW_OBJ_DIR)\/threaded\/&/g' > $(THISFILE).depend
-	cat $(TEMPFILE) | sed 's/^\([^:]*\): /$(NEW_OBJ_DIR)\/semithreaded\/&/g' >> $(THISFILE).depend
-	cat $(TEMPFILE) | sed 's/^\([^:]*\): /$(NEW_OBJ_DIR)\/unthreaded\/&/g' >> $(THISFILE).depend
+	cat $(TEMPFILE) | sed 's/^\([^:]*\): /$(NEW_OBJ_DIR)\/opt\/threaded\/&/g' > $(THISFILE).depend
+	cat $(TEMPFILE) | sed 's/^\([^:]*\): /$(NEW_OBJ_DIR)\/opt\/semithreaded\/&/g' >> $(THISFILE).depend
+	cat $(TEMPFILE) | sed 's/^\([^:]*\): /$(NEW_OBJ_DIR)\/opt\/unthreaded\/&/g' >> $(THISFILE).depend
+	cat $(TEMPFILE) | sed 's/^\([^:]*\): /$(NEW_OBJ_DIR)\/dbg\/threaded\/&/g' >> $(THISFILE).depend
+	cat $(TEMPFILE) | sed 's/^\([^:]*\): /$(NEW_OBJ_DIR)\/dbg\/semithreaded\/&/g' >> $(THISFILE).depend
+	cat $(TEMPFILE) | sed 's/^\([^:]*\): /$(NEW_OBJ_DIR)\/dbg\/unthreaded\/&/g' >> $(THISFILE).depend
 	rm $(TEMPFILE)
 
 -include $(THISFILE).depend
