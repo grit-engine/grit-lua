@@ -1,26 +1,26 @@
 Index: OgreMain/include/OgreResource.h
 ===================================================================
---- OgreMain/include/OgreResource.h	(revision 9289)
+--- OgreMain/include/OgreResource.h	(revision 9403)
 +++ OgreMain/include/OgreResource.h	(working copy)
 @@ -161,7 +161,7 @@
  		/// State count, the number of times this resource has changed state
  		size_t mStateCount;
  
 -		typedef list<Listener*>::type ListenerList;
-+               typedef set<Listener*>::type ListenerList;
++		typedef set<Listener*>::type ListenerList;
  		ListenerList mListenerList;
  		OGRE_MUTEX(mListenerListMutex)
  
 Index: OgreMain/src/OgreResource.cpp
 ===================================================================
---- OgreMain/src/OgreResource.cpp	(revision 9289)
+--- OgreMain/src/OgreResource.cpp	(revision 9403)
 +++ OgreMain/src/OgreResource.cpp	(working copy)
-@@ -343,14 +343,14 @@
+@@ -344,14 +344,14 @@
  	void Resource::addListener(Resource::Listener* lis)
  	{
  		OGRE_LOCK_MUTEX(mListenerListMutex)
 -		mListenerList.push_back(lis);
-+               mListenerList.insert(lis);
++		mListenerList.insert(lis);
  	}
  	//-----------------------------------------------------------------------
  	void Resource::removeListener(Resource::Listener* lis)
@@ -28,26 +28,7 @@ Index: OgreMain/src/OgreResource.cpp
  		// O(n) but not called very often
  		OGRE_LOCK_MUTEX(mListenerListMutex)
 -		mListenerList.remove(lis);
-+               mListenerList.erase(lis);
++		mListenerList.erase(lis);
  	}
  	//-----------------------------------------------------------------------
- 	void Resource::_fireLoadingComplete(void)
-Index: RenderSystems/GL/src/GLSL/src/OgreGLSLLinkProgram.cpp
-===================================================================
---- RenderSystems/GL/src/GLSL/src/OgreGLSLLinkProgram.cpp	(revision 9289)
-+++ RenderSystems/GL/src/GLSL/src/OgreGLSLLinkProgram.cpp	(working copy)
-@@ -174,8 +174,13 @@
- 					if (pos != String::npos)
- 					{
- 						String::size_type startpos = vpSource.find("attribute", pos-20);
--						if (startpos != String::npos && startpos < pos)
-+						if (startpos != String::npos && startpos < pos) {
- 							glBindAttribLocationARB(mGLHandle, a.attrib, a.name.c_str());
-+						} else {
-+							startpos = vpSource.find("in", pos-20);
-+							if (startpos != String::npos && startpos < pos)
-+								glBindAttribLocationARB(mGLHandle, a.attrib, a.name.c_str());
-+						}
- 					}
- 				}
- 			}
+ 	void Resource::_fireLoadingComplete(bool wasBackgroundLoaded)

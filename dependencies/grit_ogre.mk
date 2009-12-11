@@ -102,7 +102,6 @@ CORE_SOURCE=OgreMain/src/OgreAlignedAllocator.cpp \
             OgreMain/src/OgreCodec.cpp \
             OgreMain/src/OgreColourValue.cpp \
             OgreMain/src/OgreCommon.cpp \
-            OgreMain/src/OgreCompiler2Pass.cpp \
             OgreMain/src/OgreCompositionPass.cpp \
             OgreMain/src/OgreCompositionTargetPass.cpp \
             OgreMain/src/OgreCompositionTechnique.cpp \
@@ -110,8 +109,6 @@ CORE_SOURCE=OgreMain/src/OgreAlignedAllocator.cpp \
             OgreMain/src/OgreCompositor.cpp \
             OgreMain/src/OgreCompositorInstance.cpp \
             OgreMain/src/OgreCompositorManager.cpp \
-            OgreMain/src/OgreCompositorScriptCompiler.cpp \
-            OgreMain/src/OgreCompositorSerializer.cpp \
             OgreMain/src/OgreConfigFile.cpp \
             OgreMain/src/OgreControllerManager.cpp \
             OgreMain/src/OgreConvexBody.cpp \
@@ -198,6 +195,7 @@ CORE_SOURCE=OgreMain/src/OgreAlignedAllocator.cpp \
             OgreMain/src/OgrePrefabFactory.cpp \
             OgreMain/src/OgreProfiler.cpp \
             OgreMain/src/OgreProgressiveMesh.cpp \
+            OgreMain/src/OgrePVRTCCodec.cpp \
             OgreMain/src/OgreQuaternion.cpp \
             OgreMain/src/OgreRectangle2D.cpp \
             OgreMain/src/OgreRenderQueue.cpp \
