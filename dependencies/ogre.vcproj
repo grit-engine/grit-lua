@@ -388,10 +388,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreCompiler2Pass.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\ogre\OgreMain\src\OgreCompositionPass.cpp"
 				>
 			</File>
@@ -417,14 +413,6 @@
 			</File>
 			<File
 				RelativePath=".\ogre\OgreMain\src\OgreCompositorManager.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ogre\OgreMain\src\OgreCompositorScriptCompiler.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ogre\OgreMain\src\OgreCompositorSerializer.cpp"
 				>
 			</File>
 			<File
@@ -1057,6 +1045,10 @@
 			</File>
 			<File
 				RelativePath=".\ogre\OgreMain\src\OgreProgressiveMesh.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ogre\OgreMain\src\OgrePVRTCCodec.cpp"
 				>
 			</File>
 			<File
