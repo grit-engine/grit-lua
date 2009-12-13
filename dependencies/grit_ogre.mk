@@ -34,7 +34,7 @@ ALLOCATOR=-DOGRE_MEMORY_ALLOCATOR=1
 VERSION=-DVERSION=1.6.0_grit
 
 #general compiler flags - note optimisation flags, and architecture
-OPT=-DNDEBUG -O3
+OPT=-DNDEBUG -O2 -finline-functions -funroll-loops
 DBG=
 CFLAGS=-g -ffast-math -march=pentium4 -Wno-deprecated -Wfatal-errors $(shell pkg-config --cflags freetype2)
 
