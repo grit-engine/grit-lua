@@ -1,6 +1,6 @@
 Index: OgreMain/include/OgreResource.h
 ===================================================================
---- OgreMain/include/OgreResource.h	(revision 9403)
+--- OgreMain/include/OgreResource.h	(revision 9415)
 +++ OgreMain/include/OgreResource.h	(working copy)
 @@ -161,7 +161,7 @@
  		/// State count, the number of times this resource has changed state
@@ -13,7 +13,7 @@ Index: OgreMain/include/OgreResource.h
  
 Index: OgreMain/src/OgreResource.cpp
 ===================================================================
---- OgreMain/src/OgreResource.cpp	(revision 9403)
+--- OgreMain/src/OgreResource.cpp	(revision 9415)
 +++ OgreMain/src/OgreResource.cpp	(working copy)
 @@ -344,14 +344,14 @@
  	void Resource::addListener(Resource::Listener* lis)
@@ -32,3 +32,23 @@ Index: OgreMain/src/OgreResource.cpp
  	}
  	//-----------------------------------------------------------------------
  	void Resource::_fireLoadingComplete(bool wasBackgroundLoaded)
+Index: RenderSystems/GL/src/GLSL/src/OgreGLSLLinkProgram.cpp
+===================================================================
+--- RenderSystems/GL/src/GLSL/src/OgreGLSLLinkProgram.cpp	(revision 9415)
++++ RenderSystems/GL/src/GLSL/src/OgreGLSLLinkProgram.cpp	(working copy)
+@@ -178,13 +178,13 @@
+ 					{
+ 						String::size_type startpos = vpSource.find("attribute", pos-20);
+ 						if (startpos == String::npos)
+-							vpSource.find("in", pos-20);
++							startpos = vpSource.find("in", pos-20);
+ 						if (startpos != String::npos && startpos < pos)
+ 						{
+ 							// final check 
+ 							String expr = vpSource.substr(startpos, pos + a.name.length() - startpos);
+ 							StringVector vec = StringUtil::split(expr);
+-							if (vec[0] == "in" || vec[0] == "attribute" && vec[2] == a.name)
++							if ((vec[0] == "in" || vec[0] == "attribute") && vec[2] == a.name)
+ 								glBindAttribLocationARB(mGLHandle, a.attrib, a.name.c_str());
+ 						}
+ 
