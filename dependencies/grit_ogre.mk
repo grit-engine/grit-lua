@@ -329,7 +329,8 @@ GL_SOURCE=RenderSystems/GL/src/glew.cpp \
 
 CG_SOURCE=PlugIns/CgProgramManager/src/OgreCgPlugin.cpp \
           PlugIns/CgProgramManager/src/OgreCgProgram.cpp \
-          PlugIns/CgProgramManager/src/OgreCgProgramFactory.cpp
+          PlugIns/CgProgramManager/src/OgreCgProgramFactory.cpp \
+          PlugIns/CgProgramManager/src/OgreCgFxScriptLoader.cpp
 
 
 PARTICLEFX_SOURCE=PlugIns/ParticleFX/src/OgreAreaEmitter.cpp \
@@ -416,8 +417,7 @@ OCTREE_WIN32_SOURCE=PlugIns/OctreeSceneManager/src/OgreOctreeSceneManagerDll.cpp
 ### now the actual compile
 ################################################################################
 
-ALL_SOURCE=$(CORE_SOURCE) $(GL_SOURCE) $(PARTICLEFX_SOURCE) $(OCTREE_SOURCE)
-# $(CG_SOURCE) $(CG_WIN32_SOURCE)
+ALL_SOURCE=$(CORE_SOURCE) $(GL_SOURCE) $(PARTICLEFX_SOURCE) $(OCTREE_SOURCE) $(CG_SOURCE) $(CG_WIN32_SOURCE)
 ALL_SOURCE+=$(POSIX_TIMER_SOURCE) $(CONFIG_GLX_SOURCE) $(GL_GLX_SOURCE) $(OCTREE_GLX_SOURCE)
 
 $(NEW_OBJ_DIR)/opt/semithreaded/%.o: %.cpp
