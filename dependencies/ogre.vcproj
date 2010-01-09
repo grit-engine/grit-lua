@@ -186,7 +186,7 @@
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="true"
 				EnableFiberSafeOptimizations="true"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)\dependencies\ogre\OgreMain\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\OgreMain\src\nedmalloc&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\win32&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\nvparse&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\nvparse\winheaders&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\atifs\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\GLSL\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\include\&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\Direct3D9\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\ParticleFX\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\OctreeSceneManager\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\Dependencies\include&quot;;&quot;$(SolutionDir)\dependencies&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)\dependencies\ogre\OgreMain\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\OgreMain\src\nedmalloc&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\win32&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\nvparse&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\nvparse\winheaders&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\atifs\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\GLSL\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\include\&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\Direct3D9\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\ParticleFX\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\OctreeSceneManager\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\Dependencies\include&quot;;&quot;$(SolutionDir)\dependencies&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\CgProgramManager\include&quot;"
 				PreprocessorDefinitions="WIN32;OGRE_NO_FREEIMAGE=0;OGRE_MEMORY_ALLOCATOR=1;OGRE_CONFIG_LITTLE_ENDIAN;OGRE_GUI_WIN32;OGRE_THREAD_SUPPORT=2;OGRE_THREAD_PROVIDER=1;NDEBUG;OGRE_STATIC_LIB;FREEIMAGE_LIB"
 				StringPooling="true"
 				MinimalRebuild="true"
@@ -357,6 +357,26 @@
 			</File>
 			<File
 				RelativePath=".\ogre\OgreMain\src\OgreCamera.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ogre\PlugIns\CgProgramManager\src\OgreCgFxScriptLoader.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ogre\PlugIns\CgProgramManager\src\OgreCgPlugin.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ogre\PlugIns\CgProgramManager\src\OgreCgProgram.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ogre\PlugIns\CgProgramManager\src\OgreCgProgramFactory.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ogre\PlugIns\CgProgramManager\src\OgreCgProgramManagerDll.cpp"
 				>
 			</File>
 			<File
