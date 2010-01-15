@@ -452,7 +452,7 @@ $(NEW_OBJ_DIR)/opt/OgreXMLConverter: $(XMLCONVERTER_SOURCE)
 clean:
 	find $(NEW_OBJ_DIR) -name *.o -o -name *.a | xargs rm -v
 
-all: $(NEW_OBJ_DIR)/dbg/libogre_semithreaded.a $(NEW_OBJ_DIR)/opt/libogre_semithreaded.a
+all: $(NEW_OBJ_DIR)/dbg/libogre_semithreaded.a $(NEW_OBJ_DIR)/opt/libogre_semithreaded.a $(NEW_OBJ_DIR)/opt/OgreXMLConverter
 
 .DEFAULT_GOAL := all
 
