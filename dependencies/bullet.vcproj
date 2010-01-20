@@ -486,6 +486,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\bullet\src\BulletCollision\CollisionDispatch\btInternalEdgeUtility.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\bullet\src\BulletDynamics\Character\btKinematicCharacterController.cpp"
 				>
 			</File>
@@ -555,6 +559,10 @@
 			</File>
 			<File
 				RelativePath=".\bullet\src\BulletDynamics\ConstraintSolver\btSequentialImpulseConstraintSolver.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\bullet\src\LinearMath\btSerializer.cpp"
 				>
 			</File>
 			<File
