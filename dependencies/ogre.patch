@@ -1,6 +1,6 @@
 Index: OgreMain/include/OgreResource.h
 ===================================================================
---- OgreMain/include/OgreResource.h	(revision 9415)
+--- OgreMain/include/OgreResource.h	(revision 9577)
 +++ OgreMain/include/OgreResource.h	(working copy)
 @@ -161,7 +161,7 @@
  		/// State count, the number of times this resource has changed state
@@ -13,7 +13,7 @@ Index: OgreMain/include/OgreResource.h
  
 Index: OgreMain/src/OgreResource.cpp
 ===================================================================
---- OgreMain/src/OgreResource.cpp	(revision 9415)
+--- OgreMain/src/OgreResource.cpp	(revision 9577)
 +++ OgreMain/src/OgreResource.cpp	(working copy)
 @@ -344,14 +344,14 @@
  	void Resource::addListener(Resource::Listener* lis)
@@ -32,23 +32,30 @@ Index: OgreMain/src/OgreResource.cpp
  	}
  	//-----------------------------------------------------------------------
  	void Resource::_fireLoadingComplete(bool wasBackgroundLoaded)
-Index: RenderSystems/GL/src/GLSL/src/OgreGLSLLinkProgram.cpp
+Index: RenderSystems/Direct3D9/src/OgreD3D9RenderWindow.cpp
 ===================================================================
---- RenderSystems/GL/src/GLSL/src/OgreGLSLLinkProgram.cpp	(revision 9415)
-+++ RenderSystems/GL/src/GLSL/src/OgreGLSLLinkProgram.cpp	(working copy)
-@@ -178,13 +178,13 @@
- 					{
- 						String::size_type startpos = vpSource.find("attribute", pos-20);
- 						if (startpos == String::npos)
--							vpSource.find("in", pos-20);
-+							startpos = vpSource.find("in", pos-20);
- 						if (startpos != String::npos && startpos < pos)
- 						{
- 							// final check 
- 							String expr = vpSource.substr(startpos, pos + a.name.length() - startpos);
- 							StringVector vec = StringUtil::split(expr);
--							if (vec[0] == "in" || vec[0] == "attribute" && vec[2] == a.name)
-+							if ((vec[0] == "in" || vec[0] == "attribute") && vec[2] == a.name)
- 								glBindAttribLocationARB(mGLHandle, a.attrib, a.name.c_str());
- 						}
- 
+--- RenderSystems/Direct3D9/src/OgreD3D9RenderWindow.cpp	(revision 9577)
++++ RenderSystems/Direct3D9/src/OgreD3D9RenderWindow.cpp	(working copy)
+@@ -379,10 +379,11 @@
+ 				}
+ 				else
+ 				{
+-					SetWindowPos(mHWnd, HWND_TOPMOST, mLeft, mTop, width, height, SWP_NOACTIVATE);
+-					//MoveWindow(mHWnd, mLeft, mTop, mWidth, mHeight, FALSE);
+ 					SetWindowLong(mHWnd, GWL_STYLE, dwStyle);
+ 					SetWindowPos(mHWnd, 0, 0,0, 0,0, SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER);
++
++                                        SetWindowPos(mHWnd, HWND_TOPMOST, mLeft, mTop, width, height, SWP_NOACTIVATE);
++					//MoveWindow(mHWnd, mLeft, mTop, mWidth, mHeight, FALSE);
+ 				}
+ 			}
+ 			else
+@@ -399,7 +400,7 @@
+ 				SetWindowLong(mHWnd, GWL_STYLE, dwStyle);
+ 				SetWindowPos(mHWnd, HWND_NOTOPMOST, 0, 0, winWidth, winHeight,
+ 					SWP_DRAWFRAME | SWP_FRAMECHANGED | SWP_NOMOVE | SWP_NOACTIVATE);
+-				// Note that we also set the position in the restoreLostDevice method
++				// Note that we also set the position in the restoreLostDevice methods
+ 				// via _finishSwitchingFullScreen
+ 			}
+ 						
