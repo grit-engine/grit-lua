@@ -526,10 +526,12 @@ void luaV_execute (lua_State *L, int nexeccalls) {
             setnvalue(ra, cast_num(luaH_getn(hvalue(rb))));
             break;
           }
+/*
           case LUA_TSTRING: {
             setnvalue(ra, cast_num(tsvalue(rb)->len));
             break;
           }
+*/
           default: {  /* try metamethod */
             Protect(
               if (!call_binTM(L, rb, luaO_nilobject, ra, TM_LEN))
