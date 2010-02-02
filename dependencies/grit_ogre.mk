@@ -92,6 +92,7 @@ CORE_SOURCE=OgreMain/src/OgreAlignedAllocator.cpp \
             OgreMain/src/OgreAnimationTrack.cpp \
             OgreMain/src/OgreArchiveManager.cpp \
             OgreMain/src/OgreAutoParamDataSource.cpp \
+            OgreMain/src/OgreAxisAlignedBox.cpp \
             OgreMain/src/OgreBillboardChain.cpp \
             OgreMain/src/OgreBillboard.cpp \
             OgreMain/src/OgreBillboardParticleRenderer.cpp \
