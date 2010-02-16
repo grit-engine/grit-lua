@@ -1,6 +1,522 @@
+Index: Tools/XMLConverter/src/OgreXMLMeshSerializer.cpp
+===================================================================
+--- Tools/XMLConverter/src/OgreXMLMeshSerializer.cpp	(revision 9758)
++++ Tools/XMLConverter/src/OgreXMLMeshSerializer.cpp	(working copy)
+@@ -393,6 +393,8 @@
+ 			// Set up the data access for this buffer (lock read-only)
+ 			unsigned char* pVert;
+ 			float* pFloat;
++			uint16* pShort;
++			uint8* pChar;
+ 			ARGB* pColour;
+ 
+ 			pVert = static_cast<unsigned char*>(
+@@ -427,12 +429,24 @@
+ 				case VES_SPECULAR:
+ 					vbNode->SetAttribute("colours_specular","true");
+                     break;
+-                case VES_TEXTURE_COORDINATES:
++                case VES_TEXTURE_COORDINATES: {
++                    const char *type;
++                    switch (elem.getType()) {
++                        case VET_FLOAT1: type = "float1"; break;
++                        case VET_FLOAT2: type = "float2"; break;
++                        case VET_FLOAT3: type = "float3"; break;
++                        case VET_FLOAT4: type = "float4"; break;
++                        case VET_COLOUR: case VET_COLOUR_ARGB: case VET_COLOUR_ABGR: type = "colour"; break;
++                        case VET_SHORT1: type = "short1"; break;
++                        case VET_SHORT2: type = "short2"; break;
++                        case VET_SHORT3: type = "short3"; break;
++                        case VET_SHORT4: type = "short4"; break;
++                        case VET_UBYTE4: type = "ubyte4"; break;
++                    }
+                     vbNode->SetAttribute(
+-                        "texture_coord_dimensions_" + StringConverter::toString(numTextureCoords), 
+-                        StringConverter::toString(VertexElement::getTypeCount(elem.getType())));
++                        "texture_coord_dimensions_" + StringConverter::toString(numTextureCoords), type);
+                     ++numTextureCoords;
+-                    break;
++                    } break;
+ 
+                 default:
+                     break;
+@@ -520,32 +534,74 @@
+ 						}
+ 						break;
+ 					case VES_TEXTURE_COORDINATES:
+-						elem.baseVertexPointerToElement(pVert, &pFloat);
+ 						dataNode = 
+ 							vertexNode->InsertEndChild(TiXmlElement("texcoord"))->ToElement();
+ 
+ 						switch(elem.getType())
+                         {
+                         case VET_FLOAT1:
++                            elem.baseVertexPointerToElement(pVert, &pFloat);
+     						dataNode->SetAttribute("u", StringConverter::toString(*pFloat++));
+                             break;
+                         case VET_FLOAT2:
++                            elem.baseVertexPointerToElement(pVert, &pFloat);
+     						dataNode->SetAttribute("u", StringConverter::toString(*pFloat++));
+     						dataNode->SetAttribute("v", StringConverter::toString(*pFloat++));
+                             break;
+                         case VET_FLOAT3:
++                            elem.baseVertexPointerToElement(pVert, &pFloat);
+     						dataNode->SetAttribute("u", StringConverter::toString(*pFloat++));
+     						dataNode->SetAttribute("v", StringConverter::toString(*pFloat++));
+     						dataNode->SetAttribute("w", StringConverter::toString(*pFloat++));
+                             break;
+                         case VET_FLOAT4:
++                            elem.baseVertexPointerToElement(pVert, &pFloat);
+     						dataNode->SetAttribute("u", StringConverter::toString(*pFloat++));
+     						dataNode->SetAttribute("v", StringConverter::toString(*pFloat++));
+     						dataNode->SetAttribute("w", StringConverter::toString(*pFloat++));
+     						dataNode->SetAttribute("x", StringConverter::toString(*pFloat++));
+                             break;
+-                        default:
++                        case VET_SHORT1:
++                            elem.baseVertexPointerToElement(pVert, &pShort);
++    						dataNode->SetAttribute("u", StringConverter::toString(*pShort++ / 65535.0f));
+                             break;
++                        case VET_SHORT2:
++                            elem.baseVertexPointerToElement(pVert, &pShort);
++    						dataNode->SetAttribute("u", StringConverter::toString(*pShort++ / 65535.0f));
++    						dataNode->SetAttribute("v", StringConverter::toString(*pShort++ / 65535.0f));
++                            break;
++                        case VET_SHORT3:
++                            elem.baseVertexPointerToElement(pVert, &pShort);
++    						dataNode->SetAttribute("u", StringConverter::toString(*pShort++ / 65535.0f));
++    						dataNode->SetAttribute("v", StringConverter::toString(*pShort++ / 65535.0f));
++    						dataNode->SetAttribute("w", StringConverter::toString(*pShort++ / 65535.0f));
++                            break;
++                        case VET_SHORT4:
++                            elem.baseVertexPointerToElement(pVert, &pShort);
++    						dataNode->SetAttribute("u", StringConverter::toString(*pShort++ / 65535.0f));
++    						dataNode->SetAttribute("v", StringConverter::toString(*pShort++ / 65535.0f));
++    						dataNode->SetAttribute("w", StringConverter::toString(*pShort++ / 65535.0f));
++    						dataNode->SetAttribute("x", StringConverter::toString(*pShort++ / 65535.0f));
++                            break;
++                        case VET_COLOUR: case VET_COLOUR_ARGB: case VET_COLOUR_ABGR:
++                            elem.baseVertexPointerToElement(pVert, &pColour);
++                            {
++                                ARGB rc = *pColour++;
++                                ColourValue cv;
++                                cv.b = (rc & 0xFF) / 255.0f;		rc >>= 8;
++                                cv.g = (rc & 0xFF) / 255.0f;		rc >>= 8;
++                                cv.r = (rc & 0xFF) / 255.0f;		rc >>= 8;
++                                cv.a = (rc & 0xFF) / 255.0f;
++                                dataNode->SetAttribute("u", StringConverter::toString(cv));
++                            }
++                            break;
++                        case VET_UBYTE4:
++                            elem.baseVertexPointerToElement(pVert, &pChar);
++    						dataNode->SetAttribute("u", StringConverter::toString(*pChar++ / 255.0f));
++    						dataNode->SetAttribute("v", StringConverter::toString(*pChar++ / 255.0f));
++    						dataNode->SetAttribute("w", StringConverter::toString(*pChar++ / 255.0f));
++    						dataNode->SetAttribute("x", StringConverter::toString(*pChar++ / 255.0f));
++                            break;
+                         }
+ 						break;
+                     default:
+@@ -796,6 +852,8 @@
+         LogManager::getSingleton().logMessage("Reading geometry...");
+         unsigned char *pVert;
+         float *pFloat;
++        uint16 *pShort;
++        uint8 *pChar;
+         ARGB *pCol;
+ 
+         const char *claimedVertexCount_ = mGeometryNode->Attribute("vertexcount");
+@@ -889,18 +947,47 @@
+ 					StringUtil::StrStreamType str;
+ 					str << "texture_coord_dimensions_" << tx;
+                     attrib = vbElem->Attribute(str.str().c_str());
+-                    unsigned short dims;
++                    VertexElementType vtype = VET_FLOAT2; // Default
+                     if (attrib)
+                     {
+-                        dims = StringConverter::parseInt(attrib);
++                               if (!::strcmp(attrib,"1")) {
++                            vtype = VET_FLOAT1;
++                        } else if (!::strcmp(attrib,"2")) {
++                            vtype = VET_FLOAT2;
++                        } else if (!::strcmp(attrib,"3")) {
++                            vtype = VET_FLOAT3;
++                        } else if (!::strcmp(attrib,"4")) {
++                            vtype = VET_FLOAT4;
++                        } else if (!::strcmp(attrib,"float1")) {
++                            vtype = VET_FLOAT1;
++                        } else if (!::strcmp(attrib,"float2")) {
++                            vtype = VET_FLOAT2;
++                        } else if (!::strcmp(attrib,"float3")) {
++                            vtype = VET_FLOAT3;
++                        } else if (!::strcmp(attrib,"float4")) {
++                            vtype = VET_FLOAT4;
++                        } else if (!::strcmp(attrib,"short1")) {
++                            vtype = VET_SHORT1;
++                        } else if (!::strcmp(attrib,"short2")) {
++                            vtype = VET_SHORT2;
++                        } else if (!::strcmp(attrib,"short3")) {
++                            vtype = VET_SHORT3;
++                        } else if (!::strcmp(attrib,"short4")) {
++                            vtype = VET_SHORT4;
++                        } else if (!::strcmp(attrib,"ubyte4")) {
++                            vtype = VET_UBYTE4;
++                        } else if (!::strcmp(attrib,"colour")) {
++                            vtype = VET_COLOUR;
++                        } else if (!::strcmp(attrib,"colour_argb")) {
++                            vtype = VET_COLOUR_ARGB;
++                        } else if (!::strcmp(attrib,"colour_abgr")) {
++                            vtype = VET_COLOUR_ABGR;
++                        } else {
++                            std::cerr << "ERROR: Did not recognise texture_coord_dimensions value of \""<<attrib<<"\"" << std::endl;
++                            std::cerr << "Falling back to default of float2" << std::endl;
++                        }
+                     }
+-                    else
+-                    {
+-                        // Default
+-                        dims = 2;
+-                    }
+                     // Add element
+-                    VertexElementType vtype = VertexElement::multiplyTypeCount(VET_FLOAT1, dims);
+                     decl->addElement(bufCount, offset, vtype, 
+                         VES_TEXTURE_COORDINATES, totalTexCoords++);
+                     offset += VertexElement::getTypeSize(vtype);
+@@ -1085,25 +1172,116 @@
+                         }
+ 						// Record the latest texture coord entry
+ 						texCoordElem = xmlElem;
+-                        elem.baseVertexPointerToElement(pVert, &pFloat);
+ 
+-                        *pFloat++ = StringConverter::parseReal(
+-                            xmlElem->Attribute("u"));
+-                        if (VertexElement::getTypeCount(elem.getType()) > 1)
+-                        {
+-                            *pFloat++ = StringConverter::parseReal(
+-                                xmlElem->Attribute("v"));
++                        if (!xmlElem->Attribute("u"))
++                            OGRE_EXCEPT(Exception::ERR_ITEM_NOT_FOUND, "Texcoord 'u' attribute not found.", "XMLMeshSerializer::readGeometry");
++                        
++                        // depending on type, pack appropriately, can process colour channels separately which is a bonus
++                        switch (elem.getType()) {
++                            case VET_FLOAT1:
++                            elem.baseVertexPointerToElement(pVert, &pFloat);
++                            *pFloat++ = StringConverter::parseReal(xmlElem->Attribute("u"));
++                            break;
++
++                            case VET_FLOAT2:
++                            if (!xmlElem->Attribute("v"))
++                                OGRE_EXCEPT(Exception::ERR_ITEM_NOT_FOUND, "Texcoord 'v' attribute not found.", "XMLMeshSerializer::readGeometry");
++                            elem.baseVertexPointerToElement(pVert, &pFloat);
++                            *pFloat++ = StringConverter::parseReal(xmlElem->Attribute("u"));
++                            *pFloat++ = StringConverter::parseReal(xmlElem->Attribute("v"));
++                            break;
++
++                            case VET_FLOAT3:
++                            if (!xmlElem->Attribute("v"))
++                                OGRE_EXCEPT(Exception::ERR_ITEM_NOT_FOUND, "Texcoord 'v' attribute not found.", "XMLMeshSerializer::readGeometry");
++                            if (!xmlElem->Attribute("w"))
++                                OGRE_EXCEPT(Exception::ERR_ITEM_NOT_FOUND, "Texcoord 'w' attribute not found.", "XMLMeshSerializer::readGeometry");
++                            elem.baseVertexPointerToElement(pVert, &pFloat);
++                            *pFloat++ = StringConverter::parseReal(xmlElem->Attribute("u"));
++                            *pFloat++ = StringConverter::parseReal(xmlElem->Attribute("v"));
++                            *pFloat++ = StringConverter::parseReal(xmlElem->Attribute("w"));
++                            break;
++
++                            case VET_FLOAT4:
++                            if (!xmlElem->Attribute("v"))
++                                OGRE_EXCEPT(Exception::ERR_ITEM_NOT_FOUND, "Texcoord 'v' attribute not found.", "XMLMeshSerializer::readGeometry");
++                            if (!xmlElem->Attribute("w"))
++                                OGRE_EXCEPT(Exception::ERR_ITEM_NOT_FOUND, "Texcoord 'w' attribute not found.", "XMLMeshSerializer::readGeometry");
++                            if (!xmlElem->Attribute("x"))
++                                OGRE_EXCEPT(Exception::ERR_ITEM_NOT_FOUND, "Texcoord 'x' attribute not found.", "XMLMeshSerializer::readGeometry");
++                            elem.baseVertexPointerToElement(pVert, &pFloat);
++                            *pFloat++ = StringConverter::parseReal(xmlElem->Attribute("u"));
++                            *pFloat++ = StringConverter::parseReal(xmlElem->Attribute("v"));
++                            *pFloat++ = StringConverter::parseReal(xmlElem->Attribute("w"));
++                            *pFloat++ = StringConverter::parseReal(xmlElem->Attribute("x"));
++                            break;
++
++                            case VET_SHORT1:
++                            elem.baseVertexPointerToElement(pVert, &pShort);
++                            *pShort++ = 65535.0 * StringConverter::parseReal(xmlElem->Attribute("u"));
++                            break;
++
++                            case VET_SHORT2:
++                            if (!xmlElem->Attribute("v"))
++                                OGRE_EXCEPT(Exception::ERR_ITEM_NOT_FOUND, "Texcoord 'v' attribute not found.", "XMLMeshSerializer::readGeometry");
++                            elem.baseVertexPointerToElement(pVert, &pShort);
++                            *pShort++ = 65535.0 * StringConverter::parseReal(xmlElem->Attribute("u"));
++                            *pShort++ = 65535.0 * StringConverter::parseReal(xmlElem->Attribute("v"));
++                            break;
++
++                            case VET_SHORT3:
++                            if (!xmlElem->Attribute("v"))
++                                OGRE_EXCEPT(Exception::ERR_ITEM_NOT_FOUND, "Texcoord 'v' attribute not found.", "XMLMeshSerializer::readGeometry");
++                            if (!xmlElem->Attribute("w"))
++                                OGRE_EXCEPT(Exception::ERR_ITEM_NOT_FOUND, "Texcoord 'w' attribute not found.", "XMLMeshSerializer::readGeometry");
++                            elem.baseVertexPointerToElement(pVert, &pShort);
++                            *pShort++ = 65535.0 * StringConverter::parseReal(xmlElem->Attribute("u"));
++                            *pShort++ = 65535.0 * StringConverter::parseReal(xmlElem->Attribute("v"));
++                            *pShort++ = 65535.0 * StringConverter::parseReal(xmlElem->Attribute("w"));
++                            break;
++
++                            case VET_SHORT4:
++                            if (!xmlElem->Attribute("v"))
++                                OGRE_EXCEPT(Exception::ERR_ITEM_NOT_FOUND, "Texcoord 'v' attribute not found.", "XMLMeshSerializer::readGeometry");
++                            if (!xmlElem->Attribute("w"))
++                                OGRE_EXCEPT(Exception::ERR_ITEM_NOT_FOUND, "Texcoord 'w' attribute not found.", "XMLMeshSerializer::readGeometry");
++                            if (!xmlElem->Attribute("x"))
++                                OGRE_EXCEPT(Exception::ERR_ITEM_NOT_FOUND, "Texcoord 'x' attribute not found.", "XMLMeshSerializer::readGeometry");
++                            elem.baseVertexPointerToElement(pVert, &pShort);
++                            *pShort++ = 65535.0 * StringConverter::parseReal(xmlElem->Attribute("u"));
++                            *pShort++ = 65535.0 * StringConverter::parseReal(xmlElem->Attribute("v"));
++                            *pShort++ = 65535.0 * StringConverter::parseReal(xmlElem->Attribute("w"));
++                            *pShort++ = 65535.0 * StringConverter::parseReal(xmlElem->Attribute("x"));
++                            break;
++
++                            case VET_UBYTE4:
++                            if (!xmlElem->Attribute("v"))
++                                OGRE_EXCEPT(Exception::ERR_ITEM_NOT_FOUND, "Texcoord 'v' attribute not found.", "XMLMeshSerializer::readGeometry");
++                            if (!xmlElem->Attribute("w"))
++                                OGRE_EXCEPT(Exception::ERR_ITEM_NOT_FOUND, "Texcoord 'w' attribute not found.", "XMLMeshSerializer::readGeometry");
++                            if (!xmlElem->Attribute("x"))
++                                OGRE_EXCEPT(Exception::ERR_ITEM_NOT_FOUND, "Texcoord 'x' attribute not found.", "XMLMeshSerializer::readGeometry");
++                            elem.baseVertexPointerToElement(pVert, &pChar);
++                            // round off instead of just truncating -- avoids magnifying rounding errors
++                            *pChar++ = 0.5 + 255.0 * StringConverter::parseReal(xmlElem->Attribute("u"));
++                            *pChar++ = 0.5 + 255.0 * StringConverter::parseReal(xmlElem->Attribute("v"));
++                            *pChar++ = 0.5 + 255.0 * StringConverter::parseReal(xmlElem->Attribute("w"));
++                            *pChar++ = 0.5 + 255.0 * StringConverter::parseReal(xmlElem->Attribute("x"));
++                            break;
++
++                            case VET_COLOUR: {
++                                elem.baseVertexPointerToElement(pVert, &pCol);
++                                ColourValue cv = StringConverter::parseColourValue(xmlElem->Attribute("u"));
++                                *pCol++ = VertexElement::convertColourValue(cv, mColourElementType);
++                            } break;
++
++                            case VET_COLOUR_ARGB:
++                            case VET_COLOUR_ABGR: {
++                                elem.baseVertexPointerToElement(pVert, &pCol);
++                                ColourValue cv = StringConverter::parseColourValue(xmlElem->Attribute("u"));
++                                *pCol++ = VertexElement::convertColourValue(cv, elem.getType());
++                            } break;
+                         }
+-                        if (VertexElement::getTypeCount(elem.getType()) > 2)
+-                        {
+-                            *pFloat++ = StringConverter::parseReal(
+-                                xmlElem->Attribute("w"));
+-                        }
+-                        if (VertexElement::getTypeCount(elem.getType()) > 3)
+-                        {
+-                            *pFloat++ = StringConverter::parseReal(
+-                                xmlElem->Attribute("x"));
+-                        }
+ 
+                         break;
+                     default:
+Index: Tools/XMLConverter/src/main.cpp
+===================================================================
+--- Tools/XMLConverter/src/main.cpp	(revision 9758)
++++ Tools/XMLConverter/src/main.cpp	(working copy)
+@@ -301,6 +301,11 @@
+         source = args[startIndex];
+     if (numArgs > startIndex+1)
+         dest = args[startIndex+1];
++    if (numArgs > startIndex+2) {
++        cout << "Too many command-line arguments supplied - abort. " << endl;
++        help();
++        exit(1);
++    }
+ 
+     if (!source)
+     {
+@@ -536,6 +541,7 @@
+                     }
+                     else
+                     {
++                        std::cout << "Did not understand \"" << response << "\" please try again:" << std::endl;
+                         response = "";
+                     }
+                 }// while response == ""
+@@ -556,6 +562,11 @@
+                         genLod = true;
+                         askLodDtls = true;
+                     }
++                    else
++                    {
++                        std::cout << "Did not understand \"" << response << "\" please try again:" << std::endl;
++                        response = "";
++                    }
+                 }
+             }
+         }
+@@ -577,19 +588,26 @@
+ 
+                 cout << "\nWhat unit of reduction would you like to use:" <<
+                     "\n(f)ixed or (p)roportional?";
+-                cin >> response;
+-				StringUtil::toLowerCase(response);
+-                if (response == "f")
+-                {
+-                    quota = ProgressiveMesh::VRQ_CONSTANT;
+-                    cout << "\nHow many vertices should be removed at each LOD?";
++                response = "";
++                while (response == "") {
++                    cin >> response;
++                    StringUtil::toLowerCase(response);
++                    if (response == "f")
++                    {
++                        quota = ProgressiveMesh::VRQ_CONSTANT;
++                        cout << "\nHow many vertices should be removed at each LOD?";
++                    }
++                    else if (response == "p")
++                    {
++                        quota = ProgressiveMesh::VRQ_PROPORTIONAL;
++                        cout << "\nWhat percentage of remaining vertices should be removed "
++                            "\at each LOD (e.g. 50)?";
++                    }
++                    else {
++                            std::cout << "Did not understand \"" << response << "\" please try again:" << std::endl;
++                            response = "";
++                    }
+                 }
+-                else
+-                {
+-                    quota = ProgressiveMesh::VRQ_PROPORTIONAL;
+-                    cout << "\nWhat percentage of remaining vertices should be removed "
+-                        "\at each LOD (e.g. 50)?";
+-                }
+                 cin >> reduction;
+                 if (quota == ProgressiveMesh::VRQ_PROPORTIONAL)
+                 {
+@@ -651,6 +669,7 @@
+                 }
+                 else
+                 {
++                    std::cout << "Did not understand \"" << response << "\" please try again:" << std::endl;
+                     response = "";
+                 }
+             }
+@@ -671,6 +690,7 @@
+                 }
+                 else
+                 {
++                    std::cout << "Did not understand \"" << response << "\" please try again:" << std::endl;
+                     response = "";
+                 }
+             }
+@@ -688,12 +708,24 @@
+         if (opts.generateTangents)
+         {
+             unsigned short srcTex, destTex;
+-            bool existing = newMesh->suggestTangentVectorBuildParams(opts.tangentSemantic, srcTex, destTex);
++            if (!opts.quietMode) 
++            {
++                std::cout << "Checking if we already have tangent vectors...." << std::endl;
++            }
++            bool existing;
++            try {
++                existing = newMesh->suggestTangentVectorBuildParams(opts.tangentSemantic, srcTex, destTex);
++            } catch (Exception &e) {
++                std::cerr << "WARNING: While checking for existing tangents: " << e.getFullDescription() << std::endl;
++                std::cerr << "NOTE: Tangents were NOT generated for this mesh!" << std::endl;
++                existing = false;
++                opts.generateTangents = false;
++            }
+             if (existing)
+             {
+                 std::cout << "\nThis mesh appears to already have a set of 3D texture coordinates, " <<
+                     "which would suggest tangent vectors have already been calculated. Do you really " <<
+-                    "want to generate new tangent vectors (may duplicate)? (y/n)";
++                    "want to generate new tangent vectors (may duplicate)? (y/n): ";
+                 while (response == "")
+                 {
+                     cin >> response;
+@@ -708,6 +740,7 @@
+                     }
+                     else
+                     {
++                        std::cout << "Did not understand \"" << response << "\" please try again:" << std::endl;
+                         response = "";
+                     }
+                 }
+@@ -790,10 +823,17 @@
+ 
+ 	try 
+ 	{
++		logMgr = new LogManager();
++
++        // this log catches output from the parseArgs call and routes it to stdout only
++		logMgr->createLog("Temporary log", false, true, true); 
++
+ 		XmlOptions opts = parseArgs(numargs, args);
++        // use the log specified by the cmdline params
++        logMgr->setDefaultLog(logMgr->createLog(opts.logFile, false, !opts.quietMode)); 
++        // get rid of the temporary log as we use the new log now
++		logMgr->destroyLog("Temporary log");
+ 
+-		logMgr = new LogManager();
+-		logMgr->createLog(opts.logFile, false, !opts.quietMode); 
+ 		rgm = new ResourceGroupManager();
+ 		mth = new Math();
+         lodMgr = new LodStrategyManager();
+@@ -830,7 +870,8 @@
+ 	}
+ 	catch(Exception& e)
+ 	{
+-		cout << "Exception caught: " << e.getDescription();
++		cerr << "FATAL ERROR: " << e.getDescription() << std::endl;
++		cerr << "ABORTING!" << std::endl;
+ 		retCode = 1;
+ 	}
+ 
+Index: Tools/XMLConverter/docs/ogremeshxml.dtd
+===================================================================
+--- Tools/XMLConverter/docs/ogremeshxml.dtd	(revision 9758)
++++ Tools/XMLConverter/docs/ogremeshxml.dtd	(working copy)
+@@ -63,14 +63,14 @@
+ 	colours_diffuse 			(true|false)	"false"
+ 	colours_specular 			(true|false)	"false"
+ 	texture_coords				(0|1|2|3|4|5|6|7|8) 	"0"
+-	texture_coord_dimensions_0 	(0|1|2|3)		 	"2"
+-	texture_coord_dimensions_1 	(0|1|2|3)		 	"2"
+-	texture_coord_dimensions_2 	(0|1|2|3)		 	"2"
+-	texture_coord_dimensions_3 	(0|1|2|3)		 	"2"
+-	texture_coord_dimensions_4 	(0|1|2|3)		 	"2"
+-	texture_coord_dimensions_5 	(0|1|2|3)		 	"2"
+-	texture_coord_dimensions_6 	(0|1|2|3)		 	"2"
+-	texture_coord_dimensions_7 	(0|1|2|3)		 	"2"
++	texture_coord_dimensions_0 = (1|2|3|4|float1|float2|float3|float4|short1|short2|short3|short4|ubyte4|colour|colour_argb|colour_abgr) "2"
++	texture_coord_dimensions_1 = (1|2|3|4|float1|float2|float3|float4|short1|short2|short3|short4|ubyte4|colour|colour_argb|colour_abgr) "2"
++	texture_coord_dimensions_2 = (1|2|3|4|float1|float2|float3|float4|short1|short2|short3|short4|ubyte4|colour|colour_argb|colour_abgr) "2"
++	texture_coord_dimensions_3 = (1|2|3|4|float1|float2|float3|float4|short1|short2|short3|short4|ubyte4|colour|colour_argb|colour_abgr) "2"
++	texture_coord_dimensions_4 = (1|2|3|4|float1|float2|float3|float4|short1|short2|short3|short4|ubyte4|colour|colour_argb|colour_abgr) "2"
++	texture_coord_dimensions_5 = (1|2|3|4|float1|float2|float3|float4|short1|short2|short3|short4|ubyte4|colour|colour_argb|colour_abgr) "2"
++	texture_coord_dimensions_6 = (1|2|3|4|float1|float2|float3|float4|short1|short2|short3|short4|ubyte4|colour|colour_argb|colour_abgr) "2"
++	texture_coord_dimensions_7 = (1|2|3|4|float1|float2|float3|float4|short1|short2|short3|short4|ubyte4|colour|colour_argb|colour_abgr) "2"
+ 	tangents					(true|false)	"false"
+ 	tangent_dimensions			(3|4)			"3"
+ 	binormals					(true|false)	"false">
+Index: OgreMain/include/OgreHardwareVertexBuffer.h
+===================================================================
+--- OgreMain/include/OgreHardwareVertexBuffer.h	(revision 9758)
++++ OgreMain/include/OgreHardwareVertexBuffer.h	(working copy)
+@@ -273,7 +273,9 @@
+         */
+         inline void baseVertexPointerToElement(void* pBase, unsigned short** pElem) const
+         {
+-            *pElem = static_cast<unsigned short*>(pBase) + mOffset;
++            *pElem = static_cast<unsigned short*>(
++                static_cast<void*>(
++                    static_cast<unsigned char*>(pBase) + mOffset));
+         }
+ 
+ 
 Index: OgreMain/include/OgreResource.h
 ===================================================================
---- OgreMain/include/OgreResource.h	(revision 9577)
+--- OgreMain/include/OgreResource.h	(revision 9758)
 +++ OgreMain/include/OgreResource.h	(working copy)
 @@ -161,7 +161,7 @@
  		/// State count, the number of times this resource has changed state
@@ -13,7 +529,7 @@ Index: OgreMain/include/OgreResource.h
  
 Index: OgreMain/src/OgreResource.cpp
 ===================================================================
---- OgreMain/src/OgreResource.cpp	(revision 9577)
+--- OgreMain/src/OgreResource.cpp	(revision 9758)
 +++ OgreMain/src/OgreResource.cpp	(working copy)
 @@ -344,14 +344,14 @@
  	void Resource::addListener(Resource::Listener* lis)
@@ -32,30 +548,3 @@ Index: OgreMain/src/OgreResource.cpp
  	}
  	//-----------------------------------------------------------------------
  	void Resource::_fireLoadingComplete(bool wasBackgroundLoaded)
-Index: RenderSystems/Direct3D9/src/OgreD3D9RenderWindow.cpp
-===================================================================
---- RenderSystems/Direct3D9/src/OgreD3D9RenderWindow.cpp	(revision 9577)
-+++ RenderSystems/Direct3D9/src/OgreD3D9RenderWindow.cpp	(working copy)
-@@ -379,10 +379,11 @@
- 				}
- 				else
- 				{
--					SetWindowPos(mHWnd, HWND_TOPMOST, mLeft, mTop, width, height, SWP_NOACTIVATE);
--					//MoveWindow(mHWnd, mLeft, mTop, mWidth, mHeight, FALSE);
- 					SetWindowLong(mHWnd, GWL_STYLE, dwStyle);
- 					SetWindowPos(mHWnd, 0, 0,0, 0,0, SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER);
-+
-+                                        SetWindowPos(mHWnd, HWND_TOPMOST, mLeft, mTop, width, height, SWP_NOACTIVATE);
-+					//MoveWindow(mHWnd, mLeft, mTop, mWidth, mHeight, FALSE);
- 				}
- 			}
- 			else
-@@ -399,7 +400,7 @@
- 				SetWindowLong(mHWnd, GWL_STYLE, dwStyle);
- 				SetWindowPos(mHWnd, HWND_NOTOPMOST, 0, 0, winWidth, winHeight,
- 					SWP_DRAWFRAME | SWP_FRAMECHANGED | SWP_NOMOVE | SWP_NOACTIVATE);
--				// Note that we also set the position in the restoreLostDevice method
-+				// Note that we also set the position in the restoreLostDevice methods
- 				// via _finishSwitchingFullScreen
- 			}
- 						

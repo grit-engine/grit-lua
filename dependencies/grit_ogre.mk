@@ -443,8 +443,8 @@ $(NEW_OBJ_DIR)/dbg/libogre_semithreaded.a: $(patsubst %.cpp,$(NEW_OBJ_DIR)/dbg/s
 	@rm -f $@
 	@ar rs $@ $^
 
-$(NEW_OBJ_DIR)/opt/OgreXMLConverter: $(XMLCONVERTER_SOURCE)
-	@$(COMPILER) -DTIXML_USE_STL -I Tools/XMLConverter/include $(CFLAGS) $(OPT) -DOGRE_THREAD_SUPPORT=2 -DOGRE_THREAD_PROVIDER=1 $^ -o "$@" -L $(NEW_OBJ_DIR)/opt -logre_semithreaded $(LIBS)
+$(NEW_OBJ_DIR)/opt/OgreXMLConverter: $(XMLCONVERTER_SOURCE) $(NEW_OBJ_DIR)/opt/libogre_semithreaded.a
+	$(COMPILER) -DTIXML_USE_STL -I Tools/XMLConverter/include $(CFLAGS) $(OPT) -DOGRE_THREAD_SUPPORT=2 -DOGRE_THREAD_PROVIDER=1 $(XMLCONVERTER_SOURCE) -o "$@" -L $(NEW_OBJ_DIR)/opt -logre_semithreaded $(LIBS)
 
 
 
@@ -460,7 +460,7 @@ all: $(NEW_OBJ_DIR)/dbg/libogre_semithreaded.a $(NEW_OBJ_DIR)/opt/libogre_semith
 TEMPFILE:=$(shell tempfile)
 
 depend:
-	makedepend -Y $(INCLUDE_DIRS) -f $(TEMPFILE) $(CORE_SOURCE) $(GL_SOURCE) $(PARTICLEFX_SOURCE) $(CG_SOURCE) $(OCTREE_SOURCE) $(POSIX_TIMER_SOURCE) $(CONFIG_GLX_SOURCE) $(GL_GLX_SOURCE) $(OCTREE_GLX_SOURCE) $(GL_WIN32_SOURCE) $(CG_WIN32_SOURCE) $(PARTICLEFX_WIN32_SOURCE) $(OCTREE_WIN32_SOURCE)
+	makedepend -Y $(INCLUDE_DIRS) -f $(TEMPFILE) $(XMLCONVERTER_SOURCE) $(CORE_SOURCE) $(GL_SOURCE) $(PARTICLEFX_SOURCE) $(CG_SOURCE) $(OCTREE_SOURCE) $(POSIX_TIMER_SOURCE) $(CONFIG_GLX_SOURCE) $(GL_GLX_SOURCE) $(OCTREE_GLX_SOURCE) $(GL_WIN32_SOURCE) $(CG_WIN32_SOURCE) $(PARTICLEFX_WIN32_SOURCE) $(OCTREE_WIN32_SOURCE)
 	cat $(TEMPFILE) | sed 's/^\([^:]*\): /$(NEW_OBJ_DIR)\/opt\/threaded\/&/g' > $(THISFILE).depend
 	cat $(TEMPFILE) | sed 's/^\([^:]*\): /$(NEW_OBJ_DIR)\/opt\/semithreaded\/&/g' >> $(THISFILE).depend
 	cat $(TEMPFILE) | sed 's/^\([^:]*\): /$(NEW_OBJ_DIR)\/opt\/unthreaded\/&/g' >> $(THISFILE).depend
@@ -468,6 +468,7 @@ depend:
 	cat $(TEMPFILE) | sed 's/^\([^:]*\): /$(NEW_OBJ_DIR)\/dbg\/semithreaded\/&/g' >> $(THISFILE).depend
 	cat $(TEMPFILE) | sed 's/^\([^:]*\): /$(NEW_OBJ_DIR)\/dbg\/unthreaded\/&/g' >> $(THISFILE).depend
 	rm $(TEMPFILE)
+	sed -i 's/\([^/]*\)\/Tools\/XMLConverter\/src\/main[.]o/OgreXMLConverter/g' $(THISFILE).depend
 
 -include $(THISFILE).depend
 
