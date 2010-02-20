@@ -43,7 +43,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(SolutionDir)\dependencies\ogre\OgreMain\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\OgreMain\src\nedmalloc&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\win32&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\nvparse&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\nvparse\winheaders&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\atifs\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\GLSL\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\include\&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\Direct3D9\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\ParticleFX\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\OctreeSceneManager\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\Dependencies\include&quot;;&quot;$(SolutionDir)\dependencies&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\CgProgramManager\include&quot;"
-				PreprocessorDefinitions="WIN32;OGRE_NO_FREEIMAGE=0;OGRE_MEMORY_ALLOCATOR=1;OGRE_CONFIG_LITTLE_ENDIAN;OGRE_GUI_WIN32;OGRE_THREAD_SUPPORT=2;OGRE_THREAD_PROVIDER=1;_DEBUG;OGRE_STATIC_LIB;FREEIMAGE_LIB"
+				PreprocessorDefinitions="WIN32;_DEBUG"
 				StringPooling="true"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -115,79 +115,7 @@
 				OmitFramePointers="true"
 				EnableFiberSafeOptimizations="true"
 				AdditionalIncludeDirectories="&quot;$(SolutionDir)\dependencies\ogre\OgreMain\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\OgreMain\src\nedmalloc&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\win32&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\nvparse&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\nvparse\winheaders&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\atifs\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\GLSL\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\include\&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\Direct3D9\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\ParticleFX\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\OctreeSceneManager\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\Dependencies\include&quot;;&quot;$(SolutionDir)\dependencies&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\CgProgramManager\include&quot;"
-				PreprocessorDefinitions="WIN32;OGRE_NO_FREEIMAGE=0;OGRE_MEMORY_ALLOCATOR=1;OGRE_CONFIG_LITTLE_ENDIAN;OGRE_GUI_WIN32;OGRE_THREAD_SUPPORT=2;OGRE_THREAD_PROVIDER=1;NDEBUG;OGRE_STATIC_LIB;FREEIMAGE_LIB"
-				StringPooling="true"
-				MinimalRebuild="true"
-				RuntimeLibrary="2"
-				BufferSecurityCheck="false"
-				EnableFunctionLevelLinking="true"
-				EnableEnhancedInstructionSet="2"
-				ProgramDataBaseFileName="$(OutDir)\$(TargetName).pdb"
-				WarningLevel="3"
-				DebugInformationFormat="3"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLibrarianTool"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
-			Name="Optimised|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(OutDir)\int"
-			ConfigurationType="4"
-			CharacterSet="2"
-			WholeProgramOptimization="0"
-			BuildLogFile="$(OutDir)\$(TargetName)_BuildLog.htm"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="2"
-				InlineFunctionExpansion="2"
-				EnableIntrinsicFunctions="true"
-				FavorSizeOrSpeed="1"
-				OmitFramePointers="true"
-				EnableFiberSafeOptimizations="true"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)\dependencies\ogre\OgreMain\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\OgreMain\src\nedmalloc&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\win32&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\nvparse&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\nvparse\winheaders&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\atifs\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\GLSL\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\include\&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\Direct3D9\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\ParticleFX\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\OctreeSceneManager\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\Dependencies\include&quot;;&quot;$(SolutionDir)\dependencies&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\CgProgramManager\include&quot;"
-				PreprocessorDefinitions="WIN32;OGRE_NO_FREEIMAGE=0;OGRE_MEMORY_ALLOCATOR=1;OGRE_CONFIG_LITTLE_ENDIAN;OGRE_GUI_WIN32;OGRE_THREAD_SUPPORT=2;OGRE_THREAD_PROVIDER=1;NDEBUG;OGRE_STATIC_LIB;FREEIMAGE_LIB"
+				PreprocessorDefinitions="WIN32;NDEBUG"
 				StringPooling="true"
 				MinimalRebuild="true"
 				RuntimeLibrary="2"
