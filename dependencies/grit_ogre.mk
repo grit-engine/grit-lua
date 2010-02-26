@@ -7,28 +7,7 @@ THISFILE:=$(lastword $(MAKEFILE_LIST))
 
 #choose a compiler
 #COMPILER=g++
-COMPILER=grc -es g++ #i use this to colorise output
-
-#choose a GUI library
-GUI=-DOGRE_GUI_GLX
-#GUI=-DOGRE_GUI_GTK
-#GUI=-DOGRE_GUI_WIN32
-
-#choose an endian
-ENDIAN=-DOGRE_CONFIG_LITTLE_ENDIAN
-#ENDIAN=-DOGRE_CONFIG_BIG_ENDIAN
-
-#do you want Ogre::Real to be double or just float
-PRECISION=-DOGRE_DOUBLE_PRECISION=0
-
-#use devil (off by default because it's not free)
-DEVIL=-DOGRE_NO_DEVIL=1
-
-#use freeimage (on by default because devil is off, and we need *something*)
-FREEIMAGE=-DOGRE_NO_FREEIMAGE=0
-
-#don't use nedmalloc
-ALLOCATOR=-DOGRE_MEMORY_ALLOCATOR=1
+COMPILER=g++-4.3 #i use this to colorise output
 
 #version code
 VERSION=-DVERSION=1.6.0_grit
@@ -63,7 +42,8 @@ NEW_OBJ_DIR=grit_ogre_obj
 YACC=-DYY_NEVER_INTERACTIVE -DYY_NO_UNPUT
 
 
-INCLUDE_DIRS=-IOgreMain/include \
+INCLUDE_DIRS=-I.. \
+             -IOgreMain/include \
              -IOgreMain/src/nedmalloc \
              -IRenderSystems/GL/src/GLX \
              -IRenderSystems/GL/src/nvparse \
@@ -74,7 +54,6 @@ INCLUDE_DIRS=-IOgreMain/include \
              -IPlugIns/CgProgramManager/include \
              -IPlugIns/ParticleFX/include \
              -IPlugIns/OctreeSceneManager/include \
-             -I..
 
 
 CFLAGS+=$(GUI) $(ENDIAN) $(PRECISION) $(DEVIL) $(FREEIMAGE) $(ALLOCATOR) $(VERSION) $(YACC) $(INCLUDE_DIRS)
@@ -255,6 +234,7 @@ CORE_SOURCE=OgreMain/src/OgreAlignedAllocator.cpp \
             OgreMain/src/OgreTextureManager.cpp \
             OgreMain/src/OgreTextureUnitState.cpp \
             OgreMain/src/OgreUnifiedHighLevelGpuProgram.cpp \
+            OgreMain/src/OgreUTFString.cpp \
             OgreMain/src/OgreUserObjectBindings.cpp \
             OgreMain/src/OgreVector2.cpp \
             OgreMain/src/OgreVector3.cpp \
@@ -443,8 +423,11 @@ $(NEW_OBJ_DIR)/dbg/libogre_semithreaded.a: $(patsubst %.cpp,$(NEW_OBJ_DIR)/dbg/s
 	@rm -f $@
 	@ar rs $@ $^
 
+$(NEW_OBJ_DIR)/dbg/OgreXMLConverter: $(XMLCONVERTER_SOURCE) $(NEW_OBJ_DIR)/opt/libogre_semithreaded.a
+	$(COMPILER) -DTIXML_USE_STL -I Tools/XMLConverter/include $(CFLAGS) $(DBG) $(XMLCONVERTER_SOURCE) -o "$@" -L $(NEW_OBJ_DIR)/opt -logre_semithreaded $(LIBS)
+
 $(NEW_OBJ_DIR)/opt/OgreXMLConverter: $(XMLCONVERTER_SOURCE) $(NEW_OBJ_DIR)/opt/libogre_semithreaded.a
-	$(COMPILER) -DTIXML_USE_STL -I Tools/XMLConverter/include $(CFLAGS) $(OPT) -DOGRE_THREAD_SUPPORT=2 -DOGRE_THREAD_PROVIDER=1 $(XMLCONVERTER_SOURCE) -o "$@" -L $(NEW_OBJ_DIR)/opt -logre_semithreaded $(LIBS)
+	$(COMPILER) -DTIXML_USE_STL -I Tools/XMLConverter/include $(CFLAGS) $(OPT) $(XMLCONVERTER_SOURCE) -o "$@" -L $(NEW_OBJ_DIR)/opt -logre_semithreaded $(LIBS)
 
 
 
@@ -453,7 +436,7 @@ $(NEW_OBJ_DIR)/opt/OgreXMLConverter: $(XMLCONVERTER_SOURCE) $(NEW_OBJ_DIR)/opt/l
 clean:
 	find $(NEW_OBJ_DIR) -name *.o -o -name *.a | xargs rm -v
 
-all: $(NEW_OBJ_DIR)/dbg/libogre_semithreaded.a $(NEW_OBJ_DIR)/opt/libogre_semithreaded.a $(NEW_OBJ_DIR)/opt/OgreXMLConverter
+all: $(NEW_OBJ_DIR)/dbg/libogre_semithreaded.a $(NEW_OBJ_DIR)/opt/libogre_semithreaded.a $(NEW_OBJ_DIR)/opt/OgreXMLConverter $(NEW_OBJ_DIR)/dbg/OgreXMLConverter
 
 .DEFAULT_GOAL := all
 
