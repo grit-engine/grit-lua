@@ -96,6 +96,7 @@ CORE_SOURCE=OgreMain/src/OgreAlignedAllocator.cpp \
             OgreMain/src/OgreDDSCodec.cpp \
             OgreMain/src/OgreDefaultHardwareBufferManager.cpp \
             OgreMain/src/OgreDefaultSceneQueries.cpp \
+            OgreMain/src/OgreDepthBuffer.cpp \
             OgreMain/src/Threading/OgreDefaultWorkQueueStandard.cpp \
             OgreMain/src/OgreDistanceLodStrategy.cpp \
             OgreMain/src/OgreDynLib.cpp \
@@ -254,6 +255,7 @@ GL_SOURCE=RenderSystems/GL/src/glew.cpp \
           RenderSystems/GL/src/OgreGLATIFSInit.cpp \
           RenderSystems/GL/src/OgreGLContext.cpp \
           RenderSystems/GL/src/OgreGLDefaultHardwareBufferManager.cpp \
+          RenderSystems/GL/src/OgreGLDepthBuffer.cpp \
           RenderSystems/GL/src/OgreGLFBOMultiRenderTarget.cpp \
           RenderSystems/GL/src/OgreGLFBORenderTexture.cpp \
           RenderSystems/GL/src/OgreGLFrameBufferObject.cpp \

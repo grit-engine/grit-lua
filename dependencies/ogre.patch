@@ -1,6 +1,6 @@
 Index: Tools/XMLConverter/src/OgreXMLMeshSerializer.cpp
 ===================================================================
---- Tools/XMLConverter/src/OgreXMLMeshSerializer.cpp	(revision 9778)
+--- Tools/XMLConverter/src/OgreXMLMeshSerializer.cpp	(revision 9821)
 +++ Tools/XMLConverter/src/OgreXMLMeshSerializer.cpp	(working copy)
 @@ -393,6 +393,8 @@
  			// Set up the data access for this buffer (lock read-only)
@@ -318,7 +318,7 @@ Index: Tools/XMLConverter/src/OgreXMLMeshSerializer.cpp
                      default:
 Index: Tools/XMLConverter/src/main.cpp
 ===================================================================
---- Tools/XMLConverter/src/main.cpp	(revision 9778)
+--- Tools/XMLConverter/src/main.cpp	(revision 9821)
 +++ Tools/XMLConverter/src/main.cpp	(working copy)
 @@ -301,6 +301,11 @@
          source = args[startIndex];
@@ -474,7 +474,7 @@ Index: Tools/XMLConverter/src/main.cpp
  
 Index: Tools/XMLConverter/docs/ogremeshxml.dtd
 ===================================================================
---- Tools/XMLConverter/docs/ogremeshxml.dtd	(revision 9778)
+--- Tools/XMLConverter/docs/ogremeshxml.dtd	(revision 9821)
 +++ Tools/XMLConverter/docs/ogremeshxml.dtd	(working copy)
 @@ -63,14 +63,14 @@
  	colours_diffuse 			(true|false)	"false"
@@ -499,24 +499,9 @@ Index: Tools/XMLConverter/docs/ogremeshxml.dtd
  	tangents					(true|false)	"false"
  	tangent_dimensions			(3|4)			"3"
  	binormals					(true|false)	"false">
-Index: OgreMain/include/OgreHardwareVertexBuffer.h
-===================================================================
---- OgreMain/include/OgreHardwareVertexBuffer.h	(revision 9778)
-+++ OgreMain/include/OgreHardwareVertexBuffer.h	(working copy)
-@@ -273,7 +273,9 @@
-         */
-         inline void baseVertexPointerToElement(void* pBase, unsigned short** pElem) const
-         {
--            *pElem = static_cast<unsigned short*>(pBase) + mOffset;
-+            *pElem = static_cast<unsigned short*>(
-+                static_cast<void*>(
-+                    static_cast<unsigned char*>(pBase) + mOffset));
-         }
- 
- 
 Index: OgreMain/include/OgreResource.h
 ===================================================================
---- OgreMain/include/OgreResource.h	(revision 9778)
+--- OgreMain/include/OgreResource.h	(revision 9821)
 +++ OgreMain/include/OgreResource.h	(working copy)
 @@ -161,7 +161,7 @@
  		/// State count, the number of times this resource has changed state
@@ -529,7 +514,7 @@ Index: OgreMain/include/OgreResource.h
  
 Index: OgreMain/src/OgreResource.cpp
 ===================================================================
---- OgreMain/src/OgreResource.cpp	(revision 9778)
+--- OgreMain/src/OgreResource.cpp	(revision 9821)
 +++ OgreMain/src/OgreResource.cpp	(working copy)
 @@ -344,14 +344,14 @@
  	void Resource::addListener(Resource::Listener* lis)
@@ -548,16 +533,16 @@ Index: OgreMain/src/OgreResource.cpp
  	}
  	//-----------------------------------------------------------------------
  	void Resource::_fireLoadingComplete(bool wasBackgroundLoaded)
-Index: RenderSystems/GL/src/OgreGLRenderSystem.cpp
+Index: Samples/DeferredShading/src/LightMaterialGenerator.cpp
 ===================================================================
---- RenderSystems/GL/src/OgreGLRenderSystem.cpp	(revision 9778)
-+++ RenderSystems/GL/src/OgreGLRenderSystem.cpp	(working copy)
-@@ -2765,7 +2765,7 @@
- 				case VET_COLOUR:
- 				case VET_COLOUR_ABGR:
- 				case VET_COLOUR_ARGB:
--				case VET_UBYTE4:
-+				//case VET_UBYTE4:
- 					// Because GL takes these as a sequence of single unsigned bytes, count needs to be 4
- 					// VertexElement::getTypeCount treats them as 1 (RGBA)
- 					// Also need to normalise the fixed-point data
+--- Samples/DeferredShading/src/LightMaterialGenerator.cpp	(revision 9821)
++++ Samples/DeferredShading/src/LightMaterialGenerator.cpp	(working copy)
+@@ -64,7 +64,7 @@
+ 		}
+ 
+ 		GpuProgramPtr ptr = HighLevelGpuProgramManager::getSingleton().getByName(programName);
+-		assert(ptr->getLanguage()=="cg");
++		//assert(ptr->getLanguage()=="cg");
+ 		return ptr;
+ 	}
+ 
