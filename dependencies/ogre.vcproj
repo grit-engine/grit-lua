@@ -384,6 +384,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9DepthBuffer.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9Device.cpp"
 				>
 			</File>
@@ -508,6 +512,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ogre\OgreMain\src\OgreDepthBuffer.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ogre\PlugIns\ParticleFX\src\OgreDirectionRandomiserAffector.cpp"
 				>
 			</File>
@@ -581,6 +589,10 @@
 			</File>
 			<File
 				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLDefaultHardwareBufferManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLDepthBuffer.cpp"
 				>
 			</File>
 			<File
@@ -1273,6 +1285,10 @@
 			</File>
 			<File
 				RelativePath=".\ogre\OgreMain\src\OgreUserObjectBindings.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ogre\OgreMain\src\OgreUTFString.cpp"
 				>
 			</File>
 			<File
