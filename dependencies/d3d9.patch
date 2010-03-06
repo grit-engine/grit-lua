@@ -1,0 +1,72 @@
+Index: OgreD3D9RenderWindow.cpp
+===================================================================
+--- OgreD3D9RenderWindow.cpp	(revision 9821)
++++ OgreD3D9RenderWindow.cpp	(working copy)
+@@ -50,7 +50,7 @@
+ 		mHWnd = 0;
+ 		mActive = false;		
+ 		mClosed = false;
+-		mSwitchingFullscreen = false;
++		mNeedsFinalWindowAdjustment = false;
+ 		mDisplayFrequency = 0;
+ 		mDeviceValid = false;
+ 		mUseNVPerfHUD = false;
+@@ -350,7 +350,7 @@
+ 		if (fullScreen != mIsFullScreen || width != mWidth || height != mHeight)
+ 		{
+ 			if (fullScreen != mIsFullScreen)
+-				mSwitchingFullscreen = true;
++				mNeedsFinalWindowAdjustment = true;
+ 
+ 			DWORD dwStyle = WS_VISIBLE | WS_CLIPCHILDREN;
+ 
+@@ -382,6 +382,7 @@
+ 				{
+ 					// was previously fullscreen, just changing the resolution
+ 					SetWindowPos(mHWnd, HWND_TOPMOST, mLeft, mTop, width, height, SWP_NOACTIVATE);
++        				mNeedsFinalWindowAdjustment = true;
+ 				}
+ 				else
+ 				{
+@@ -481,6 +482,11 @@
+ 			LONG screenw = monitorInfo.rcWork.right  - monitorInfo.rcWork.left;
+ 			LONG screenh = monitorInfo.rcWork.bottom - monitorInfo.rcWork.top;
+ 
++                        // When switching from a low fullscreen res to windowed mode in a high
++                        // res desktop need to release this low res constraint on the window
++                        // region otherwise we will not be able to make the window larger
++                        // than the low fullscreen res we were just at
++			SetWindowRgn(mHWnd, NULL, TRUE);
+ 
+ 			int left = screenw > winWidth ? ((screenw - winWidth) / 2) : 0;
+ 			int top = screenh > winHeight ? ((screenh - winHeight) / 2) : 0;
+@@ -495,7 +501,7 @@
+ 					(*it++).second->_updateDimensions();			
+ 			}
+ 		}
+-		mSwitchingFullscreen = false;
++		mNeedsFinalWindowAdjustment = false;
+ 	}
+ 	
+ 	void D3D9RenderWindow::buildPresentParameters(D3DPRESENT_PARAMETERS* presentParams)
+@@ -777,7 +783,7 @@
+ 		if (mDeviceValid)
+ 		{
+ 			// Finish window / fullscreen mode switch.
+-			if (_getSwitchingFullscreen())
++			if (_getNeedsFinalWindowAdjustment())
+ 			{
+ 				_finishSwitchingFullscreen();		
+ 				// have to re-validate since this may have altered dimensions
+@@ -816,9 +822,9 @@
+ 	}
+ 
+ 	//-----------------------------------------------------------------------------
+-	bool D3D9RenderWindow::_getSwitchingFullscreen() const
++	bool D3D9RenderWindow::_getNeedsFinalWindowAdjustment() const
+ 	{
+-		return mSwitchingFullscreen;
++		return mNeedsFinalWindowAdjustment;
+ 	}
+ 
+ 	//-----------------------------------------------------------------------------
