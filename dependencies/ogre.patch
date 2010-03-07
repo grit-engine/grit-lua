@@ -533,19 +533,6 @@ Index: OgreMain/src/OgreResource.cpp
  	}
  	//-----------------------------------------------------------------------
  	void Resource::_fireLoadingComplete(bool wasBackgroundLoaded)
-Index: Samples/DeferredShading/src/LightMaterialGenerator.cpp
-===================================================================
---- Samples/DeferredShading/src/LightMaterialGenerator.cpp	(revision 9821)
-+++ Samples/DeferredShading/src/LightMaterialGenerator.cpp	(working copy)
-@@ -64,7 +64,7 @@
- 		}
- 
- 		GpuProgramPtr ptr = HighLevelGpuProgramManager::getSingleton().getByName(programName);
--		assert(ptr->getLanguage()=="cg");
-+		//assert(ptr->getLanguage()=="cg");
- 		return ptr;
- 	}
- 
 Index: RenderSystems/Direct3D9/include/OgreD3D9RenderWindow.h
 ===================================================================
 --- RenderSystems/Direct3D9/include/OgreD3D9RenderWindow.h	(revision 9821)
