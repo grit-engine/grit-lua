@@ -546,3 +546,117 @@ Index: Samples/DeferredShading/src/LightMaterialGenerator.cpp
  		return ptr;
  	}
  
+Index: RenderSystems/Direct3D9/include/OgreD3D9RenderWindow.h
+===================================================================
+--- RenderSystems/Direct3D9/include/OgreD3D9RenderWindow.h	(revision 9821)
++++ RenderSystems/Direct3D9/include/OgreD3D9RenderWindow.h	(working copy)
+@@ -90,7 +90,7 @@
+ 		IDirect3DSurface9* getRenderSurface();
+ 
+ 		/// Are we in the middle of switching between fullscreen and windowed
+-		bool _getSwitchingFullscreen() const;
++		bool _getNeedsFinalWindowAdjustment() const;
+ 		
+ 		/// Indicate that fullscreen / windowed switching has finished
+ 		void _finishSwitchingFullscreen();
+@@ -114,7 +114,7 @@
+ 		HWND						mHWnd;					// Win32 Window handle		
+ 		bool						mIsExternal;			// window not created by Ogre
+ 		bool						mClosed;				// Is this window destroyed.		
+-		bool						mSwitchingFullscreen;	// Are we switching from fullscreen to windowed or vice versa		
++		bool						mNeedsFinalWindowAdjustment;	// Are we switching from fullscreen to windowed or vice versa		
+ 		D3DMULTISAMPLE_TYPE			mFSAAType;				// AA type.
+ 		DWORD						mFSAAQuality;			// AA quality.
+ 		UINT						mDisplayFrequency;		// Display frequency.
+Index: RenderSystems/Direct3D9/src/OgreD3D9RenderWindow.cpp
+===================================================================
+--- RenderSystems/Direct3D9/src/OgreD3D9RenderWindow.cpp	(revision 9821)
++++ RenderSystems/Direct3D9/src/OgreD3D9RenderWindow.cpp	(working copy)
+@@ -50,7 +50,7 @@
+ 		mHWnd = 0;
+ 		mActive = false;		
+ 		mClosed = false;
+-		mSwitchingFullscreen = false;
++		mNeedsFinalWindowAdjustment = false;
+ 		mDisplayFrequency = 0;
+ 		mDeviceValid = false;
+ 		mUseNVPerfHUD = false;
+@@ -350,7 +350,7 @@
+ 		if (fullScreen != mIsFullScreen || width != mWidth || height != mHeight)
+ 		{
+ 			if (fullScreen != mIsFullScreen)
+-				mSwitchingFullscreen = true;
++				mNeedsFinalWindowAdjustment = true;
+ 
+ 			DWORD dwStyle = WS_VISIBLE | WS_CLIPCHILDREN;
+ 
+@@ -382,6 +382,7 @@
+ 				{
+ 					// was previously fullscreen, just changing the resolution
+ 					SetWindowPos(mHWnd, HWND_TOPMOST, mLeft, mTop, width, height, SWP_NOACTIVATE);
++        				mNeedsFinalWindowAdjustment = true;
+ 				}
+ 				else
+ 				{
+@@ -481,6 +482,11 @@
+ 			LONG screenw = monitorInfo.rcWork.right  - monitorInfo.rcWork.left;
+ 			LONG screenh = monitorInfo.rcWork.bottom - monitorInfo.rcWork.top;
+ 
++                        // When switching from a low fullscreen res to windowed mode in a high
++                        // res desktop need to release this low res constraint on the window
++                        // region otherwise we will not be able to make the window larger
++                        // than the low fullscreen res we were just at
++			SetWindowRgn(mHWnd, NULL, TRUE);
+ 
+ 			int left = screenw > winWidth ? ((screenw - winWidth) / 2) : 0;
+ 			int top = screenh > winHeight ? ((screenh - winHeight) / 2) : 0;
+@@ -495,7 +501,7 @@
+ 					(*it++).second->_updateDimensions();			
+ 			}
+ 		}
+-		mSwitchingFullscreen = false;
++		mNeedsFinalWindowAdjustment = false;
+ 	}
+ 	
+ 	void D3D9RenderWindow::buildPresentParameters(D3DPRESENT_PARAMETERS* presentParams)
+@@ -777,7 +783,7 @@
+ 		if (mDeviceValid)
+ 		{
+ 			// Finish window / fullscreen mode switch.
+-			if (_getSwitchingFullscreen())
++			if (_getNeedsFinalWindowAdjustment())
+ 			{
+ 				_finishSwitchingFullscreen();		
+ 				// have to re-validate since this may have altered dimensions
+@@ -816,9 +822,9 @@
+ 	}
+ 
+ 	//-----------------------------------------------------------------------------
+-	bool D3D9RenderWindow::_getSwitchingFullscreen() const
++	bool D3D9RenderWindow::_getNeedsFinalWindowAdjustment() const
+ 	{
+-		return mSwitchingFullscreen;
++		return mNeedsFinalWindowAdjustment;
+ 	}
+ 
+ 	//-----------------------------------------------------------------------------
+Index: RenderSystems/Direct3D9/src/OgreD3D9GpuProgram.cpp
+===================================================================
+--- RenderSystems/Direct3D9/src/OgreD3D9GpuProgram.cpp	(revision 9821)
++++ RenderSystems/Direct3D9/src/OgreD3D9GpuProgram.cpp	(working copy)
+@@ -180,6 +180,15 @@
+ 		// Populate compile flags
+         DWORD compileFlags = 0;
+ 
++        while (true) {
++                Ogre::String::size_type c = mSource.find("vFace.x",0);
++                if (c!=Ogre::String.npos) {
++                        mSource.replace(c,7,"vFace");
++                        continue;
++                }
++                break;
++        }
++        
+ 		// Create the shader
+ 		// Assemble source into microcode
+ 		LPD3DXBUFFER microcode;
