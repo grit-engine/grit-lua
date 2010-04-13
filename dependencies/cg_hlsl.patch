@@ -1,0 +1,20 @@
+Index: RenderSystems/Direct3D9/src/OgreD3D9GpuProgram.cpp
+===================================================================
+--- RenderSystems/Direct3D9/src/OgreD3D9GpuProgram.cpp	(revision 9952)
++++ RenderSystems/Direct3D9/src/OgreD3D9GpuProgram.cpp	(working copy)
+@@ -180,6 +180,15 @@
+ 		// Populate compile flags
+         DWORD compileFlags = 0;
+ 
++        while (true) {
++                Ogre::String::size_type c = mSource.find("vFace.x",0);
++                if (c!=Ogre::String.npos) {
++                        mSource.replace(c,7,"vFace");
++                        continue;
++                }
++                break;
++        }
++        
+ 		// Create the shader
+ 		// Assemble source into microcode
+ 		LPD3DXBUFFER microcode;

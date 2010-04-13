@@ -1,7 +1,29 @@
-Index: OgreD3D9RenderWindow.cpp
+Index: RenderSystems/Direct3D9/include/OgreD3D9RenderWindow.h
 ===================================================================
---- OgreD3D9RenderWindow.cpp	(revision 9821)
-+++ OgreD3D9RenderWindow.cpp	(working copy)
+--- RenderSystems/Direct3D9/include/OgreD3D9RenderWindow.h	(revision 9952)
++++ RenderSystems/Direct3D9/include/OgreD3D9RenderWindow.h	(working copy)
+@@ -90,7 +90,7 @@
+ 		IDirect3DSurface9* getRenderSurface();
+ 
+ 		/// Are we in the middle of switching between fullscreen and windowed
+-		bool _getSwitchingFullscreen() const;
++		bool _getNeedsFinalWindowAdjustment() const;
+ 		
+ 		/// Indicate that fullscreen / windowed switching has finished
+ 		void _finishSwitchingFullscreen();
+@@ -114,7 +114,7 @@
+ 		HWND						mHWnd;					// Win32 Window handle		
+ 		bool						mIsExternal;			// window not created by Ogre
+ 		bool						mClosed;				// Is this window destroyed.		
+-		bool						mSwitchingFullscreen;	// Are we switching from fullscreen to windowed or vice versa		
++		bool						mNeedsFinalWindowAdjustment;	// Are we switching from fullscreen to windowed or vice versa		
+ 		D3DMULTISAMPLE_TYPE			mFSAAType;				// AA type.
+ 		DWORD						mFSAAQuality;			// AA quality.
+ 		UINT						mDisplayFrequency;		// Display frequency.
+Index: RenderSystems/Direct3D9/src/OgreD3D9RenderWindow.cpp
+===================================================================
+--- RenderSystems/Direct3D9/src/OgreD3D9RenderWindow.cpp	(revision 9952)
++++ RenderSystems/Direct3D9/src/OgreD3D9RenderWindow.cpp	(working copy)
 @@ -50,7 +50,7 @@
  		mHWnd = 0;
  		mActive = false;		
