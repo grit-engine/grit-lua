@@ -8,7 +8,7 @@
 PLAT= none
 
 CC= gcc
-CFLAGS=-g -O3 -Wall -DLUA_USE_MKSTEMP
+CFLAGS=-g -O0 -Wall -DLUA_USE_MKSTEMP -DLUA_USE_APICHECK
 AR= ar rcu
 RANLIB= ranlib
 RM= rm -f
@@ -30,10 +30,9 @@ $(LUA_A): $(MEGA_O)
 	$(RANLIB) $@
 
 $(MEGA_C): $(LIB_C) $(CORE_C) 
-	$(CAT) $^ > $@
 
 clean:
-	$(RM) $(MEGA_C) $(MEGA_O)
+	$(RM) $(MEGA_O)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
