@@ -335,18 +335,12 @@ PARTICLEFX_SOURCE=PlugIns/ParticleFX/src/OgreAreaEmitter.cpp \
                   PlugIns/ParticleFX/src/OgreScaleAffector.cpp
 
 
-OCTREE_SOURCE=PlugIns/OctreeSceneManager/src/OgreHeightmapTerrainPageSource.cpp \
-              PlugIns/OctreeSceneManager/src/OgreOctreeCamera.cpp \
+OCTREE_SOURCE=PlugIns/OctreeSceneManager/src/OgreOctreeCamera.cpp \
               PlugIns/OctreeSceneManager/src/OgreOctree.cpp \
               PlugIns/OctreeSceneManager/src/OgreOctreeNode.cpp \
               PlugIns/OctreeSceneManager/src/OgreOctreePlugin.cpp \
               PlugIns/OctreeSceneManager/src/OgreOctreeSceneManager.cpp \
-              PlugIns/OctreeSceneManager/src/OgreOctreeSceneQuery.cpp \
-              PlugIns/OctreeSceneManager/src/OgreTerrainPage.cpp \
-              PlugIns/OctreeSceneManager/src/OgreTerrainPageSource.cpp \
-              PlugIns/OctreeSceneManager/src/OgreTerrainRenderable.cpp \
-              PlugIns/OctreeSceneManager/src/OgreTerrainSceneManager.cpp \
-              PlugIns/OctreeSceneManager/src/OgreTerrainVertexProgram.cpp
+              PlugIns/OctreeSceneManager/src/OgreOctreeSceneQuery.cpp
 
 XMLCONVERTER_SOURCE=Tools/XMLConverter/src/main.cpp \
                     Tools/XMLConverter/src/OgreXMLSkeletonSerializer.cpp \
