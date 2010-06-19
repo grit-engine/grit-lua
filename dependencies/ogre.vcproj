@@ -42,7 +42,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)\dependencies\ogre\OgreMain\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\OgreMain\src\nedmalloc&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\win32&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\nvparse&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\nvparse\winheaders&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\atifs\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\GLSL\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\include\&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\Direct3D9\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\ParticleFX\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\OctreeSceneManager\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\Dependencies\include&quot;;&quot;$(SolutionDir)\dependencies&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\CgProgramManager\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)\dependencies\ogre\OgreMain\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\OgreMain\src\nedmalloc&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\win32&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\nvparse&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\nvparse\winheaders&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\atifs\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\GLSL\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\include\&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\Direct3D9\include&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\PlugIns\ParticleFX\include&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\PlugIns\OctreeSceneManager\include&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\Dependencies\include&quot;;&quot;$(SolutionDir)\dependencies&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\PlugIns\CgProgramManager\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG"
 				StringPooling="true"
 				MinimalRebuild="true"
@@ -114,7 +114,7 @@
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="true"
 				EnableFiberSafeOptimizations="true"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)\dependencies\ogre\OgreMain\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\OgreMain\src\nedmalloc&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\win32&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\nvparse&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\nvparse\winheaders&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\atifs\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\src\GLSL\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\GL\include\&quot;;&quot;$(SolutionDir)\dependencies\ogre\RenderSystems\Direct3D9\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\ParticleFX\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\OctreeSceneManager\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\Dependencies\include&quot;;&quot;$(SolutionDir)\dependencies&quot;;&quot;$(SolutionDir)\dependencies\ogre\PlugIns\CgProgramManager\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)\dependencies\grit_ogre\OgreMain\include&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\OgreMain\src\nedmalloc&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\RenderSystems\GL\src\win32&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\RenderSystems\GL\src\nvparse&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\RenderSystems\GL\src\nvparse\winheaders&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\RenderSystems\GL\src\atifs\include&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\RenderSystems\GL\src\GLSL\include&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\RenderSystems\GL\include\&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\RenderSystems\Direct3D9\include&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\PlugIns\ParticleFX\include&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\PlugIns\OctreeSceneManager\include&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\Dependencies\include&quot;;&quot;$(SolutionDir)\dependencies&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\PlugIns\CgProgramManager\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG"
 				StringPooling="true"
 				MinimalRebuild="true"
@@ -164,1231 +164,1211 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\_ps1.0_lexer.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\_ps1.0_lexer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\_ps1.0_parser.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\_ps1.0_parser.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\_rc1.0_lexer.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\_rc1.0_lexer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\_rc1.0_parser.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\_rc1.0_parser.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\_ts1.0_lexer.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\_ts1.0_lexer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\_ts1.0_parser.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\_ts1.0_parser.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\_vs1.0_lexer.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\_vs1.0_lexer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\_vs1.0_parser.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\_vs1.0_parser.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\atifs\src\ATI_FS_GLGpuProgram.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\atifs\src\ATI_FS_GLGpuProgram.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\avp1.0_impl.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\avp1.0_impl.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\atifs\src\Compiler2Pass.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\atifs\src\Compiler2Pass.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\glew.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\glew.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\nvparse.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\nvparse.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\nvparse_errors.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\nvparse_errors.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreAlignedAllocator.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreAlignedAllocator.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreAnimable.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreAnimable.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreAnimation.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreAnimation.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreAnimationState.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreAnimationState.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreAnimationTrack.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreAnimationTrack.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreArchiveManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreArchiveManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\ParticleFX\src\OgreAreaEmitter.cpp"
+				RelativePath=".\grit_ogre\PlugIns\ParticleFX\src\OgreAreaEmitter.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreAutoParamDataSource.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreAutoParamDataSource.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreAxisAlignedBox.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreAxisAlignedBox.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreBillboard.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreBillboard.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreBillboardChain.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreBillboardChain.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreBillboardParticleRenderer.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreBillboardParticleRenderer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreBillboardSet.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreBillboardSet.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreBone.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreBone.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreBorderPanelOverlayElement.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreBorderPanelOverlayElement.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\ParticleFX\src\OgreBoxEmitter.cpp"
+				RelativePath=".\grit_ogre\PlugIns\ParticleFX\src\OgreBoxEmitter.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreCamera.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreCamera.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\CgProgramManager\src\OgreCgFxScriptLoader.cpp"
+				RelativePath=".\grit_ogre\PlugIns\CgProgramManager\src\OgreCgFxScriptLoader.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\CgProgramManager\src\OgreCgPlugin.cpp"
+				RelativePath=".\grit_ogre\PlugIns\CgProgramManager\src\OgreCgPlugin.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\CgProgramManager\src\OgreCgProgram.cpp"
+				RelativePath=".\grit_ogre\PlugIns\CgProgramManager\src\OgreCgProgram.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\CgProgramManager\src\OgreCgProgramFactory.cpp"
+				RelativePath=".\grit_ogre\PlugIns\CgProgramManager\src\OgreCgProgramFactory.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\CgProgramManager\src\OgreCgProgramManagerDll.cpp"
+				RelativePath=".\grit_ogre\PlugIns\CgProgramManager\src\OgreCgProgramManagerDll.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreCodec.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreCodec.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\ParticleFX\src\OgreColourFaderAffector.cpp"
+				RelativePath=".\grit_ogre\PlugIns\ParticleFX\src\OgreColourFaderAffector.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\ParticleFX\src\OgreColourFaderAffector2.cpp"
+				RelativePath=".\grit_ogre\PlugIns\ParticleFX\src\OgreColourFaderAffector2.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\ParticleFX\src\OgreColourImageAffector.cpp"
+				RelativePath=".\grit_ogre\PlugIns\ParticleFX\src\OgreColourImageAffector.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\ParticleFX\src\OgreColourInterpolatorAffector.cpp"
+				RelativePath=".\grit_ogre\PlugIns\ParticleFX\src\OgreColourInterpolatorAffector.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreColourValue.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreColourValue.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreCommon.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreCommon.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreCompositionPass.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreCompositionPass.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreCompositionTargetPass.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreCompositionTargetPass.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreCompositionTechnique.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreCompositionTechnique.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreCompositor.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreCompositor.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreCompositorChain.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreCompositorChain.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreCompositorInstance.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreCompositorInstance.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreCompositorManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreCompositorManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\WIN32\OgreConfigDialog.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\WIN32\OgreConfigDialog.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreConfigFile.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreConfigFile.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreControllerManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreControllerManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreConvexBody.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreConvexBody.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\ParticleFX\src\OgreCylinderEmitter.cpp"
+				RelativePath=".\grit_ogre\PlugIns\ParticleFX\src\OgreCylinderEmitter.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9DepthBuffer.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9DepthBuffer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9Device.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9Device.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9DeviceManager.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9DeviceManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9Driver.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9Driver.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9DriverList.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9DriverList.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9GpuProgram.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9GpuProgram.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9GpuProgramManager.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9GpuProgramManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9HardwareBufferManager.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9HardwareBufferManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9HardwareIndexBuffer.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9HardwareIndexBuffer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9HardwareOcclusionQuery.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9HardwareOcclusionQuery.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9HardwarePixelBuffer.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9HardwarePixelBuffer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9HardwareVertexBuffer.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9HardwareVertexBuffer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9HLSLProgram.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9HLSLProgram.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9HLSLProgramFactory.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9HLSLProgramFactory.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9Mappings.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9Mappings.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9MultiRenderTarget.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9MultiRenderTarget.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9Plugin.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9Plugin.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9RenderSystem.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9RenderSystem.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9RenderWindow.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9RenderWindow.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9Resource.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9Resource.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9ResourceManager.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9ResourceManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9Texture.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9Texture.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9TextureManager.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9TextureManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9VertexDeclaration.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9VertexDeclaration.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9VideoMode.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9VideoMode.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\Direct3D9\src\OgreD3D9VideoModeList.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\Direct3D9\src\OgreD3D9VideoModeList.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreDataStream.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreDataStream.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreDDSCodec.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreDDSCodec.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreDefaultHardwareBufferManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreDefaultHardwareBufferManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreDefaultSceneQueries.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreDefaultSceneQueries.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\Threading\OgreDefaultWorkQueueStandard.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\Threading\OgreDefaultWorkQueueStandard.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\ParticleFX\src\OgreDeflectorPlaneAffector.cpp"
+				RelativePath=".\grit_ogre\PlugIns\ParticleFX\src\OgreDeflectorPlaneAffector.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreDepthBuffer.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreDepthBuffer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\ParticleFX\src\OgreDirectionRandomiserAffector.cpp"
+				RelativePath=".\grit_ogre\PlugIns\ParticleFX\src\OgreDirectionRandomiserAffector.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreDistanceLodStrategy.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreDistanceLodStrategy.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreDynLib.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreDynLib.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreDynLibManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreDynLibManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreEdgeListBuilder.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreEdgeListBuilder.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\ParticleFX\src\OgreEllipsoidEmitter.cpp"
+				RelativePath=".\grit_ogre\PlugIns\ParticleFX\src\OgreEllipsoidEmitter.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreEntity.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreEntity.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\WIN32\OgreErrorDialog.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\WIN32\OgreErrorDialog.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreException.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreException.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreExternalTextureSource.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreExternalTextureSource.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreExternalTextureSourceManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreExternalTextureSourceManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreFileSystem.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreFileSystem.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreFont.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreFont.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreFontManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreFontManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreFreeImageCodec.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreFreeImageCodec.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreFrustum.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreFrustum.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLATIFSInit.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLATIFSInit.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLContext.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLContext.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLDefaultHardwareBufferManager.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLDefaultHardwareBufferManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLDepthBuffer.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLDepthBuffer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLFBOMultiRenderTarget.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLFBOMultiRenderTarget.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLFBORenderTexture.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLFBORenderTexture.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLFrameBufferObject.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLFrameBufferObject.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLGpuNvparseProgram.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLGpuNvparseProgram.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLGpuProgram.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLGpuProgram.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLGpuProgramManager.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLGpuProgramManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLHardwareBufferManager.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLHardwareBufferManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLHardwareIndexBuffer.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLHardwareIndexBuffer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLHardwareOcclusionQuery.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLHardwareOcclusionQuery.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLHardwarePixelBuffer.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLHardwarePixelBuffer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLHardwareVertexBuffer.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLHardwareVertexBuffer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLPBRenderTexture.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLPBRenderTexture.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLPixelFormat.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLPixelFormat.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLPlugin.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLPlugin.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLRenderSystem.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLRenderSystem.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLRenderTexture.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLRenderTexture.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLRenderToVertexBuffer.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLRenderToVertexBuffer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLExtSupport.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLExtSupport.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLGpuProgram.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLGpuProgram.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLLinkProgram.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLLinkProgram.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLLinkProgramManager.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLLinkProgramManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLPreprocessor.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLPreprocessor.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLProgram.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLProgram.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLProgramFactory.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLProgramFactory.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLSupport.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLSupport.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLTexture.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLTexture.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreGLTextureManager.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreGLTextureManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreGpuProgram.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreGpuProgram.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreGpuProgramManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreGpuProgramManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreGpuProgramParams.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreGpuProgramParams.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreGpuProgramUsage.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreGpuProgramUsage.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreHardwareBufferManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreHardwareBufferManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreHardwareIndexBuffer.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreHardwareIndexBuffer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreHardwareOcclusionQuery.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreHardwareOcclusionQuery.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreHardwarePixelBuffer.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreHardwarePixelBuffer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreHardwareVertexBuffer.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreHardwareVertexBuffer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\OctreeSceneManager\src\OgreHeightmapTerrainPageSource.cpp"
+				RelativePath=".\grit_ogre\PlugIns\OctreeSceneManager\src\OgreHeightmapTerrainPageSource.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreHighLevelGpuProgram.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreHighLevelGpuProgram.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreHighLevelGpuProgramManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreHighLevelGpuProgramManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\ParticleFX\src\OgreHollowEllipsoidEmitter.cpp"
+				RelativePath=".\grit_ogre\PlugIns\ParticleFX\src\OgreHollowEllipsoidEmitter.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreImage.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreImage.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreInstancedGeometry.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreInstancedGeometry.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreKeyFrame.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreKeyFrame.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreLight.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreLight.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\ParticleFX\src\OgreLinearForceAffector.cpp"
+				RelativePath=".\grit_ogre\PlugIns\ParticleFX\src\OgreLinearForceAffector.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreLodStrategy.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreLodStrategy.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreLodStrategyManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreLodStrategyManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreLog.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreLog.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreLogManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreLogManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreManualObject.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreManualObject.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreMaterial.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreMaterial.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreMaterialManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreMaterialManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreMaterialSerializer.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreMaterialSerializer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreMath.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreMath.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreMatrix3.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreMatrix3.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreMatrix4.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreMatrix4.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreMemoryAllocatedObject.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreMemoryAllocatedObject.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreMemoryTracker.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreMemoryTracker.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreMesh.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreMesh.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreMeshManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreMeshManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreMeshSerializer.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreMeshSerializer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreMeshSerializerImpl.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreMeshSerializerImpl.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreMovableObject.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreMovableObject.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreMovablePlane.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreMovablePlane.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreNode.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreNode.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreNumerics.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreNumerics.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\OctreeSceneManager\src\OgreOctree.cpp"
+				RelativePath=".\grit_ogre\PlugIns\OctreeSceneManager\src\OgreOctree.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\OctreeSceneManager\src\OgreOctreeCamera.cpp"
+				RelativePath=".\grit_ogre\PlugIns\OctreeSceneManager\src\OgreOctreeCamera.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\OctreeSceneManager\src\OgreOctreeNode.cpp"
+				RelativePath=".\grit_ogre\PlugIns\OctreeSceneManager\src\OgreOctreeNode.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\OctreeSceneManager\src\OgreOctreePlugin.cpp"
+				RelativePath=".\grit_ogre\PlugIns\OctreeSceneManager\src\OgreOctreePlugin.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\OctreeSceneManager\src\OgreOctreeSceneManager.cpp"
+				RelativePath=".\grit_ogre\PlugIns\OctreeSceneManager\src\OgreOctreeSceneManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\OctreeSceneManager\src\OgreOctreeSceneQuery.cpp"
+				RelativePath=".\grit_ogre\PlugIns\OctreeSceneManager\src\OgreOctreeSceneQuery.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreOptimisedUtil.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreOptimisedUtil.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreOptimisedUtilGeneral.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreOptimisedUtilGeneral.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreOptimisedUtilSSE.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreOptimisedUtilSSE.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreOverlay.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreOverlay.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreOverlayContainer.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreOverlayContainer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreOverlayElement.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreOverlayElement.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreOverlayElementCommands.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreOverlayElementCommands.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreOverlayManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreOverlayManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgrePanelOverlayElement.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgrePanelOverlayElement.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreParticle.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreParticle.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreParticleEmitter.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreParticleEmitter.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreParticleEmitterCommands.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreParticleEmitterCommands.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\ParticleFX\src\OgreParticleFXPlugin.cpp"
+				RelativePath=".\grit_ogre\PlugIns\ParticleFX\src\OgreParticleFXPlugin.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreParticleIterator.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreParticleIterator.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreParticleSystem.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreParticleSystem.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreParticleSystemManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreParticleSystemManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgrePass.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgrePass.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgrePatchMesh.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgrePatchMesh.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgrePatchSurface.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgrePatchSurface.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgrePixelCountLodStrategy.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgrePixelCountLodStrategy.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgrePixelFormat.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgrePixelFormat.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgrePlane.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgrePlane.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgrePlatformInformation.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgrePlatformInformation.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\ParticleFX\src\OgrePointEmitter.cpp"
+				RelativePath=".\grit_ogre\PlugIns\ParticleFX\src\OgrePointEmitter.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgrePolygon.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgrePolygon.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgrePose.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgrePose.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgrePrecompiledHeaders.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgrePrecompiledHeaders.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgrePredefinedControllers.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgrePredefinedControllers.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgrePrefabFactory.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgrePrefabFactory.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreProfiler.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreProfiler.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreProgressiveMesh.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreProgressiveMesh.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgrePVRTCCodec.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgrePVRTCCodec.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreQuaternion.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreQuaternion.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreRectangle2D.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreRectangle2D.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreRenderQueue.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreRenderQueue.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreRenderQueueInvocation.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreRenderQueueInvocation.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreRenderQueueSortingGrouping.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreRenderQueueSortingGrouping.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreRenderSystem.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreRenderSystem.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreRenderSystemCapabilities.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreRenderSystemCapabilities.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreRenderSystemCapabilitiesManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreRenderSystemCapabilitiesManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreRenderSystemCapabilitiesSerializer.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreRenderSystemCapabilitiesSerializer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreRenderTarget.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreRenderTarget.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreRenderTexture.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreRenderTexture.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreRenderToVertexBuffer.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreRenderToVertexBuffer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreRenderWindow.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreRenderWindow.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreResource.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreResource.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreResourceBackgroundQueue.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreResourceBackgroundQueue.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreResourceGroupManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreResourceGroupManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreResourceManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreResourceManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreRibbonTrail.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreRibbonTrail.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\ParticleFX\src\OgreRingEmitter.cpp"
+				RelativePath=".\grit_ogre\PlugIns\ParticleFX\src\OgreRingEmitter.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreRoot.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreRoot.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\ParticleFX\src\OgreRotationAffector.cpp"
+				RelativePath=".\grit_ogre\PlugIns\ParticleFX\src\OgreRotationAffector.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreRotationSpline.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreRotationSpline.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\ParticleFX\src\OgreScaleAffector.cpp"
+				RelativePath=".\grit_ogre\PlugIns\ParticleFX\src\OgreScaleAffector.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreSceneManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreSceneManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreSceneManagerEnumerator.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreSceneManagerEnumerator.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreSceneNode.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreSceneNode.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreSceneQuery.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreSceneQuery.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreScriptCompiler.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreScriptCompiler.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreScriptLexer.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreScriptLexer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreScriptParser.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreScriptParser.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreScriptTranslator.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreScriptTranslator.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreSearchOps.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreSearchOps.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreSerializer.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreSerializer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreShadowCameraSetup.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreShadowCameraSetup.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreShadowCameraSetupFocused.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreShadowCameraSetupFocused.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreShadowCameraSetupLiSPSM.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreShadowCameraSetupLiSPSM.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreShadowCameraSetupPlaneOptimal.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreShadowCameraSetupPlaneOptimal.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreShadowCameraSetupPSSM.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreShadowCameraSetupPSSM.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreShadowCaster.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreShadowCaster.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreShadowTextureManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreShadowTextureManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreShadowVolumeExtrudeProgram.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreShadowVolumeExtrudeProgram.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreSimpleRenderable.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreSimpleRenderable.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreSimpleSpline.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreSimpleSpline.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreSkeleton.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreSkeleton.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreSkeletonInstance.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreSkeletonInstance.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreSkeletonManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreSkeletonManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreSkeletonSerializer.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreSkeletonSerializer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreStaticGeometry.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreStaticGeometry.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreStreamSerialiser.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreStreamSerialiser.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreString.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreString.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreStringConverter.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreStringConverter.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreStringInterface.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreStringInterface.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreSubEntity.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreSubEntity.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreSubMesh.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreSubMesh.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreTagPoint.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreTagPoint.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreTangentSpaceCalc.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreTangentSpaceCalc.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreTechnique.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreTechnique.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\OctreeSceneManager\src\OgreTerrainPage.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreTextAreaOverlayElement.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\OctreeSceneManager\src\OgreTerrainPageSource.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreTexture.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\OctreeSceneManager\src\OgreTerrainRenderable.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreTextureManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\OctreeSceneManager\src\OgreTerrainSceneManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreTextureUnitState.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\PlugIns\OctreeSceneManager\src\OgreTerrainVertexProgram.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\WIN32\OgreTimer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreTextAreaOverlayElement.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreUnifiedHighLevelGpuProgram.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreTexture.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreUserObjectBindings.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreTextureManager.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreUTFString.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreTextureUnitState.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreVector2.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\WIN32\OgreTimer.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreVector3.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreUnifiedHighLevelGpuProgram.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreVector4.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreUserObjectBindings.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreVertexIndexData.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreUTFString.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreViewport.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreVector2.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\win32\OgreWin32Context.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreVector3.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreWin32GLSupport.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreVector4.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreWin32RenderTexture.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreVertexIndexData.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\OgreWin32Window.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreViewport.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreWindowEventUtilities.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\win32\OgreWin32Context.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreWireBoundingBox.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreWin32GLSupport.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreWorkQueue.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreWin32RenderTexture.cpp"
+				RelativePath=".\grit_ogre\OgreMain\src\OgreZip.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\OgreWin32Window.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\ps1.0_program.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreWindowEventUtilities.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\atifs\src\ps_1_4.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreWireBoundingBox.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\rc1.0_combiners.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreWorkQueue.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\rc1.0_final.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\OgreMain\src\OgreZip.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\rc1.0_general.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\ps1.0_program.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\ts1.0_inst.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\atifs\src\ps_1_4.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\ts1.0_inst_list.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\rc1.0_combiners.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\vcp1.0_impl.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\rc1.0_final.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\vp1.0_impl.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\rc1.0_general.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\vs1.0_inst.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\ts1.0_inst.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\vs1.0_inst_list.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\ts1.0_inst_list.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\vcp1.0_impl.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\vp1.0_impl.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\vs1.0_inst.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\vs1.0_inst_list.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ogre\RenderSystems\GL\src\nvparse\vsp1.0_impl.cpp"
+				RelativePath=".\grit_ogre\RenderSystems\GL\src\nvparse\vsp1.0_impl.cpp"
 				>
 			</File>
 		</Filter>

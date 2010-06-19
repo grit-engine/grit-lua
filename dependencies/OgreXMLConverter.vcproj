@@ -43,7 +43,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)\dependencies\ogre\OgreMain\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\Dependencies\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\Tools\XMLConverter\include&quot;;&quot;$(SolutionDir)\dependencies&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)\dependencies\grit_ogre\OgreMain\include&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\Dependencies\include&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\Tools\XMLConverter\include&quot;;&quot;$(SolutionDir)\dependencies&quot;"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;TIXML_USE_STL"
 				StringPooling="true"
 				MinimalRebuild="true"
@@ -71,7 +71,7 @@
 				AdditionalDependencies="ogre.lib FreeImaged.lib freetype235_D.lib LibJPEG.lib LibMNG.lib LibOpenJPEG.lib LibPNG.lib LibTIFF.lib dxguid.lib dinput8.lib OpenEXR.lib zlibd.lib zziplibd.lib bullet.lib OPENGL32.lib GLU32.lib d3d9.lib d3dx9.lib dxerr.lib"
 				OutputFile="$(OutDir)\OgreXMLConverter_$(ConfigurationName).exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(SolutionDir)\dependencies\ogre\Dependencies\lib\Debug&quot;;&quot;$(SolutionDir)\dependencies\ogre\lib&quot;;&quot;$(OutDir)&quot;;$(NOINHERIT)"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)\dependencies\grit_ogre\Dependencies\lib\Debug&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\lib&quot;;&quot;$(OutDir)&quot;;$(NOINHERIT)"
 				GenerateDebugInformation="true"
 				AssemblyDebug="0"
 				SubSystem="1"
@@ -132,7 +132,7 @@
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="true"
 				EnableFiberSafeOptimizations="true"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)\dependencies\ogre\OgreMain\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\Dependencies\include&quot;;&quot;$(SolutionDir)\dependencies\ogre\Tools\XMLConverter\include&quot;;&quot;$(SolutionDir)\dependencies&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)\dependencies\grit_ogre\OgreMain\include&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\Dependencies\include&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\Tools\XMLConverter\include&quot;;&quot;$(SolutionDir)\dependencies&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;TIXML_USE_STL"
 				StringPooling="true"
 				MinimalRebuild="true"
@@ -159,7 +159,7 @@
 				AdditionalDependencies="FreeImage.lib freetype235.lib LibJPEG.lib LibMNG.lib LibOpenJPEG.lib LibPNG.lib LibTIFF.lib ogre.lib zlib.lib zziplib.lib $(ProjectDir)OgreXMLConverter.res"
 				OutputFile="$(SolutionDir)\grit_core\media\Tools\OgreXMLConverter.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(SolutionDir)\dependencies\ogre\Dependencies\lib\Release&quot;;&quot;$(OutDir)&quot;;$(NOINHERIT)"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)\dependencies\grit_ogre\Dependencies\lib\Release&quot;;&quot;$(OutDir)&quot;;$(NOINHERIT)"
 				GenerateDebugInformation="true"
 				AssemblyDebug="0"
 				ProgramDatabaseFile="$(OutDir)\$(TargetName).pdb"
@@ -201,31 +201,31 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\ogre\Tools\XMLConverter\src\main.cpp"
+				RelativePath=".\grit_ogre\Tools\XMLConverter\src\main.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\Tools\XMLConverter\src\OgreXMLMeshSerializer.cpp"
+				RelativePath=".\grit_ogre\Tools\XMLConverter\src\OgreXMLMeshSerializer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\Tools\XMLConverter\src\OgreXMLSkeletonSerializer.cpp"
+				RelativePath=".\grit_ogre\Tools\XMLConverter\src\OgreXMLSkeletonSerializer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\Tools\XMLConverter\src\tinystr.cpp"
+				RelativePath=".\grit_ogre\Tools\XMLConverter\src\tinystr.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\Tools\XMLConverter\src\tinyxml.cpp"
+				RelativePath=".\grit_ogre\Tools\XMLConverter\src\tinyxml.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\Tools\XMLConverter\src\tinyxmlerror.cpp"
+				RelativePath=".\grit_ogre\Tools\XMLConverter\src\tinyxmlerror.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ogre\Tools\XMLConverter\src\tinyxmlparser.cpp"
+				RelativePath=".\grit_ogre\Tools\XMLConverter\src\tinyxmlparser.cpp"
 				>
 			</File>
 		</Filter>
