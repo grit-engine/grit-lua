@@ -153,6 +153,7 @@ CORE_SOURCE=OgreMain/src/OgreAlignedAllocator.cpp \
             OgreMain/src/OgreOverlayContainer.cpp \
             OgreMain/src/OgreOverlay.cpp \
             OgreMain/src/OgreOverlayElementCommands.cpp \
+            OgreMain/src/OgreOverlayElementFactory.cpp \
             OgreMain/src/OgreOverlayElement.cpp \
             OgreMain/src/OgreOverlayManager.cpp \
             OgreMain/src/OgrePanelOverlayElement.cpp \
