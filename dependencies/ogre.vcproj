@@ -740,10 +740,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\grit_ogre\PlugIns\OctreeSceneManager\src\OgreHeightmapTerrainPageSource.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\grit_ogre\OgreMain\src\OgreHighLevelGpuProgram.cpp"
 				>
 			</File>
@@ -909,6 +905,10 @@
 			</File>
 			<File
 				RelativePath=".\grit_ogre\OgreMain\src\OgreOverlayElementCommands.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\grit_ogre\OgreMain\src\OgreOverlayElementFactory.cpp"
 				>
 			</File>
 			<File
