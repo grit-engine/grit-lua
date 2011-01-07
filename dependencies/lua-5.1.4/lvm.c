@@ -45,14 +45,24 @@ const TValue *luaV_tonumber (const TValue *obj, TValue *n) {
 
 
 int luaV_tostring (lua_State *L, StkId obj) {
-  if (!ttisnumber(obj))
-    return 0;
-  else {
+  if (ttisnumber(obj)) {
     char s[LUAI_MAXNUMBER2STR];
     lua_Number n = nvalue(obj);
     lua_number2str(s, n);
     setsvalue2s(L, obj, luaS_new(L, s));
     return 1;
+  } else if (ttisvector3(obj)) {
+    char s[LUAI_MAXVECTOR32STR];
+    lua_vector32str(s, v3value(obj));
+    setsvalue2s(L, obj, luaS_new(L, s));
+    return 1;
+  } else if (ttisquat(obj)) {
+    char s[LUAI_MAXQUAT2STR];
+    lua_quat2str(s, qvalue(obj));
+    setsvalue2s(L, obj, luaS_new(L, s));
+    return 1;
+  } else {
+    return 0;
   }
 }
 
@@ -119,8 +129,38 @@ void luaV_gettable (lua_State *L, const TValue *t, TValue *key, StkId val) {
       }
       /* else will try the tag method */
     }
-    else if (ttisnil(tm = luaT_gettmbyobj(L, t, TM_INDEX)))
-      luaG_typeerror(L, t, "index");
+    else if (ttisnil(tm = luaT_gettmbyobj(L, t, TM_INDEX))) {
+      if (ttisvector3(t)) {  
+        lua_Float4 f4 = v3value(t);
+        const char *k = svalue(key);
+        if (strcmp(k,"x")==0) {
+          setnvalue(val, f4.x);
+        } else if (strcmp(k,"y")==0) {
+          setnvalue(val, f4.y);
+        } else if (strcmp(k,"z")==0) {
+          setnvalue(val, f4.z);
+        } else {
+          luaG_typeerror(L, t, "index");
+        }
+      } else if (ttisquat(t)) {  
+        lua_Float4 f4 = qvalue(t);
+        const char *k = svalue(key);
+        if (strcmp(k,"w")==0) {
+          setnvalue(val, f4.w);
+        } else if (strcmp(k,"x")==0) {
+          setnvalue(val, f4.x);
+        } else if (strcmp(k,"y")==0) {
+          setnvalue(val, f4.y);
+        } else if (strcmp(k,"z")==0) {
+          setnvalue(val, f4.z);
+        } else {
+          luaG_typeerror(L, t, "index");
+        }
+      } else {
+        luaG_typeerror(L, t, "index");
+      }
+      return;
+    }
     if (ttisfunction(tm)) {
       callTMres(L, val, tm, t, key);
       return;
@@ -131,8 +171,9 @@ void luaV_gettable (lua_State *L, const TValue *t, TValue *key, StkId val) {
 }
 
 
-void luaV_settable (lua_State *L, const TValue *t, TValue *key, StkId val) {
+void luaV_settable (lua_State *L, TValue *t_, TValue *key, StkId val) {
   int loop;
+  const TValue *t = t_;
   for (loop = 0; loop < MAXTAGLOOP; loop++) {
     const TValue *tm;
     if (ttistable(t)) {  /* `t' is a table? */
@@ -146,8 +187,40 @@ void luaV_settable (lua_State *L, const TValue *t, TValue *key, StkId val) {
       }
       /* else will try the tag method */
     }
-    else if (ttisnil(tm = luaT_gettmbyobj(L, t, TM_NEWINDEX)))
-      luaG_typeerror(L, t, "index");
+    else if (ttisnil(tm = luaT_gettmbyobj(L, t, TM_NEWINDEX))) {
+      if (ttisvector3(t)) {  
+        lua_Float4 f4 = v3value(t);
+        const char *k = svalue(key);
+        if (strcmp(k,"x")==0) {
+          f4.x = nvalue(val);
+        } else if (strcmp(k,"y")==0) {
+          f4.y = nvalue(val);
+        } else if (strcmp(k,"z")==0) {
+          f4.z = nvalue(val);
+        } else {
+          luaG_typeerror(L, t, "index");
+        }
+        setv3value(t_, f4);
+      } else if (ttisquat(t)) {  
+        lua_Float4 f4 = qvalue(t);
+        const char *k = svalue(key);
+        if (strcmp(k,"w")==0) {
+          f4.w = nvalue(val);
+        } else if (strcmp(k,"x")==0) {
+          f4.x = nvalue(val);
+        } else if (strcmp(k,"y")==0) {
+          f4.y = nvalue(val);
+        } else if (strcmp(k,"z")==0) {
+          f4.z = nvalue(val);
+        } else {
+          luaG_typeerror(L, t, "index");
+        }
+        setqvalue(t_, f4);
+      } else {
+        luaG_typeerror(L, t, "index");
+      }
+      return;
+    }
     if (ttisfunction(tm)) {
       callTM(L, tm, t, key, val);
       return;
@@ -309,14 +382,18 @@ void luaV_concat (lua_State *L, int total, int last) {
   } while (total > 1);  /* repeat until only 1 result left */
 }
 
+static float addf (float x, float y) { return x + y; }
+static float subf (float x, float y) { return x - y; }
+static float mulf (float x, float y) { return x * y; }
+static float divf (float x, float y) { return x / y; }
+
+#define PW3(f) r.x = f(nb.x, nc.x); r.y = f(nb.y, nc.y); r.z = f(nb.z, nc.z); 
+#define SCALAR3(f) r.x = f(nb.x, nc); r.y = f(nb.y, nc); r.z = f(nb.z, nc); 
 
 static void Arith (lua_State *L, StkId ra, const TValue *rb,
                    const TValue *rc, TMS op) {
-  TValue tempb, tempc;
-  const TValue *b, *c;
-  if ((b = luaV_tonumber(rb, &tempb)) != NULL &&
-      (c = luaV_tonumber(rc, &tempc)) != NULL) {
-    lua_Number nb = nvalue(b), nc = nvalue(c);
+  if (ttisnumber(rb) && ttisnumber(rc)) {
+    lua_Number nb = nvalue(rb), nc = nvalue(rc);
     switch (op) {
       case TM_ADD: setnvalue(ra, luai_numadd(nb, nc)); break;
       case TM_SUB: setnvalue(ra, luai_numsub(nb, nc)); break;
@@ -327,9 +404,76 @@ static void Arith (lua_State *L, StkId ra, const TValue *rb,
       case TM_UNM: setnvalue(ra, luai_numunm(nb)); break;
       default: lua_assert(0); break;
     }
-  }
-  else if (!call_binTM(L, rb, rc, ra, op))
+  } else if (ttisvector3(rb) && ttisvector3(rc)) {
+    lua_Float4 nb = v3value(rb), nc = v3value(rc);
+    lua_Float4 r;
+    switch (op) {
+      case TM_ADD: PW3(addf); break;
+      case TM_SUB: PW3(subf); break;
+      case TM_MUL: PW3(mulf); break;
+      case TM_DIV: PW3(divf); break;
+      case TM_MOD: PW3(fmodf); break;
+      case TM_POW: PW3(powf); break;
+      case TM_UNM: r.x = -nb.x; r.y = -nb.y; r.z = -nb.z; break;
+      default: lua_assert(0); break;
+    }
+    setv3value(ra, r);
+  } else if (ttisvector3(rb) && ttisnumber(rc)) {
+    lua_Float4 nb = v3value(rb);
+    lua_Number nc = nvalue(rc);
+    lua_Float4 r;
+    switch (op) {
+      case TM_MUL: SCALAR3(mulf); break;
+      case TM_DIV: SCALAR3(divf); break;
+      case TM_MOD: SCALAR3(fmodf); break;
+      case TM_POW: SCALAR3(powf); break;
+      default: luaG_runerror(L, "Cannot use that op with vector3 and number");
+    }
+    setv3value(ra, r);
+  } else if (ttisnumber(rb) && ttisvector3(rc)) {
+    lua_Float4 nb = v3value(rc);
+    lua_Number nc = nvalue(rb);
+    lua_Float4 r;
+    switch (op) {
+      case TM_MUL: SCALAR3(mulf); break;
+      default: luaG_runerror(L, "Cannot use that op with number and vector3");
+    }
+    setv3value(ra, r);
+  } else if (ttisquat(rb) && ttisquat(rc)) {
+    lua_Float4 nb = qvalue(rb), nc = qvalue(rc);
+    lua_Float4 r;
+    switch (op) {
+      case TM_MUL:
+      r.w = nb.w*nc.w - nb.x*nc.x - nb.y*nc.y - nb.z*nc.z;
+      r.x = nb.w*nc.x + nb.x*nc.w + nb.y*nc.z - nb.z*nc.y;
+      r.y = nb.w*nc.y + nb.y*nc.w + nb.z*nc.x - nb.x*nc.z;
+      r.z = nb.w*nc.z + nb.z*nc.w + nb.x*nc.y - nb.y*nc.x;
+      break;
+      default: luaG_runerror(L, "Cannot use that op with quat and quat");
+    }
+    setqvalue(ra, r);
+  } else if (ttisquat(rb) && ttisvector3(rc)) {
+    lua_Float4 nb = qvalue(rb), nc = v3value(rc);
+    lua_Float4 r;
+    switch (op) {
+      case TM_MUL: {
+        float a=nb.w, b=nb.x, c=nb.y, d=nb.z;
+        float mat[3][3] = { // row major
+            { a*a+b*b-c*c-d*d, 2*b*c-2*a*d    , 2*b*d+2*a*c         },
+            { 2*b*c+2*a*d    , a*a-b*b+c*c-d*d, 2*c*d-2*a*b         },
+            { 2*b*d-2*a*c    , 2*c*d+2*a*b    , a*a-b*b-c*c+d*d },
+        };
+        r.x = mat[0][0]*nc.x + mat[0][1]*nc.y + mat[0][2]*nc.z;
+        r.y = mat[1][0]*nc.x + mat[1][1]*nc.y + mat[1][2]*nc.z;
+        r.z = mat[2][0]*nc.x + mat[2][1]*nc.y + mat[2][2]*nc.z;
+      }
+      break;
+      default: luaG_runerror(L, "Cannot use that op with quat and vector3");
+    }
+    setv3value(ra, r);
+  } else if (!call_binTM(L, rb, rc, ra, op)) {
     luaG_aritherror(L, rb, rc);
+  }
 }
 
 
@@ -526,12 +670,16 @@ void luaV_execute (lua_State *L, int nexeccalls) {
             setnvalue(ra, cast_num(luaH_getn(hvalue(rb))));
             break;
           }
-/*
-          case LUA_TSTRING: {
-            setnvalue(ra, cast_num(tsvalue(rb)->len));
+          case LUA_TVECTOR3: {
+            lua_Float4 f4 = v3value(rb);
+            setnvalue(ra, sqrtf(f4.x*f4.x + f4.y*f4.y + f4.z*f4.z));
             break;
           }
-*/
+          case LUA_TQUAT: {
+            lua_Float4 f4 = qvalue(rb);
+            setnvalue(ra, sqrtf(f4.w*f4.w + f4.x*f4.x + f4.y*f4.y + f4.z*f4.z));
+            break;
+          }
           default: {  /* try metamethod */
             Protect(
               if (!call_binTM(L, rb, luaO_nilobject, ra, TM_LEN))

@@ -75,11 +75,13 @@ typedef void * (*lua_Alloc) (void *ud, void *ptr, size_t osize, size_t nsize);
 #define LUA_TBOOLEAN		1
 #define LUA_TLIGHTUSERDATA	2
 #define LUA_TNUMBER		3
-#define LUA_TSTRING		4
-#define LUA_TTABLE		5
-#define LUA_TFUNCTION		6
-#define LUA_TUSERDATA		7
-#define LUA_TTHREAD		8
+#define LUA_TVECTOR3		4
+#define LUA_TQUAT		5
+#define LUA_TSTRING		6
+#define LUA_TTABLE		7
+#define LUA_TFUNCTION		8
+#define LUA_TUSERDATA		9
+#define LUA_TTHREAD		10
 
 
 
@@ -133,6 +135,8 @@ LUA_API void  (lua_xmove) (lua_State *from, lua_State *to, int n);
 */
 
 LUA_API int             (lua_isnumber) (lua_State *L, int idx);
+LUA_API int             (lua_isvector3) (lua_State *L, int idx);
+LUA_API int             (lua_isquat) (lua_State *L, int idx);
 LUA_API int             (lua_isstring) (lua_State *L, int idx);
 LUA_API int             (lua_iscfunction) (lua_State *L, int idx);
 LUA_API int             (lua_isuserdata) (lua_State *L, int idx);
@@ -144,6 +148,8 @@ LUA_API int            (lua_rawequal) (lua_State *L, int idx1, int idx2);
 LUA_API int            (lua_lessthan) (lua_State *L, int idx1, int idx2);
 
 LUA_API lua_Number      (lua_tonumber) (lua_State *L, int idx);
+LUA_API void            (lua_checkvector3) (lua_State *L, int idx, float *x, float *y, float *z);
+LUA_API void            (lua_checkquat) (lua_State *L, int idx, float *w, float *x, float *y, float *z);
 LUA_API lua_Integer     (lua_tointeger) (lua_State *L, int idx);
 LUA_API int             (lua_toboolean) (lua_State *L, int idx);
 LUA_API const char     *(lua_tolstring) (lua_State *L, int idx, size_t *len);
@@ -159,6 +165,8 @@ LUA_API const void     *(lua_topointer) (lua_State *L, int idx);
 */
 LUA_API void  (lua_pushnil) (lua_State *L);
 LUA_API void  (lua_pushnumber) (lua_State *L, lua_Number n);
+LUA_API void  (lua_pushvector3) (lua_State *L, lua_Number x, lua_Number y, lua_Number z);
+LUA_API void  (lua_pushquat) (lua_State *L, lua_Number w, lua_Number x, lua_Number y, lua_Number z);
 LUA_API void  (lua_pushinteger) (lua_State *L, lua_Integer n);
 LUA_API void  (lua_pushlstring) (lua_State *L, const char *s, size_t l);
 LUA_API void  (lua_pushstring) (lua_State *L, const char *s);

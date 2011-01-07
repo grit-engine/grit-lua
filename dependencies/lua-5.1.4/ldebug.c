@@ -579,17 +579,12 @@ void luaG_typeerror (lua_State *L, const TValue *o, const char *op) {
 
 
 void luaG_concaterror (lua_State *L, StkId p1, StkId p2) {
-  if (ttisstring(p1) || ttisnumber(p1)) p1 = p2;
-  lua_assert(!ttisstring(p1) && !ttisnumber(p1));
-  luaG_typeerror(L, p1, "concatenate");
+  luaG_runerror(L, "attempt to concatenate %s and %s", luaT_typenames[ttype(p1)], luaT_typenames[ttype(p2)]);
 }
 
 
 void luaG_aritherror (lua_State *L, const TValue *p1, const TValue *p2) {
-  TValue temp;
-  if (luaV_tonumber(p1, &temp) == NULL)
-    p2 = p1;  /* first operand is wrong */
-  luaG_typeerror(L, p2, "perform arithmetic on");
+  luaG_runerror(L, "attempt to perform arithmetic on %s and %s", luaT_typenames[ttype(p1)], luaT_typenames[ttype(p2)]);
 }
 
 

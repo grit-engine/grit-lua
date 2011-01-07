@@ -7,7 +7,7 @@ THISFILE:=$(lastword $(MAKEFILE_LIST))
 
 #choose a compiler
 #COMPILER=g++
-COMPILER=g++-4.3 #i use this to colorise output
+COMPILER=colg++ #i use this to colorise output
 
 #version code
 VERSION=-DVERSION=1.6.0_grit

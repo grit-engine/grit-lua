@@ -263,6 +263,16 @@ LUA_API int lua_isnumber (lua_State *L, int idx) {
   return tonumber(o, &n);
 }
 
+LUA_API int lua_isvector3 (lua_State *L, int idx) {
+  const TValue *o = index2adr(L, idx);
+  return ttisvector3(o);
+}
+
+LUA_API int lua_isquat (lua_State *L, int idx) {
+  const TValue *o = index2adr(L, idx);
+  return ttisquat(o);
+}
+
 
 LUA_API int lua_isstring (lua_State *L, int idx) {
   int t = lua_type(L, idx);
@@ -317,6 +327,32 @@ LUA_API lua_Number lua_tonumber (lua_State *L, int idx) {
     return nvalue(o);
   else
     return 0;
+}
+
+
+LUA_API void lua_checkvector3 (lua_State *L, int idx, float *x, float *y, float *z) {
+  const TValue *o = index2adr(L, idx);
+  if (ttisvector3(o)) {
+    lua_Float4 f4 = v3value(o);
+    *x = f4.x;
+    *y = f4.y;
+    *z = f4.z;
+  } else {
+    luaG_runerror(L, "Not a vector3");
+  }
+}
+
+LUA_API void lua_checkquat (lua_State *L, int idx, float *w, float *x, float *y, float *z) {
+  const TValue *o = index2adr(L, idx);
+  if (ttisquat(o)) {
+    lua_Float4 f4 = qvalue(o);
+    *w = f4.w;
+    *x = f4.x;
+    *y = f4.y;
+    *z = f4.z;
+  } else {
+    luaG_runerror(L, "Not a quat");
+  }
 }
 
 
@@ -429,6 +465,24 @@ LUA_API void lua_pushnil (lua_State *L) {
 LUA_API void lua_pushnumber (lua_State *L, lua_Number n) {
   lua_lock(L);
   setnvalue(L->top, n);
+  api_incr_top(L);
+  lua_unlock(L);
+}
+
+
+LUA_API void lua_pushvector3 (lua_State *L, lua_Number x, lua_Number y, lua_Number z) {
+  lua_lock(L);
+  lua_Float4 f4 = { 0, x, y, z };
+  setv3value(L->top, f4);
+  api_incr_top(L);
+  lua_unlock(L);
+}
+
+
+LUA_API void lua_pushquat (lua_State *L, lua_Number w, lua_Number x, lua_Number y, lua_Number z) {
+  lua_lock(L);
+  lua_Float4 f4 = { w, x, y, z };
+  setqvalue(L->top, f4);
   api_incr_top(L);
   lua_unlock(L);
 }

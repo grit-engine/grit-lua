@@ -51,6 +51,20 @@ typedef struct GCheader {
 } GCheader;
 
 
+typedef struct lua_Float4 {
+  float w, x, y, z;
+} lua_Float4;
+
+#define LUAI_MAXFLOAT2STR   16
+/* "vector3" "(A," " B," " C)" */
+#define LUAI_MAXVECTOR32STR (7 + 3*(1+LUAI_MAXFLOAT2STR+1))
+int lua_vector32str (char *s, lua_Float4 n);
+lua_Float4 lua_str2vector3 (char *s, char *p);
+
+/* "quat" "(A," " B," " C," " D)" */
+#define LUAI_MAXQUAT2STR (7 + 4*(1+LUAI_MAXFLOAT2STR+1))
+int lua_quat2str (char *s, lua_Float4 n);
+lua_Float4 lua_str2quat (char *s, char *p);
 
 
 /*
@@ -61,6 +75,7 @@ typedef union {
   void *p;
   lua_Number n;
   int b;
+  lua_Float4 f4;
 } Value;
 
 
@@ -85,6 +100,8 @@ typedef struct lua_TValue {
 #define ttisuserdata(o)	(ttype(o) == LUA_TUSERDATA)
 #define ttisthread(o)	(ttype(o) == LUA_TTHREAD)
 #define ttislightuserdata(o)	(ttype(o) == LUA_TLIGHTUSERDATA)
+#define ttisvector3(o)	(ttype(o) == LUA_TVECTOR3)
+#define ttisquat(o)	(ttype(o) == LUA_TQUAT)
 
 /* Macros to access values */
 #define ttype(o)	((o)->tt)
@@ -99,6 +116,8 @@ typedef struct lua_TValue {
 #define hvalue(o)	check_exp(ttistable(o), &(o)->value.gc->h)
 #define bvalue(o)	check_exp(ttisboolean(o), (o)->value.b)
 #define thvalue(o)	check_exp(ttisthread(o), &(o)->value.gc->th)
+#define v3value(o)  check_exp(ttisvector3(o), (o)->value.f4)
+#define qvalue(o)  check_exp(ttisquat(o), (o)->value.f4)
 
 #define l_isfalse(o)	(ttisnil(o) || (ttisboolean(o) && bvalue(o) == 0))
 
@@ -154,6 +173,12 @@ typedef struct lua_TValue {
   { TValue *i_o=(obj); \
     i_o->value.gc=cast(GCObject *, (x)); i_o->tt=LUA_TPROTO; \
     checkliveness(G(L),i_o); }
+
+#define setv3value(obj,x) \
+  { TValue *i_o=(obj); i_o->value.f4=(x); i_o->tt=LUA_TVECTOR3; }
+
+#define setqvalue(obj,x) \
+  { TValue *i_o=(obj); i_o->value.f4=(x); i_o->tt=LUA_TQUAT; }
 
 
 

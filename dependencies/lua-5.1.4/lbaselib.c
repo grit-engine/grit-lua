@@ -340,18 +340,33 @@ static int luaB_assert (lua_State *L) {
 
 
 static int luaB_unpack (lua_State *L) {
-  int i, e, n;
-  luaL_checktype(L, 1, LUA_TTABLE);
-  i = luaL_optint(L, 2, 1);
-  e = luaL_opt(L, luaL_checkint, 3, luaL_getn(L, 1));
-  if (i > e) return 0;  /* empty range */
-  n = e - i + 1;  /* number of elements */
-  if (n <= 0 || !lua_checkstack(L, n))  /* n <= 0 means arith. overflow */
-    return luaL_error(L, "too many results to unpack");
-  lua_rawgeti(L, 1, i);  /* push arg[i] (avoiding overflow problems) */
-  while (i++ < e)  /* push arg[i + 1...e] */
-    lua_rawgeti(L, 1, i);
-  return n;
+  if (lua_gettop(L)==1 && lua_isvector3(L,1)) {
+    float x, y, z; lua_checkvector3(L, 1, &x, &y, &z);
+    lua_pushnumber(L,x);
+    lua_pushnumber(L,y);
+    lua_pushnumber(L,z);
+    return 3;
+  } else if (lua_gettop(L)==1 && lua_isquat(L,1)) {
+    float w, x, y, z; lua_checkquat(L, 1, &w, &x, &y, &z);
+    lua_pushnumber(L,w);
+    lua_pushnumber(L,x);
+    lua_pushnumber(L,y);
+    lua_pushnumber(L,z);
+    return 4;
+  } else {
+    int i, e, n;
+    luaL_checktype(L, 1, LUA_TTABLE);
+    i = luaL_optint(L, 2, 1);
+    e = luaL_opt(L, luaL_checkint, 3, luaL_getn(L, 1));
+    if (i > e) return 0;  /* empty range */
+    n = e - i + 1;  /* number of elements */
+    if (n <= 0 || !lua_checkstack(L, n))  /* n <= 0 means arith. overflow */
+      return luaL_error(L, "too many results to unpack");
+    lua_rawgeti(L, 1, i);  /* push arg[i] (avoiding overflow problems) */
+    while (i++ < e)  /* push arg[i + 1...e] */
+      lua_rawgeti(L, 1, i);
+    return n;
+  }
 }
 
 
@@ -398,6 +413,8 @@ static int luaB_tostring (lua_State *L) {
   if (luaL_callmeta(L, 1, "__tostring"))  /* is there a metafield? */
     return 1;  /* use its value */
   switch (lua_type(L, 1)) {
+    case LUA_TQUAT:
+    case LUA_TVECTOR3:
     case LUA_TNUMBER:
       lua_pushstring(L, lua_tostring(L, 1));
       break;
@@ -443,6 +460,131 @@ static int luaB_newproxy (lua_State *L) {
   return 1;
 }
 
+static int luaB_vector3 (lua_State *L) {
+  if (lua_gettop(L) != 3) luaL_error(L, "Invalid params, try vector3(n,n,n)");
+  float x = luaL_checknumber(L, 1);
+  float y = luaL_checknumber(L, 2);
+  float z = luaL_checknumber(L, 3);
+  lua_pushvector3(L, x,y,z);
+  return 1;
+}
+
+#define PI 3.1415926535897932385f
+
+static float dot (float x1, float y1, float z1, float x2, float y2, float z2) {
+  return x1*x2 + y1*y2 + z1*z2;
+}
+
+static void cross (float x1, float y1, float z1, float x2, float y2, float z2, float *xr, float *yr, float *zr) {
+  *xr = y1*z2 - z1*y2;
+  *yr = z1*x2 - x1*z2;
+  *zr = x1*y2 - y1*x2;
+}
+
+static int luaB_dot (lua_State *L) {
+  if (lua_gettop(L) != 2) luaL_error(L, "Invalid params, try dot(v,v)");
+  float x1, y1, z1; lua_checkvector3(L, 1, &x1, &y1, &z1);
+  float x2, y2, z2; lua_checkvector3(L, 2, &x2, &y2, &z2);
+  lua_pushnumber(L,dot(x1,y1,z1, x2,y2,z2));
+  return 1;
+}
+
+static int luaB_cross (lua_State *L) {
+  if (lua_gettop(L) != 2) luaL_error(L, "Invalid params, try cross(v,v)");
+  float x1, y1, z1; lua_checkvector3(L, 1, &x1, &y1, &z1);
+  float x2, y2, z2; lua_checkvector3(L, 2, &x2, &y2, &z2);
+  float ax, ay, az; cross(x1,y1,z1, x2,y2,z2, &ax, &ay, &az);
+  lua_pushvector3(L,ax,ay,az);
+  return 1;
+}
+
+static int luaB_quat (lua_State *L) {
+  if (lua_gettop(L)==4 && lua_isnumber(L,1) && lua_isnumber(L,2) && lua_isnumber(L,3) && lua_isnumber(L,4)) {
+    float w = lua_tonumber(L, 1);
+    float x = lua_tonumber(L, 2);
+    float y = lua_tonumber(L, 3);
+    float z = lua_tonumber(L, 4);
+    lua_pushquat(L, w,x,y,z);
+    return 1;
+  } else if (lua_gettop(L)==2 && lua_isnumber(L,1) && lua_isvector3(L,2)) {
+    float angle = lua_tonumber(L, 1);
+    float x, y, z; lua_checkvector3(L, 2, &x, &y, &z);
+    float ha = angle*(0.5f*PI/180.0f);
+    float s = sinf(ha);
+    lua_pushquat(L, cosf(ha),s*x,s*y,s*z);
+    return 1;
+  } else if (lua_gettop(L)==2 && lua_isvector3(L,1) && lua_isvector3(L,2)) {
+    float x1, y1, z1; lua_checkvector3(L, 1, &x1, &y1, &z1);
+    float x2, y2, z2; lua_checkvector3(L, 2, &x2, &y2, &z2);
+
+    // Based on Stan Melax's article in Game Programming Gems
+    float l1 = sqrt(x1*x1 + y1*y1 + z1*z1);
+    float l2 = sqrt(x2*x2 + y2*y2 + z2*z2);
+    x1/=l1; y1/=l1; z1/=l1; 
+    x2/=l2; y2/=l2; z2/=l2; 
+
+    float d = dot(x1,y1,z1, x2,y2,z2);
+
+    // If dot == 1, vectors are the same
+    if (d >= 1.0f) {
+      lua_pushquat(L, 1,0,0,0);
+      return 1;
+    }
+
+    if (d < (1e-6f - 1.0f)) {
+
+      float ax, ay, az; cross(1,0,0, x1,y1,z1, &ax, &ay, &az);
+      float len2 = ax*ax + ay*ay + az*az;
+      if (ax*ax + ay*ay + az*az > 0) {
+        cross(0,1,0, x1,y1,z1, &ax, &ay, &az);
+        len2 = ax*ax + ay*ay + az*az;
+      }
+      float len = sqrtf(len2);
+      ax/=len; ay/=len; az/=len; 
+      lua_pushquat(L, 0,ax,ay,az);
+      return 1;
+
+    } else {
+
+      float s = sqrtf((1+d)*2);
+      float ax, ay, az; cross(x1,y1,z1, x2,y2,z2, &ax, &ay, &az);
+      ax/=s; ay/=s; az/=s; 
+      float qw = s*0.5f;
+      float qlen = sqrt(qw*qw + ax*ax + ay*ay + az*az);
+      lua_pushquat(L, qw/qlen,ax/qlen,ay/qlen,az/qlen);
+      return 1;
+
+    }
+
+  } else {
+    luaL_error(L, "Invalid params, try quat(n,n,n,n) quat(n,v3) quat(v3,v3)");
+    return 0;
+  }
+}
+
+static int luaB_inv (lua_State *L) {
+  if (lua_gettop(L) != 1) luaL_error(L, "Invalid params, try inv(q)");
+  float w, x, y, z; lua_checkquat(L, 1, &w, &x, &y, &z);
+  lua_pushquat(L,w,x,y,z);
+  return 1;
+}
+
+static int luaB_norm (lua_State *L) {
+  if (lua_gettop(L)==1 && lua_isvector3(L,1)) {
+    float x, y, z; lua_checkvector3(L, 1, &x, &y, &z);
+    float len = sqrt(x*x + y*y + z*z);
+    lua_pushvector3(L,x/len,y/len,z/len);
+    return 1;
+  } else if (lua_gettop(L)==1 && lua_isquat(L,1)) {
+    float w, x, y, z; lua_checkquat(L, 1, &w, &x, &y, &z);
+    float qlen = sqrt(w*w + x*x + y*y + z*z);
+    lua_pushquat(L,w/qlen,x/qlen,y/qlen,z/qlen);
+    return 1;
+  } else {
+    luaL_error(L, "Invalid params, try norm(v) norm(q)");
+    return 0;
+  }
+}
 
 static const luaL_Reg base_funcs[] = {
   {"assert", luaB_assert},
@@ -469,6 +611,14 @@ static const luaL_Reg base_funcs[] = {
   {"type", luaB_type},
   {"unpack", luaB_unpack},
   {"xpcall", luaB_xpcall},
+
+  {"vector3", luaB_vector3},
+  {"quat", luaB_quat},
+  {"dot", luaB_dot},
+  {"cross", luaB_cross},
+  {"inv", luaB_inv},
+  {"norm", luaB_norm},
+
   {NULL, NULL}
 };
 

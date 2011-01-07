@@ -21,9 +21,20 @@
 
 
 const char *const luaT_typenames[] = {
-  "nil", "boolean", "userdata", "number",
-  "string", "table", "function", "userdata", "thread",
-  "proto", "upval"
+  "nil",        /* 0 */
+  "boolean",    /* 1 */
+  "userdata",   /* 2 */
+  "number",     /* 3 */
+  "vector3",    /* 4 */
+  "quat",       /* 5 */
+  "string",     /* 6 */
+  "table",      /* 7 */
+  "function",   /* 8 */
+  "userdata",   /* 9 */
+  "thread",     /* 10 */
+
+  "proto",      /* +1 */
+  "upval"       /* +2 */
 };
 
 

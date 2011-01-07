@@ -7,7 +7,8 @@
 # Your platform. See PLATS for possible values.
 PLAT= none
 
-CC= gcc
+#CC= gcc
+CC= devgcc
 CFLAGS=-g -O0 -Wall -DLUA_USE_MKSTEMP -DLUA_USE_APICHECK
 AR= ar rcu
 RANLIB= ranlib
@@ -31,15 +32,19 @@ $(LUA_A): $(MEGA_O)
 
 $(MEGA_C): $(LIB_C) $(CORE_C) 
 
-clean:
-	$(RM) $(MEGA_O)
-
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-depend:
-	@$(CC) $(CFLAGS) -MM $(MEGA_C)
+test: test.c $(LUA_A)
+	$(CC) $(CFLAGS) $< $(LUA_A) -lm -o $@
 
-$(MEGA_O): lapi.h lauxlib.h lcode.h ldebug.h ldo.h lfunc.h lgc.h llex.h 
-$(MEGA_O): llimits.h lmem.h lobject.h lopcodes.h lparser.h lstate.h lstring.h
-$(MEGA_O): ltable.h ltm.h luaconf.h lua.h lualib.h lundump.h lvm.h lzio.h
+clean:
+	$(RM) $(MEGA_O) test
+
+$(MEGA_O): lapi.c lua.h luaconf.h lapi.h lobject.h llimits.h ldebug.h lstate.h
+$(MEGA_O): ltm.h lzio.h lmem.h ldo.h lfunc.h lgc.h lstring.h ltable.h lundump.h
+$(MEGA_O): lvm.h lcode.c lcode.h llex.h lopcodes.h lparser.h ldebug.c ldo.c
+$(MEGA_O): ldump.c lfunc.c lgc.c llex.c lmem.c lobject.c lopcodes.c lparser.c
+$(MEGA_O): lstate.c lstring.c ltable.c ltm.c lundump.c lvm.c lzio.c lauxlib.c
+$(MEGA_O): lauxlib.h lbaselib.c lualib.h ldblib.c liolib.c lmathlib.c loslib.c
+$(MEGA_O): ltablib.c lstrlib.c loadlib.c linit.c

@@ -212,3 +212,25 @@ void luaO_chunkid (char *out, const char *source, size_t bufflen) {
     }
   }
 }
+
+int lua_quat2str (char *s, lua_Float4 n) {
+  return sprintf(s, "quat(%.7g, %.7g, %.7g, %.7g)", n.w, n.x, n.y, n.z);
+}
+
+lua_Float4 lua_str2quat (char *s, char *p)
+{
+  (void)s; (void)p;
+  fprintf(stderr, "lua_str2quat not yet implemented\n");
+  abort();
+}
+
+int lua_vector32str (char *s, lua_Float4 n) {
+  return sprintf(s, "vector3(%.7g, %.7g, %.7g)", n.x, n.y, n.z);
+}
+
+lua_Float4 lua_str2vector3 (char *s, char *p)
+{
+  (void)s; (void)p;
+  fprintf(stderr, "lua_str2vector3 not yet implemented\n");
+  abort();
+}
