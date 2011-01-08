@@ -516,7 +516,7 @@ static int luaB_quat (lua_State *L) {
   } else if (lua_gettop(L)==2 && lua_isnumber(L,1) && lua_isvector3(L,2)) {
     float angle,x,y,z,ha,s;
     angle = (float)lua_tonumber(L, 1);
-    x, y, z; lua_checkvector3(L, 2, &x, &y, &z);
+    lua_checkvector3(L, 2, &x, &y, &z);
     ha = angle*(0.5f*PI/180.0f);
     s = sinf(ha);
     lua_pushquat(L, cosf(ha),s*x,s*y,s*z);
