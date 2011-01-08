@@ -188,7 +188,9 @@ void luaV_settable (lua_State *L, TValue *t_, TValue *key, StkId val) {
       /* else will try the tag method */
     }
     else if (ttisnil(tm = luaT_gettmbyobj(L, t, TM_NEWINDEX))) {
-      if (ttisvector3(t)) {  
+      // mutable fields of vectors/quats does not work very well in lua
+      // since o.f is not an lvalue, o.f.x = 10 is a no-op
+      if (0 && ttisvector3(t)) {  
         lua_Float4 f4 = v3value(t);
         const char *k = svalue(key);
         if (strcmp(k,"x")==0) {
@@ -201,7 +203,7 @@ void luaV_settable (lua_State *L, TValue *t_, TValue *key, StkId val) {
           luaG_typeerror(L, t, "index");
         }
         setv3value(t_, f4);
-      } else if (ttisquat(t)) {  
+      } else if (0 && ttisquat(t)) {  
         lua_Float4 f4 = qvalue(t);
         const char *k = svalue(key);
         if (strcmp(k,"w")==0) {
