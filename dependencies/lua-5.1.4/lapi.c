@@ -470,18 +470,18 @@ LUA_API void lua_pushnumber (lua_State *L, lua_Number n) {
 }
 
 
-LUA_API void lua_pushvector3 (lua_State *L, lua_Number x, lua_Number y, lua_Number z) {
-  lua_lock(L);
+LUA_API void lua_pushvector3 (lua_State *L, float x, float y, float z) {
   lua_Float4 f4 = { 0, x, y, z };
+  lua_lock(L);
   setv3value(L->top, f4);
   api_incr_top(L);
   lua_unlock(L);
 }
 
 
-LUA_API void lua_pushquat (lua_State *L, lua_Number w, lua_Number x, lua_Number y, lua_Number z) {
-  lua_lock(L);
+LUA_API void lua_pushquat (lua_State *L, float w, float x, float y, float z) {
   lua_Float4 f4 = { w, x, y, z };
+  lua_lock(L);
   setqvalue(L->top, f4);
   api_incr_top(L);
   lua_unlock(L);

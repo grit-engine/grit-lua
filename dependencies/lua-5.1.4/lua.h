@@ -165,8 +165,8 @@ LUA_API const void     *(lua_topointer) (lua_State *L, int idx);
 */
 LUA_API void  (lua_pushnil) (lua_State *L);
 LUA_API void  (lua_pushnumber) (lua_State *L, lua_Number n);
-LUA_API void  (lua_pushvector3) (lua_State *L, lua_Number x, lua_Number y, lua_Number z);
-LUA_API void  (lua_pushquat) (lua_State *L, lua_Number w, lua_Number x, lua_Number y, lua_Number z);
+LUA_API void  (lua_pushvector3) (lua_State *L, float x, float y, float z);
+LUA_API void  (lua_pushquat) (lua_State *L, float w, float x, float y, float z);
 LUA_API void  (lua_pushinteger) (lua_State *L, lua_Integer n);
 LUA_API void  (lua_pushlstring) (lua_State *L, const char *s, size_t l);
 LUA_API void  (lua_pushstring) (lua_State *L, const char *s);

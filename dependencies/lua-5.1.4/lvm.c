@@ -192,11 +192,11 @@ void luaV_settable (lua_State *L, TValue *t_, TValue *key, StkId val) {
         lua_Float4 f4 = v3value(t);
         const char *k = svalue(key);
         if (strcmp(k,"x")==0) {
-          f4.x = nvalue(val);
+          f4.x = (float)nvalue(val);
         } else if (strcmp(k,"y")==0) {
-          f4.y = nvalue(val);
+          f4.y = (float)nvalue(val);
         } else if (strcmp(k,"z")==0) {
-          f4.z = nvalue(val);
+          f4.z = (float)nvalue(val);
         } else {
           luaG_typeerror(L, t, "index");
         }
@@ -205,13 +205,13 @@ void luaV_settable (lua_State *L, TValue *t_, TValue *key, StkId val) {
         lua_Float4 f4 = qvalue(t);
         const char *k = svalue(key);
         if (strcmp(k,"w")==0) {
-          f4.w = nvalue(val);
+          f4.w = (float)nvalue(val);
         } else if (strcmp(k,"x")==0) {
-          f4.x = nvalue(val);
+          f4.x = (float)nvalue(val);
         } else if (strcmp(k,"y")==0) {
-          f4.y = nvalue(val);
+          f4.y = (float)nvalue(val);
         } else if (strcmp(k,"z")==0) {
-          f4.z = nvalue(val);
+          f4.z = (float)nvalue(val);
         } else {
           luaG_typeerror(L, t, "index");
         }
@@ -420,7 +420,7 @@ static void Arith (lua_State *L, StkId ra, const TValue *rb,
     setv3value(ra, r);
   } else if (ttisvector3(rb) && ttisnumber(rc)) {
     lua_Float4 nb = v3value(rb);
-    lua_Number nc = nvalue(rc);
+    float nc = (float)nvalue(rc);
     lua_Float4 r;
     switch (op) {
       case TM_MUL: SCALAR3(mulf); break;
@@ -432,7 +432,7 @@ static void Arith (lua_State *L, StkId ra, const TValue *rb,
     setv3value(ra, r);
   } else if (ttisnumber(rb) && ttisvector3(rc)) {
     lua_Float4 nb = v3value(rc);
-    lua_Number nc = nvalue(rb);
+    float nc = (float)nvalue(rb);
     lua_Float4 r;
     switch (op) {
       case TM_MUL: SCALAR3(mulf); break;
