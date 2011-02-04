@@ -52,9 +52,9 @@ INCLUDE_DIRS=-I.. \
              -IRenderSystems/GL/include \
              -IRenderSystems/GL/include/GLX \
              -IPlugIns/CgProgramManager/include \
-             -IPlugIns/ParticleFX/include \
              -IPlugIns/OctreeSceneManager/include \
 
+             #-IPlugIns/ParticleFX/include \
 
 CFLAGS+=$(GUI) $(ENDIAN) $(PRECISION) $(DEVIL) $(FREEIMAGE) $(ALLOCATOR) $(VERSION) $(YACC) $(INCLUDE_DIRS)
 
@@ -123,7 +123,14 @@ CORE_SOURCE=OgreMain/src/OgreAlignedAllocator.cpp \
             OgreMain/src/OgreHighLevelGpuProgram.cpp \
             OgreMain/src/OgreHighLevelGpuProgramManager.cpp \
             OgreMain/src/OgreImage.cpp \
+            OgreMain/src/OgreInstanceBatch.cpp \
+            OgreMain/src/OgreInstanceBatchVTF.cpp \
+            OgreMain/src/OgreInstanceBatchShader.cpp \
+            OgreMain/src/OgreInstanceBatchHW_VTF.cpp \
+            OgreMain/src/OgreInstanceBatchHW.cpp \
+            OgreMain/src/OgreInstanceManager.cpp \
             OgreMain/src/OgreInstancedGeometry.cpp \
+            OgreMain/src/OgreInstancedEntity.cpp \
             OgreMain/src/OgreKeyFrame.cpp \
             OgreMain/src/OgreLight.cpp \
             OgreMain/src/OgreLodStrategy.cpp \
@@ -395,7 +402,7 @@ OCTREE_WIN32_SOURCE=PlugIns/OctreeSceneManager/src/OgreOctreeSceneManagerDll.cpp
 ### now the actual compile
 ################################################################################
 
-ALL_SOURCE=$(CORE_SOURCE) $(GL_SOURCE) $(PARTICLEFX_SOURCE) $(OCTREE_SOURCE) $(CG_SOURCE) $(CG_WIN32_SOURCE)
+ALL_SOURCE=$(CORE_SOURCE) $(GL_SOURCE) $(OCTREE_SOURCE) $(CG_SOURCE) $(CG_WIN32_SOURCE)
 ALL_SOURCE+=$(POSIX_TIMER_SOURCE) $(CONFIG_GLX_SOURCE) $(GL_GLX_SOURCE) $(OCTREE_GLX_SOURCE)
 
 $(NEW_OBJ_DIR)/opt/semithreaded/%.o: %.cpp
@@ -440,7 +447,7 @@ all: $(NEW_OBJ_DIR)/dbg/libogre_semithreaded.a $(NEW_OBJ_DIR)/opt/libogre_semith
 TEMPFILE:=$(shell tempfile)
 
 depend:
-	makedepend -Y $(INCLUDE_DIRS) -f $(TEMPFILE) $(XMLCONVERTER_SOURCE) $(CORE_SOURCE) $(GL_SOURCE) $(PARTICLEFX_SOURCE) $(CG_SOURCE) $(OCTREE_SOURCE) $(POSIX_TIMER_SOURCE) $(CONFIG_GLX_SOURCE) $(GL_GLX_SOURCE) $(OCTREE_GLX_SOURCE) $(GL_WIN32_SOURCE) $(CG_WIN32_SOURCE) $(PARTICLEFX_WIN32_SOURCE) $(OCTREE_WIN32_SOURCE)
+	makedepend -Y $(INCLUDE_DIRS) -f $(TEMPFILE) $(XMLCONVERTER_SOURCE) $(CORE_SOURCE) $(GL_SOURCE) $(CG_SOURCE) $(OCTREE_SOURCE) $(POSIX_TIMER_SOURCE) $(CONFIG_GLX_SOURCE) $(GL_GLX_SOURCE) $(OCTREE_GLX_SOURCE) $(GL_WIN32_SOURCE) $(CG_WIN32_SOURCE) $(PARTICLEFX_WIN32_SOURCE) $(OCTREE_WIN32_SOURCE)
 	cat $(TEMPFILE) | sed 's/^\([^:]*\): /$(NEW_OBJ_DIR)\/opt\/threaded\/&/g' > $(THISFILE).depend
 	cat $(TEMPFILE) | sed 's/^\([^:]*\): /$(NEW_OBJ_DIR)\/opt\/semithreaded\/&/g' >> $(THISFILE).depend
 	cat $(TEMPFILE) | sed 's/^\([^:]*\): /$(NEW_OBJ_DIR)\/opt\/unthreaded\/&/g' >> $(THISFILE).depend
