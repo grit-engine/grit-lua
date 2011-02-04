@@ -756,7 +756,35 @@
 				>
 			</File>
 			<File
+				RelativePath=".\grit_ogre\OgreMain\src\OgreInstanceBatch.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\grit_ogre\OgreMain\src\OgreInstanceBatchHW.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\grit_ogre\OgreMain\src\OgreInstanceBatchHW_VTF.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\grit_ogre\OgreMain\src\OgreInstanceBatchShader.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\grit_ogre\OgreMain\src\OgreInstanceBatchVTF.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\grit_ogre\OgreMain\src\OgreInstancedEntity.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\grit_ogre\OgreMain\src\OgreInstancedGeometry.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\grit_ogre\OgreMain\src\OgreInstanceManager.cpp"
 				>
 			</File>
 			<File
