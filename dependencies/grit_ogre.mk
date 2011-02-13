@@ -54,9 +54,7 @@ INCLUDE_DIRS=-I.. \
              -IPlugIns/CgProgramManager/include \
              -IPlugIns/OctreeSceneManager/include \
 
-             #-IPlugIns/ParticleFX/include \
-
-CFLAGS+=$(GUI) $(ENDIAN) $(PRECISION) $(DEVIL) $(FREEIMAGE) $(ALLOCATOR) $(VERSION) $(YACC) $(INCLUDE_DIRS)
+CFLAGS+=$(VERSION) $(INCLUDE_DIRS)
 
 
 

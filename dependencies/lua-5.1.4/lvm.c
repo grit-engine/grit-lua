@@ -640,7 +640,7 @@ void luaV_execute (lua_State *L, int nexeccalls) {
           setnvalue(ra, nb);
         }
         else
-          Protect(Arith(L, ra, rb, rc, TM_MOD));
+          Protect(Arith(L, ra, rb, rc, TM_DIV));
         continue;
       }
       case OP_MOD: {
