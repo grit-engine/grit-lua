@@ -1228,6 +1228,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\grit_ogre\OgreMain\src\OgreSmallVector.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\grit_ogre\OgreMain\src\OgreStaticGeometry.cpp"
 				>
 			</File>
