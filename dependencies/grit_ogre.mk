@@ -227,6 +227,7 @@ CORE_SOURCE=OgreMain/src/OgreAlignedAllocator.cpp \
             OgreMain/src/OgreSkeletonInstance.cpp \
             OgreMain/src/OgreSkeletonManager.cpp \
             OgreMain/src/OgreSkeletonSerializer.cpp \
+            OgreMain/src/OgreSmallVector.cpp \
             OgreMain/src/OgreStaticGeometry.cpp \
             OgreMain/src/OgreStringConverter.cpp \
             OgreMain/src/OgreString.cpp \
