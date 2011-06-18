@@ -415,7 +415,12 @@ static void Arith (lua_State *L, StkId ra, const TValue *rb,
       case TM_ADD: PW3(addf); break;
       case TM_SUB: PW3(subf); break;
       case TM_MUL: PW3(mulf); break;
-      case TM_DIV: PW3(divf); break;
+      case TM_DIV:
+        if (nc.x==0.0 || nc.y==0.0 || nc.z==0.0) {
+          luaG_runerror(L, "division by zero");
+        }
+        PW3(divf);
+        break;
       case TM_MOD: PW3(fmodf); break;
       case TM_POW: PW3(powf); break;
       case TM_UNM: r.x = -nb.x; r.y = -nb.y; r.z = -nb.z; break;
@@ -428,7 +433,12 @@ static void Arith (lua_State *L, StkId ra, const TValue *rb,
     lua_Float4 r;
     switch (op) {
       case TM_MUL: SCALAR3(mulf); break;
-      case TM_DIV: SCALAR3(divf); break;
+      case TM_DIV:
+        if (nc==0.0) {
+          luaG_runerror(L, "division by zero");
+        }
+        SCALAR3(divf);
+        break;
       case TM_MOD: SCALAR3(fmodf); break;
       case TM_POW: SCALAR3(powf); break;
       default: luaG_runerror(L, "Cannot use that op with vector3 and number");

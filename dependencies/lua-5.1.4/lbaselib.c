@@ -593,6 +593,8 @@ static int luaB_norm (lua_State *L) {
     float len;
     lua_checkvector3(L, 1, &x, &y, &z);
     len = sqrtf(x*x + y*y + z*z);
+    if (len == 0)
+        luaL_error(L, "Cannot normalise vector3(0,0,0)");
     lua_pushvector3(L,x/len,y/len,z/len);
     return 1;
   } else if (lua_gettop(L)==1 && lua_isquat(L,1)) {
@@ -600,6 +602,8 @@ static int luaB_norm (lua_State *L) {
     float qlen;
     lua_checkquat(L, 1, &w, &x, &y, &z);
     qlen = sqrtf(w*w + x*x + y*y + z*z);
+    if (qlen == 0)
+        luaL_error(L, "Cannot normalise quat(0,0,0,0)");
     lua_pushquat(L,w/qlen,x/qlen,y/qlen,z/qlen);
     return 1;
   } else {

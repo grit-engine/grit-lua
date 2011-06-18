@@ -51,7 +51,9 @@ dump(quat(V_NORTH, V_EAST) * V_NORTH)
 
 dump(V_NORTH.y)
 local v = V_NORTH
-v.y = 666
+--v.y = 666
 dump(v)
+
+local x = vector3(1,1,1) / vector3(0,1,0)
 
 print "Done."
