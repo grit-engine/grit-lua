@@ -21,12 +21,12 @@ LIBS=-lpthread \
      /usr/lib/libboost_thread-mt.a \
      /usr/lib/libfreeimage.a \
      /usr/lib/libzzip.a \
-     /usr/lib/libfreetype.a \
+     /usr/lib/i386-linux-gnu/libfreetype.a \
      /usr/lib/libGLU.a \
      /usr/lib/libGLEW.a \
-     /usr/lib/libXrandr.a \
-     /usr/lib/libXrender.a \
-     /usr/lib/libz.a \
+     /usr/lib/i386-linux-gnu/libXrandr.a \
+     /usr/lib/i386-linux-gnu/libXrender.a \
+     /usr/lib/i386-linux-gnu/libz.a \
      -lGL -lXaw
 
 
