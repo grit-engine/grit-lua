@@ -156,10 +156,10 @@
 			<Tool
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="false"
-				AdditionalDependencies="FreeImage.lib freetype235.lib LibJPEG.lib LibMNG.lib LibOpenJPEG.lib LibPNG.lib LibTIFF.lib ogre.lib zlib.lib zziplib.lib $(ProjectDir)OgreXMLConverter.res"
+				AdditionalDependencies="FreeImage.lib freetype2311.lib ogre.lib zlib.lib zziplib.lib $(ProjectDir)OgreXMLConverter.res"
 				OutputFile="$(SolutionDir)\grit_core\media\Tools\OgreXMLConverter.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(SolutionDir)\dependencies\grit_ogre\Dependencies\lib\Release&quot;;&quot;$(OutDir)&quot;;$(NOINHERIT)"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)\dependencies\grit_ogre_dependencies\lib\Release&quot;;&quot;$(OutDir)&quot;;$(NOINHERIT)"
 				GenerateDebugInformation="true"
 				AssemblyDebug="0"
 				ProgramDatabaseFile="$(OutDir)\$(TargetName).pdb"
