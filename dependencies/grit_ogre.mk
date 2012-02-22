@@ -432,6 +432,9 @@ $(NEW_OBJ_DIR)/dbg/OgreXMLConverter: $(XMLCONVERTER_SOURCE) $(NEW_OBJ_DIR)/opt/l
 $(NEW_OBJ_DIR)/opt/OgreXMLConverter: $(XMLCONVERTER_SOURCE) $(NEW_OBJ_DIR)/opt/libogre_semithreaded.a
 	$(COMPILER) -DTIXML_USE_STL -I Tools/XMLConverter/include $(CFLAGS) $(OPT) $(XMLCONVERTER_SOURCE) -o "$@" -L $(NEW_OBJ_DIR)/opt -logre_semithreaded $(LIBS)
 
+GRIT_BLENDER_DIR=../../exporters/blender_scripts/addons/grit_blender
+$(GRIT_BLENDER_DIR)/OgreXMLConverter: $(NEW_OBJ_DIR)/opt/OgreXMLConverter
+	cp $< $@
 
 
 .PHONY: all clean depend
@@ -439,7 +442,7 @@ $(NEW_OBJ_DIR)/opt/OgreXMLConverter: $(XMLCONVERTER_SOURCE) $(NEW_OBJ_DIR)/opt/l
 clean:
 	find $(NEW_OBJ_DIR) -name *.o -o -name *.a | xargs rm -v
 
-all: $(NEW_OBJ_DIR)/dbg/libogre_semithreaded.a $(NEW_OBJ_DIR)/opt/libogre_semithreaded.a $(NEW_OBJ_DIR)/opt/OgreXMLConverter $(NEW_OBJ_DIR)/dbg/OgreXMLConverter
+all: $(NEW_OBJ_DIR)/dbg/libogre_semithreaded.a $(NEW_OBJ_DIR)/opt/libogre_semithreaded.a $(NEW_OBJ_DIR)/opt/OgreXMLConverter $(NEW_OBJ_DIR)/dbg/OgreXMLConverter $(GRIT_BLENDER_DIR)/OgreXMLConverter
 
 .DEFAULT_GOAL := all
 
