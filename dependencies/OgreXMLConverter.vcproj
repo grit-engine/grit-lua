@@ -189,6 +189,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="copy $(TargetPath) $(SolutionDir)exporters\blender_scripts\addons\grit_blender"
 			/>
 		</Configuration>
 	</Configurations>
