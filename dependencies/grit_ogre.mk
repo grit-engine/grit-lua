@@ -434,7 +434,7 @@ $(NEW_OBJ_DIR)/opt/OgreXMLConverter: $(XMLCONVERTER_SOURCE) $(NEW_OBJ_DIR)/opt/l
 
 GRIT_BLENDER_DIR=../../exporters/blender_scripts/addons/grit_blender
 $(GRIT_BLENDER_DIR)/OgreXMLConverter: $(NEW_OBJ_DIR)/opt/OgreXMLConverter
-	cp $< $@
+	strip $< -o $@
 
 
 .PHONY: all clean depend
