@@ -108,6 +108,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="2"
 				EnableIntrinsicFunctions="true"
@@ -117,7 +118,7 @@
 				AdditionalIncludeDirectories="&quot;$(SolutionDir)\dependencies\grit_ogre\OgreMain\include&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\OgreMain\src\nedmalloc&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\RenderSystems\GL\src\win32&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\RenderSystems\GL\src\nvparse&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\RenderSystems\GL\src\nvparse\winheaders&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\RenderSystems\GL\src\atifs\include&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\RenderSystems\GL\src\GLSL\include&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\RenderSystems\GL\include\&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\RenderSystems\Direct3D9\include&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\PlugIns\ParticleFX\include&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\PlugIns\OctreeSceneManager\include&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre_dependencies\include&quot;;&quot;$(SolutionDir)\dependencies&quot;;&quot;$(SolutionDir)\dependencies\grit_ogre\PlugIns\CgProgramManager\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG"
 				StringPooling="true"
-				MinimalRebuild="true"
+				MinimalRebuild="false"
 				RuntimeLibrary="2"
 				BufferSecurityCheck="false"
 				EnableFunctionLevelLinking="true"
