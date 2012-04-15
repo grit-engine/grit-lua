@@ -549,7 +549,7 @@ static int luaB_quat (lua_State *L) {
 
       cross(1,0,0, x1,y1,z1, &ax, &ay, &az);
       len2 = ax*ax + ay*ay + az*az;
-      if (ax*ax + ay*ay + az*az > 0) {
+      if (len2 == 0) {
         cross(0,1,0, x1,y1,z1, &ax, &ay, &az);
         len2 = ax*ax + ay*ay + az*az;
       }
