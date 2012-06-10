@@ -589,13 +589,18 @@ static int luaB_inv (lua_State *L) {
 }
 
 static int luaB_slerp (lua_State *L) {
-  if (lua_gettop(L) != 3) luaL_error(L, "Invalid params, try slerp(q1,q2,a)");
   float w1, x1, y1, z1;
-  lua_checkquat(L, 1, &w1, &x1, &y1, &z1);
-  float w1i = w1, x1i = -x1, y1i = -y1, z1i = -z1;
+  float w1i, x1i, y1i, z1i;
   float w2, x2, y2, z2;
+  float a;
+  float w, x, y, z, vl;
+  float theta;
+  float w3, x3, y3, z3;
+  if (lua_gettop(L) != 3) luaL_error(L, "Invalid params, try slerp(q1,q2,a)");
+  lua_checkquat(L, 1, &w1, &x1, &y1, &z1);
+  w1i = w1; x1i = -x1; y1i = -y1; z1i = -z1;
   lua_checkquat(L, 2, &w2, &x2, &y2, &z2);
-  float a = (float)lua_tonumber(L, 3);
+  a = (float)lua_tonumber(L, 3);
 
   if (a==0) {
     // no rotation at all
@@ -604,19 +609,19 @@ static int luaB_slerp (lua_State *L) {
   }
 
   // w,x,y,z is the correct amount of change for a == 1
-  float w = w2*w1i - x2*x1i - y2*y1i - z2*z1i;
-  float x = w2*x1i + x2*w1i + y2*z1i - z2*y1i;
-  float y = w2*y1i + y2*w1i + z2*x1i - x2*z1i;
-  float z = w2*z1i + z2*w1i + x2*y1i - y2*x1i;
+  w = w2*w1i - x2*x1i - y2*y1i - z2*z1i;
+  x = w2*x1i + x2*w1i + y2*z1i - z2*y1i;
+  y = w2*y1i + y2*w1i + z2*x1i - x2*z1i;
+  z = w2*z1i + z2*w1i + x2*y1i - y2*x1i;
 
-  float vl = sqrtf(x*x + y*y + z*z);
+  vl = sqrtf(x*x + y*y + z*z);
   if (vl == 0.0f) {
     // could test w==1 here but i think this is more robust to non-normalised input quats
     // no rotation at all
     lua_pushquat(L,w1,x1,y1,z1);
     return 1;
   }
-  float theta = atan2(vl, w);
+  theta = atan2(vl, w);
   theta *= a;
 
   // w,x,y,z is the correct amount of change for arbitrary a
@@ -626,10 +631,10 @@ static int luaB_slerp (lua_State *L) {
   z *= sin(theta)/vl;
 
   // but we must include the original orientation w1 as well
-  float w3 = w*w1 - x*x1 - y*y1 - z*z1;
-  float x3 = w*x1 + x*w1 + y*z1 - z*y1;
-  float y3 = w*y1 + y*w1 + z*x1 - x*z1;
-  float z3 = w*z1 + z*w1 + x*y1 - y*x1;
+  w3 = w*w1 - x*x1 - y*y1 - z*z1;
+  x3 = w*x1 + x*w1 + y*z1 - z*y1;
+  y3 = w*y1 + y*w1 + z*x1 - x*z1;
+  z3 = w*z1 + z*w1 + x*y1 - y*x1;
 
   lua_pushquat(L,w3, x3, y3, z3);
   return 1;
