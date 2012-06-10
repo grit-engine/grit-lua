@@ -154,6 +154,15 @@ void luaV_gettable (lua_State *L, const TValue *t, TValue *key, StkId val) {
           setnvalue(val, f4.y);
         } else if (strcmp(k,"z")==0) {
           setnvalue(val, f4.z);
+        } else if (strcmp(k,"angle")==0) {
+          const float pi = 3.14159265358979323846;
+          setnvalue(val, acos(f4.w)/pi*180 * 2);
+        } else if (strcmp(k,"axis")==0) {
+          float l = sqrt(f4.x*f4.x + f4.y*f4.y + f4.z*f4.z);
+          if (l == 0.0f) luaG_runerror(L, "Identity quaternion has no axis");
+          float il = 1/l;
+          lua_Float4 v = {0, il*f4.x, il*f4.y, il*f4.z};
+          setv3value(val, v);
         } else {
           luaG_typeerror(L, t, "index");
         }

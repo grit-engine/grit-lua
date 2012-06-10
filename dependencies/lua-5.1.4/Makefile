@@ -38,6 +38,9 @@ $(MEGA_C): $(LIB_C) $(CORE_C)
 test: test.c $(LUA_A)
 	$(CC) $(CFLAGS) $< $(LUA_A) -lm -o $@
 
+interpreter: interpreter.c $(LUA_A)
+	$(CC) $(CFLAGS) $< $(LUA_A) -lm -o $@
+
 clean:
 	$(RM) $(MEGA_O) test
 
