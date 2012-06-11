@@ -9,7 +9,7 @@ PLAT= none
 
 #CC= gcc
 CC= devgcc
-CFLAGS=-g -O0 -Wall -DLUA_USE_MKSTEMP -DLUA_USE_APICHECK
+CFLAGS= -g -O0 -Wall -DLUA_USE_MKSTEMP -DLUA_USE_APICHECK
 AR= ar rcu
 RANLIB= ranlib
 RM= rm -f

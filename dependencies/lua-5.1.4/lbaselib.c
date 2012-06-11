@@ -528,7 +528,7 @@ static int luaB_quat (lua_State *L) {
     lua_checkvector3(L, 1, &x1, &y1, &z1);
     lua_checkvector3(L, 2, &x2, &y2, &z2);
 
-    // Based on Stan Melax's article in Game Programming Gems
+    /* Based on Stan Melax's article in Game Programming Gems */
     l1 = sqrtf(x1*x1 + y1*y1 + z1*z1);
     l2 = sqrtf(x2*x2 + y2*y2 + z2*z2);
     x1/=l1; y1/=l1; z1/=l1; 
@@ -536,7 +536,7 @@ static int luaB_quat (lua_State *L) {
 
     d = dot(x1,y1,z1, x2,y2,z2);
 
-    // If dot == 1, vectors are the same
+    /* If dot == 1, vectors are the same */
     if (d >= 1.0f) {
       lua_pushquat(L, 1,0,0,0);
       return 1;
@@ -583,60 +583,48 @@ static int luaB_inv (lua_State *L) {
   float w, x, y, z;
   if (lua_gettop(L) != 1) luaL_error(L, "Invalid params, try inv(q)");
   lua_checkquat(L, 1, &w, &x, &y, &z);
-  // don't invert w, as that would mean inv(Q_ID) would flip the polarity of w
+  /* don't invert w, as that would mean inv(Q_ID) would flip the polarity of w */
   lua_pushquat(L,w,-x,-y,-z);
   return 1;
 }
 
 static int luaB_slerp (lua_State *L) {
   float w1, x1, y1, z1;
-  float w1i, x1i, y1i, z1i;
   float w2, x2, y2, z2;
-  float a;
-  float w, x, y, z, vl;
-  float theta;
-  float w3, x3, y3, z3;
+  float t, theta, dot;
   if (lua_gettop(L) != 3) luaL_error(L, "Invalid params, try slerp(q1,q2,a)");
   lua_checkquat(L, 1, &w1, &x1, &y1, &z1);
-  w1i = w1; x1i = -x1; y1i = -y1; z1i = -z1;
   lua_checkquat(L, 2, &w2, &x2, &y2, &z2);
-  a = (float)lua_tonumber(L, 3);
+  t = (float)lua_tonumber(L, 3);
 
-  if (a==0) {
-    // no rotation at all
-    lua_pushquat(L,w1,x1,y1,z1);
-    return 1;
+  dot = w1*w2 + x1*x2 + y1*y2 + z1*z2;
+  if (dot < 0) {
+    /* flip one of them */
+    w2 *= -1;
+    x2 *= -1;
+    y2 *= -1;
+    z2 *= -1;
+    /* update dot to match */
+    dot *= -1;
   }
 
-  // w,x,y,z is the correct amount of change for a == 1
-  w = w2*w1i - x2*x1i - y2*y1i - z2*z1i;
-  x = w2*x1i + x2*w1i + y2*z1i - z2*y1i;
-  y = w2*y1i + y2*w1i + z2*x1i - x2*z1i;
-  z = w2*z1i + z2*w1i + x2*y1i - y2*x1i;
-
-  vl = sqrtf(x*x + y*y + z*z);
-  if (vl == 0.0f) {
-    // could test w==1 here but i think this is more robust to non-normalised input quats
-    // no rotation at all
+  /* dot > 0 now */
+    
+  theta = acosf(dot);
+  if (dot != 1) {
+    float d = 1.0f / sinf(theta);
+    float s0 = sinf((1.0f - t) * theta);
+    float s1 = sinf(t * theta);
+    lua_pushquat(L,
+        d * (w1*s0 + w2*s1),
+        d * (x1*s0 + x2*s1),
+        d * (y1*s0 + y2*s1),
+        d * (z1*s0 + z2*s1)
+    );
+  } else {
     lua_pushquat(L,w1,x1,y1,z1);
-    return 1;
   }
-  theta = atan2(vl, w);
-  theta *= a;
 
-  // w,x,y,z is the correct amount of change for arbitrary a
-  w = cos(theta);
-  x *= sin(theta)/vl;
-  y *= sin(theta)/vl;
-  z *= sin(theta)/vl;
-
-  // but we must include the original orientation w1 as well
-  w3 = w*w1 - x*x1 - y*y1 - z*z1;
-  x3 = w*x1 + x*w1 + y*z1 - z*y1;
-  y3 = w*y1 + y*w1 + z*x1 - x*z1;
-  z3 = w*z1 + z*w1 + x*y1 - y*x1;
-
-  lua_pushquat(L,w3, x3, y3, z3);
   return 1;
 }
 
@@ -660,8 +648,7 @@ static int luaB_norm (lua_State *L) {
     lua_pushquat(L,w/qlen,x/qlen,y/qlen,z/qlen);
     return 1;
   } else {
-    luaL_error(L, "Invalid params, try norm(v) norm(q)");
-    return 0;
+    return luaL_error(L, "Invalid arguments, try norm(v) or norm(q).");
   }
 }
 

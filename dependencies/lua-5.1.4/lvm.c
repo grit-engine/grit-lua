@@ -200,9 +200,10 @@ void luaV_settable (lua_State *L, TValue *t_, TValue *key, StkId val) {
       /* else will try the tag method */
     }
     else if (ttisnil(tm = luaT_gettmbyobj(L, t, TM_NEWINDEX))) {
-      // mutable fields of vectors/quats does not work very well in lua
-      // since o.f is not an lvalue, o.f.x = 10 is a no-op
-      // so disable this code
+      /* mutable fields of vectors/quats does not work very well in lua
+       * since o.f is not an lvalue, o.f.x = 10 is a no-op
+       * so disable this code
+       */
       if (0 && ttisvector3(t)) {  
         lua_Float4 f4 = v3value(t);
         const char *k = svalue(key);
@@ -483,7 +484,7 @@ static void Arith (lua_State *L, StkId ra, const TValue *rb,
     switch (op) {
       case TM_MUL: {
         float a=nb.w, b=nb.x, c=nb.y, d=nb.z;
-        float mat[3][3] = { // row major
+        float mat[3][3] = { /* row major */
             { a*a+b*b-c*c-d*d, 2*b*c-2*a*d    , 2*b*d+2*a*c         },
             { 2*b*c+2*a*d    , a*a-b*b+c*c-d*d, 2*c*d-2*a*b         },
             { 2*b*d-2*a*c    , 2*c*d+2*a*b    , a*a-b*b-c*c+d*d },

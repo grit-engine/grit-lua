@@ -107,7 +107,38 @@ static int math_sqrt (lua_State *L) {
 }
 
 static int math_pow (lua_State *L) {
-  lua_pushnumber(L, pow(luaL_checknumber(L, 1), luaL_checknumber(L, 2)));
+  if (lua_gettop(L) != 2) {
+    luaL_error(L, "Wrong number of arguments: use math.pow(n,n) or math.pow(q,n)");
+  }
+  if (lua_type(L, 1) != LUA_TNUMBER && lua_type(L, 1) != LUA_TQUAT) {
+    luaL_error(L, "Invalid type for 1st parameter, use math.pow(n,n) or math.pow(q,n)");
+  }
+  if (lua_type(L, 2) != LUA_TNUMBER) {
+    luaL_error(L, "math.pow second argument must be a number");
+  }
+
+  if (lua_type(L, 1) == LUA_TNUMBER) {
+      lua_pushnumber(L, pow(lua_tonumber(L, 1), lua_tonumber(L, 2)));
+  } else {
+    float w, x, y, z,  l;
+    float index;
+    lua_checkquat(L, 1, &w, &x, &y, &z);
+    index = lua_tonumber(L, 2);
+    l = sqrtf(x*x + y*y + z*z);
+    if (l==0) {
+      lua_pushquat(L, 1, 0, 0, 0);
+    } else {
+      float angle, sangle;
+      float w2, x2, y2, z2;
+      angle = index * acosf(w); /* without the factor of 2 */
+      sangle = sinf(angle);
+      w2 = cosf(angle);
+      x2 = sangle * x/l;
+      y2 = sangle * y/l;
+      z2 = sangle * z/l;
+      lua_pushquat(L, w2, x2, y2, z2);
+    }
+  }
   return 1;
 }
 
