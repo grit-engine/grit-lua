@@ -219,11 +219,11 @@ int lua_quat2str (char *s, lua_Float4 n) {
 
 lua_Float4 lua_str2quat (char *s, char *p)
 {
-  lua_Float4 f4;
+  lua_Float4 stupid = {0.0f,0.0f,0.0f,0.0f};
   (void)s; (void)p;
   fprintf(stderr, "lua_str2quat not yet implemented\n");
   abort();
-  return f4; /* shut up msvc */
+  return stupid; /* shut up msvc */
 }
 
 int lua_vector32str (char *s, lua_Float4 n) {
@@ -232,9 +232,9 @@ int lua_vector32str (char *s, lua_Float4 n) {
 
 lua_Float4 lua_str2vector3 (char *s, char *p)
 {
-  lua_Float4 f4;
+  lua_Float4 stupid = {0.0f,0.0f,0.0f,0.0f};
   (void)s; (void)p;
   fprintf(stderr, "lua_str2vector3 not yet implemented\n");
   abort();
-  return f4; /* shut up msvc */
+  return stupid; /* shut up msvc */
 }

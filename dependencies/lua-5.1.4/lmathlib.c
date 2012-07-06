@@ -123,7 +123,7 @@ static int math_pow (lua_State *L) {
     float w, x, y, z,  l;
     float index;
     lua_checkquat(L, 1, &w, &x, &y, &z);
-    index = lua_tonumber(L, 2);
+    index = (float)lua_tonumber(L, 2);
     l = sqrtf(x*x + y*y + z*z);
     if (l==0) {
       lua_pushquat(L, 1, 0, 0, 0);
