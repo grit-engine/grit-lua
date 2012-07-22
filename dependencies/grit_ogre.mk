@@ -96,12 +96,14 @@ CORE_SOURCE=OgreMain/src/OgreAlignedAllocator.cpp \
             OgreMain/src/OgreDefaultHardwareBufferManager.cpp \
             OgreMain/src/OgreDefaultSceneQueries.cpp \
             OgreMain/src/OgreDepthBuffer.cpp \
+            OgreMain/src/OgreDualQuaternion.cpp \
             OgreMain/src/Threading/OgreDefaultWorkQueueStandard.cpp \
             OgreMain/src/OgreDistanceLodStrategy.cpp \
             OgreMain/src/OgreDynLib.cpp \
             OgreMain/src/OgreDynLibManager.cpp \
             OgreMain/src/OgreEdgeListBuilder.cpp \
             OgreMain/src/OgreEntity.cpp \
+            OgreMain/src/OgreETC1Codec.cpp \
             OgreMain/src/OgreException.cpp \
             OgreMain/src/OgreExternalTextureSource.cpp \
             OgreMain/src/OgreExternalTextureSourceManager.cpp \
