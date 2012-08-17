@@ -345,6 +345,13 @@ int luaV_equalval (lua_State *L, const TValue *t1, const TValue *t2) {
     case LUA_TNUMBER: return luai_numeq(nvalue(t1), nvalue(t2));
     case LUA_TBOOLEAN: return bvalue(t1) == bvalue(t2);  /* true must be 1 !! */
     case LUA_TLIGHTUSERDATA: return pvalue(t1) == pvalue(t2);
+    case LUA_TQUAT:
+    if (v3value(t1).w != v3value(t2).w) return 0;
+    case LUA_TVECTOR3:
+    if (v3value(t1).x != v3value(t2).x) return 0;
+    if (v3value(t1).y != v3value(t2).y) return 0;
+    if (v3value(t1).z != v3value(t2).z) return 0;
+    return 1;
     case LUA_TUSERDATA: {
       if (uvalue(t1) == uvalue(t2)) return 1;
       tm = get_compTM(L, uvalue(t1)->metatable, uvalue(t2)->metatable,
