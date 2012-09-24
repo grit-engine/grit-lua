@@ -347,7 +347,9 @@ int main (int argc, char **argv) {
     l_message(argv[0], "cannot create state: not enough memory");
     return EXIT_FAILURE;
   }
+  #ifdef BIND_FREEIMAGE
   luaopen_freeimage(L);
+  #endif
   s.argc = argc;
   s.argv = argv;
   status = lua_cpcall(L, &pmain, &s);

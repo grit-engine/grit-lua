@@ -39,7 +39,12 @@ test: test.c $(LUA_A)
 	$(CC) $(CFLAGS) $< $(LUA_A) -lm -o $@
 
 interpreter: interpreter.c $(LUA_A)
-	$(CC) $(CFLAGS) $< $(LUA_A) /home/spark/lua_freeimage/src/libluafreeimage.a -lm -o $@ -lfreeimage
+	$(CC) $(CFLAGS) $< $(LUA_A) -lm -o $@ -lfreeimage
+
+LUA_FREEIMAGE_SRC=freeimage/luafreeimage.c
+
+luaimg: interpreter.c $(LUA_A)
+	$(CC) $(CFLAGS) $< $(LUA_A) -DBIND_FREEIMAGE $(LUA_FREEIMAGE_SRC) -I . -lm -o $@ -lfreeimage
 
 clean:
 	$(RM) $(MEGA_O) test
