@@ -1,58 +1,34 @@
 # makefile for building Lua
-# see ../INSTALL for installation instructions
-# see ../Makefile and luaconf.h for further customization
 
-# == CHANGE THE SETTINGS BELOW TO SUIT YOUR ENVIRONMENT =======================
+include ../../common.mk
 
-# Your platform. See PLATS for possible values.
-PLAT= none
-
-#CC= gcc
-CC= devgcc
-CFLAGS= -g -O0 -Wall -DLUA_USE_MKSTEMP -DLUA_USE_APICHECK
-AR= ar rcu
-RANLIB= ranlib
-RM= rm -f
-CAT=cat
+LUA_CFLAGS = -DLUA_USE_MKSTEMP -DLUA_USE_APICHECK
 
 # == END OF USER SETTINGS. NO NEED TO CHANGE ANYTHING BELOW THIS LINE =========
 
 LUA_A= liblua.a
-MEGA_C= mega.c
-MEGA_O= mega.o
-CORE_C=	lapi.c lcode.c ldebug.c ldo.c ldump.c lfunc.c lgc.c llex.c lmem.c \
-	lobject.c lopcodes.c lparser.c lstate.c lstring.c ltable.c ltm.c  \
-	lundump.c lvm.c lzio.c
-LIB_C= lauxlib.c lbaselib.c ldblib.c liolib.c lmathlib.c loslib.c ltablib.c \
-	lstrlib.c loadlib.c linit.c
 
-$(LUA_A): $(MEGA_O)
-	$(AR) $@ $?
-	$(RANLIB) $@
+$(LUA_A): mega.c
+	$(CC) $(CFLAGS) $(LUA_CFLAGS) -c $< -o mega.o
+	ar -rcus $@ mega.o
 
-$(MEGA_C): $(LIB_C) $(CORE_C) 
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+interpreter: interpreter.c $(LUA_A)
+	$(CC) $(CFLAGS) $< $(LUA_A) -lm -o $@
 
 test: test.c $(LUA_A)
 	$(CC) $(CFLAGS) $< $(LUA_A) -lm -o $@
 
-interpreter: interpreter.c $(LUA_A)
-	$(CC) $(CFLAGS) $< $(LUA_A) -lm -o $@ -lfreeimage
 
-LUA_FREEIMAGE_SRC=freeimage/luafreeimage.c
-
-luaimg: interpreter.c $(LUA_A)
-	$(CC) $(CFLAGS) $< $(LUA_A) -DBIND_FREEIMAGE $(LUA_FREEIMAGE_SRC) -I . -lm -o $@ -lfreeimage
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(MEGA_O) test
+	rm -fv mega.o test interpreter $(LUA_A)
 
-$(MEGA_O): lapi.c lua.h luaconf.h lapi.h lobject.h llimits.h ldebug.h lstate.h
-$(MEGA_O): ltm.h lzio.h lmem.h ldo.h lfunc.h lgc.h lstring.h ltable.h lundump.h
-$(MEGA_O): lvm.h lcode.c lcode.h llex.h lopcodes.h lparser.h ldebug.c ldo.c
-$(MEGA_O): ldump.c lfunc.c lgc.c llex.c lmem.c lobject.c lopcodes.c lparser.c
-$(MEGA_O): lstate.c lstring.c ltable.c ltm.c lundump.c lvm.c lzio.c lauxlib.c
-$(MEGA_O): lauxlib.h lbaselib.c lualib.h ldblib.c liolib.c lmathlib.c loslib.c
-$(MEGA_O): ltablib.c lstrlib.c loadlib.c linit.c
+$(LUA_A): lapi.c lua.h luaconf.h lapi.h lobject.h llimits.h ldebug.h lstate.h
+$(LUA_A): ltm.h lzio.h lmem.h ldo.h lfunc.h lgc.h lstring.h ltable.h lundump.h
+$(LUA_A): lvm.h lcode.c lcode.h llex.h lopcodes.h lparser.h ldebug.c ldo.c
+$(LUA_A): ldump.c lfunc.c lgc.c llex.c lmem.c lobject.c lopcodes.c lparser.c
+$(LUA_A): lstate.c lstring.c ltable.c ltm.c lundump.c lvm.c lzio.c lauxlib.c
+$(LUA_A): lauxlib.h lbaselib.c lualib.h ldblib.c liolib.c lmathlib.c loslib.c
+$(LUA_A): ltablib.c lstrlib.c loadlib.c linit.c
