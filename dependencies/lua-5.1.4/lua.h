@@ -76,12 +76,13 @@ typedef void * (*lua_Alloc) (void *ud, void *ptr, size_t osize, size_t nsize);
 #define LUA_TLIGHTUSERDATA	2
 #define LUA_TNUMBER		3
 #define LUA_TVECTOR3		4
-#define LUA_TQUAT		5
-#define LUA_TSTRING		6
-#define LUA_TTABLE		7
-#define LUA_TFUNCTION		8
-#define LUA_TUSERDATA		9
-#define LUA_TTHREAD		10
+#define LUA_TVECTOR2		5
+#define LUA_TQUAT		6
+#define LUA_TSTRING		7
+#define LUA_TTABLE		8
+#define LUA_TFUNCTION		9
+#define LUA_TUSERDATA		10
+#define LUA_TTHREAD		11
 
 
 
@@ -135,6 +136,7 @@ LUA_API void  (lua_xmove) (lua_State *from, lua_State *to, int n);
 */
 
 LUA_API int             (lua_isnumber) (lua_State *L, int idx);
+LUA_API int             (lua_isvector2) (lua_State *L, int idx);
 LUA_API int             (lua_isvector3) (lua_State *L, int idx);
 LUA_API int             (lua_isquat) (lua_State *L, int idx);
 LUA_API int             (lua_isstring) (lua_State *L, int idx);
@@ -148,6 +150,7 @@ LUA_API int            (lua_rawequal) (lua_State *L, int idx1, int idx2);
 LUA_API int            (lua_lessthan) (lua_State *L, int idx1, int idx2);
 
 LUA_API lua_Number      (lua_tonumber) (lua_State *L, int idx);
+LUA_API void            (lua_checkvector2) (lua_State *L, int idx, float *x, float *y);
 LUA_API void            (lua_checkvector3) (lua_State *L, int idx, float *x, float *y, float *z);
 LUA_API void            (lua_checkquat) (lua_State *L, int idx, float *w, float *x, float *y, float *z);
 LUA_API lua_Integer     (lua_tointeger) (lua_State *L, int idx);
@@ -165,6 +168,7 @@ LUA_API const void     *(lua_topointer) (lua_State *L, int idx);
 */
 LUA_API void  (lua_pushnil) (lua_State *L);
 LUA_API void  (lua_pushnumber) (lua_State *L, lua_Number n);
+LUA_API void  (lua_pushvector2) (lua_State *L, float x, float y);
 LUA_API void  (lua_pushvector3) (lua_State *L, float x, float y, float z);
 LUA_API void  (lua_pushquat) (lua_State *L, float w, float x, float y, float z);
 LUA_API void  (lua_pushinteger) (lua_State *L, lua_Integer n);

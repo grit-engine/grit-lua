@@ -162,12 +162,16 @@ static const char *get_prompt (lua_State *L, int firstline) {
 
 static int loadline (lua_State *L) {
   int status;
-  lua_settop(L, 0);
-
   char buffer[LUA_MAXINPUT];
-  char *b = buffer;
+  char *b;
   size_t l;
-  const char *prmt = get_prompt(L, 1);
+  const char *prmt;
+  char buffer_with_return[LUA_MAXINPUT];
+
+  lua_settop(L, 0);
+  prmt = get_prompt(L, 1);
+  b = buffer;
+
   if (lua_readline(L, b, prmt) == 0)
     return -1;  /* no input */
   l = strlen(b);
@@ -176,7 +180,6 @@ static int loadline (lua_State *L) {
     l--;
   }
 
-  char buffer_with_return[LUA_MAXINPUT];
   snprintf(buffer_with_return, LUA_MAXINPUT, "return %s", b);
 
   status = luaL_loadbuffer(L, buffer_with_return, strlen(buffer_with_return), "=stdin");

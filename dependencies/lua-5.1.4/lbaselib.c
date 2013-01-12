@@ -340,7 +340,12 @@ static int luaB_assert (lua_State *L) {
 
 
 static int luaB_unpack (lua_State *L) {
-  if (lua_gettop(L)==1 && lua_isvector3(L,1)) {
+  if (lua_gettop(L)==1 && lua_isvector2(L,1)) {
+    float x, y; lua_checkvector2(L, 1, &x, &y);
+    lua_pushnumber(L,x);
+    lua_pushnumber(L,y);
+    return 3;
+  } else if (lua_gettop(L)==1 && lua_isvector3(L,1)) {
     float x, y, z; lua_checkvector3(L, 1, &x, &y, &z);
     lua_pushnumber(L,x);
     lua_pushnumber(L,y);
@@ -415,6 +420,7 @@ static int luaB_tostring (lua_State *L) {
   switch (lua_type(L, 1)) {
     case LUA_TQUAT:
     case LUA_TVECTOR3:
+    case LUA_TVECTOR2:
     case LUA_TNUMBER:
       lua_pushstring(L, lua_tostring(L, 1));
       break;
@@ -460,6 +466,15 @@ static int luaB_newproxy (lua_State *L) {
   return 1;
 }
 
+static int luaB_vector2 (lua_State *L) {
+  float x,y;
+  if (lua_gettop(L) != 2) luaL_error(L, "Invalid params, try vector2(n,n)");
+  x = (float)luaL_checknumber(L, 1);
+  y = (float)luaL_checknumber(L, 2);
+  lua_pushvector2(L, x,y);
+  return 1;
+}
+
 static int luaB_vector3 (lua_State *L) {
   float x,y,z;
   if (lua_gettop(L) != 3) luaL_error(L, "Invalid params, try vector3(n,n,n)");
@@ -472,11 +487,15 @@ static int luaB_vector3 (lua_State *L) {
 
 #define PI 3.1415926535897932385f
 
-static float dot (float x1, float y1, float z1, float x2, float y2, float z2) {
+static float dot3 (float x1, float y1, float z1, float x2, float y2, float z2) {
   return x1*x2 + y1*y2 + z1*z2;
 }
 
-static void cross (float x1, float y1, float z1, float x2, float y2, float z2, float *xr, float *yr, float *zr) {
+static float dot2 (float x1, float y1, float x2, float y2) {
+  return x1*x2 + y1*y2;
+}
+
+static void cross3 (float x1, float y1, float z1, float x2, float y2, float z2, float *xr, float *yr, float *zr) {
   *xr = y1*z2 - z1*y2;
   *yr = z1*x2 - x1*z2;
   *zr = x1*y2 - y1*x2;
@@ -486,9 +505,15 @@ static int luaB_dot (lua_State *L) {
   float x1, y1, z1;
   float x2, y2, z2;
   if (lua_gettop(L) != 2) luaL_error(L, "Invalid params, try dot(v,v)");
-  lua_checkvector3(L, 1, &x1, &y1, &z1);
-  lua_checkvector3(L, 2, &x2, &y2, &z2);
-  lua_pushnumber(L,dot(x1,y1,z1, x2,y2,z2));
+  if (lua_isvector3(L,1)) {
+    lua_checkvector3(L, 1, &x1, &y1, &z1);
+    lua_checkvector3(L, 2, &x2, &y2, &z2);
+    lua_pushnumber(L,dot3(x1,y1,z1, x2,y2,z2));
+  } else if (lua_isvector2(L,1)) {
+    lua_checkvector2(L, 1, &x1, &y1);
+    lua_checkvector2(L, 2, &x2, &y2);
+    lua_pushnumber(L,dot2(x1,y1, x2,y2));
+  }
   return 1;
 }
 
@@ -499,7 +524,7 @@ static int luaB_cross (lua_State *L) {
   if (lua_gettop(L) != 2) luaL_error(L, "Invalid params, try cross(v,v)");
   lua_checkvector3(L, 1, &x1, &y1, &z1);
   lua_checkvector3(L, 2, &x2, &y2, &z2);
-  cross(x1,y1,z1, x2,y2,z2, &ax, &ay, &az);
+  cross3(x1,y1,z1, x2,y2,z2, &ax, &ay, &az);
   lua_pushvector3(L,ax,ay,az);
   return 1;
 }
@@ -534,7 +559,7 @@ static int luaB_quat (lua_State *L) {
     x1/=l1; y1/=l1; z1/=l1; 
     x2/=l2; y2/=l2; z2/=l2; 
 
-    d = dot(x1,y1,z1, x2,y2,z2);
+    d = dot3(x1,y1,z1, x2,y2,z2);
 
     /* If dot == 1, vectors are the same */
     if (d >= 1.0f) {
@@ -547,10 +572,10 @@ static int luaB_quat (lua_State *L) {
       float ax, ay, az;
       float len2, len;
 
-      cross(1,0,0, x1,y1,z1, &ax, &ay, &az);
+      cross3(1,0,0, x1,y1,z1, &ax, &ay, &az);
       len2 = ax*ax + ay*ay + az*az;
       if (len2 == 0) {
-        cross(0,1,0, x1,y1,z1, &ax, &ay, &az);
+        cross3(0,1,0, x1,y1,z1, &ax, &ay, &az);
         len2 = ax*ax + ay*ay + az*az;
       }
       len = sqrtf(len2);
@@ -564,7 +589,7 @@ static int luaB_quat (lua_State *L) {
       float ax, ay, az;
       float qw, qlen;
 
-      cross(x1,y1,z1, x2,y2,z2, &ax, &ay, &az);
+      cross3(x1,y1,z1, x2,y2,z2, &ax, &ay, &az);
       ax/=s; ay/=s; az/=s; 
       qw = s*0.5f;
       qlen = sqrtf(qw*qw + ax*ax + ay*ay + az*az);
@@ -629,7 +654,16 @@ static int luaB_slerp (lua_State *L) {
 }
 
 static int luaB_norm (lua_State *L) {
-  if (lua_gettop(L)==1 && lua_isvector3(L,1)) {
+  if (lua_gettop(L)==1 && lua_isvector2(L,1)) {
+    float x, y;
+    float len;
+    lua_checkvector2(L, 1, &x, &y);
+    len = sqrtf(x*x + y*y);
+    if (len == 0)
+        luaL_error(L, "Cannot normalise vector2(0,0)");
+    lua_pushvector2(L,x/len,y/len);
+    return 1;
+  } else if (lua_gettop(L)==1 && lua_isvector3(L,1)) {
     float x, y, z;
     float len;
     lua_checkvector3(L, 1, &x, &y, &z);
@@ -679,6 +713,7 @@ static const luaL_Reg base_funcs[] = {
   {"xpcall", luaB_xpcall},
 
   {"vector3", luaB_vector3},
+  {"vector2", luaB_vector2},
   {"quat", luaB_quat},
   {"dot", luaB_dot},
   {"cross", luaB_cross},

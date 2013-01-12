@@ -51,6 +51,11 @@ int luaV_tostring (lua_State *L, StkId obj) {
     lua_number2str(s, n);
     setsvalue2s(L, obj, luaS_new(L, s));
     return 1;
+  } else if (ttisvector2(obj)) {
+    char s[LUAI_MAXVECTOR22STR];
+    lua_vector22str(s, v2value(obj));
+    setsvalue2s(L, obj, luaS_new(L, s));
+    return 1;
   } else if (ttisvector3(obj)) {
     char s[LUAI_MAXVECTOR32STR];
     lua_vector32str(s, v3value(obj));
@@ -140,6 +145,16 @@ void luaV_gettable (lua_State *L, const TValue *t, TValue *key, StkId val) {
           setnvalue(val, f4.y);
         } else if (strcmp(k,"z")==0) {
           setnvalue(val, f4.z);
+        } else {
+          luaG_typeerror(L, t, "index");
+        }
+      } else if (stringkey && ttisvector2(t)) {  
+        lua_Float4 f4 = v2value(t);
+        const char *k = svalue(key);
+        if (strcmp(k,"x")==0) {
+          setnvalue(val, f4.x);
+        } else if (strcmp(k,"y")==0) {
+          setnvalue(val, f4.y);
         } else {
           luaG_typeerror(L, t, "index");
         }
@@ -348,9 +363,10 @@ int luaV_equalval (lua_State *L, const TValue *t1, const TValue *t2) {
     case LUA_TQUAT:
     if (v3value(t1).w != v3value(t2).w) return 0;
     case LUA_TVECTOR3:
-    if (v3value(t1).x != v3value(t2).x) return 0;
-    if (v3value(t1).y != v3value(t2).y) return 0;
     if (v3value(t1).z != v3value(t2).z) return 0;
+    case LUA_TVECTOR2:
+    if (v3value(t1).y != v3value(t2).y) return 0;
+    if (v3value(t1).x != v3value(t2).x) return 0;
     return 1;
     case LUA_TUSERDATA: {
       if (uvalue(t1) == uvalue(t2)) return 1;
@@ -410,8 +426,10 @@ static float subf (float x, float y) { return x - y; }
 static float mulf (float x, float y) { return x * y; }
 static float divf (float x, float y) { return x / y; }
 
-#define PW3(f) r.x = f(nb.x, nc.x); r.y = f(nb.y, nc.y); r.z = f(nb.z, nc.z); 
-#define SCALAR3(f) r.x = f(nb.x, nc); r.y = f(nb.y, nc); r.z = f(nb.z, nc); 
+#define PW2(f)     r.x = f(nb.x, nc.x); r.y = f(nb.y, nc.y);
+#define SCALAR2(f) r.x = f(nb.x, nc  ); r.y = f(nb.y, nc  );
+#define PW3(f)     r.x = f(nb.x, nc.x); r.y = f(nb.y, nc.y); r.z = f(nb.z, nc.z); 
+#define SCALAR3(f) r.x = f(nb.x, nc  ); r.y = f(nb.y, nc  ); r.z = f(nb.z, nc  ); 
 
 static void Arith (lua_State *L, StkId ra, const TValue *rb,
                    const TValue *rc, TMS op) {
@@ -427,6 +445,25 @@ static void Arith (lua_State *L, StkId ra, const TValue *rb,
       case TM_UNM: setnvalue(ra, luai_numunm(nb)); break;
       default: lua_assert(0); break;
     }
+  } else if (ttisvector2(rb) && ttisvector2(rc)) {
+    lua_Float4 nb = v2value(rb), nc = v2value(rc);
+    lua_Float4 r;
+    switch (op) {
+      case TM_ADD: PW2(addf); break;
+      case TM_SUB: PW2(subf); break;
+      case TM_MUL: PW2(mulf); break;
+      case TM_DIV:
+        if (nc.x==0.0 || nc.y==0.0 || nc.z==0.0) {
+          luaG_runerror(L, "division by zero");
+        }
+        PW2(divf);
+        break;
+      case TM_MOD: PW2(fmodf); break;
+      case TM_POW: PW2(powf); break;
+      case TM_UNM: r.x = -nb.x; r.y = -nb.y; break;
+      default: lua_assert(0); break;
+    }
+    setv2value(ra, r);
   } else if (ttisvector3(rb) && ttisvector3(rc)) {
     lua_Float4 nb = v3value(rb), nc = v3value(rc);
     lua_Float4 r;
@@ -446,6 +483,23 @@ static void Arith (lua_State *L, StkId ra, const TValue *rb,
       default: lua_assert(0); break;
     }
     setv3value(ra, r);
+  } else if (ttisvector2(rb) && ttisnumber(rc)) {
+    lua_Float4 nb = v2value(rb);
+    float nc = (float)nvalue(rc);
+    lua_Float4 r;
+    switch (op) {
+      case TM_MUL: SCALAR2(mulf); break;
+      case TM_DIV:
+        if (nc==0.0) {
+          luaG_runerror(L, "division by zero");
+        }
+        SCALAR2(divf);
+        break;
+      case TM_MOD: SCALAR2(fmodf); break;
+      case TM_POW: SCALAR2(powf); break;
+      default: luaG_runerror(L, "Cannot use that op with vector3 and number");
+    }
+    setv2value(ra, r);
   } else if (ttisvector3(rb) && ttisnumber(rc)) {
     lua_Float4 nb = v3value(rb);
     float nc = (float)nvalue(rc);
@@ -463,6 +517,15 @@ static void Arith (lua_State *L, StkId ra, const TValue *rb,
       default: luaG_runerror(L, "Cannot use that op with vector3 and number");
     }
     setv3value(ra, r);
+  } else if (ttisnumber(rb) && ttisvector2(rc)) {
+    lua_Float4 nb = v2value(rc);
+    float nc = (float)nvalue(rb);
+    lua_Float4 r;
+    switch (op) {
+      case TM_MUL: SCALAR2(mulf); break;
+      default: luaG_runerror(L, "Cannot use that op with number and vector3");
+    }
+    setv2value(ra, r);
   } else if (ttisnumber(rb) && ttisvector3(rc)) {
     lua_Float4 nb = v3value(rc);
     float nc = (float)nvalue(rb);
@@ -701,6 +764,11 @@ void luaV_execute (lua_State *L, int nexeccalls) {
         switch (ttype(rb)) {
           case LUA_TTABLE: {
             setnvalue(ra, cast_num(luaH_getn(hvalue(rb))));
+            break;
+          }
+          case LUA_TVECTOR2: {
+            lua_Float4 f4 = v2value(rb);
+            setnvalue(ra, sqrtf(f4.x*f4.x + f4.y*f4.y));
             break;
           }
           case LUA_TVECTOR3: {

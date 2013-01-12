@@ -263,6 +263,11 @@ LUA_API int lua_isnumber (lua_State *L, int idx) {
   return tonumber(o, &n);
 }
 
+LUA_API int lua_isvector2 (lua_State *L, int idx) {
+  const TValue *o = index2adr(L, idx);
+  return ttisvector2(o);
+}
+
 LUA_API int lua_isvector3 (lua_State *L, int idx) {
   const TValue *o = index2adr(L, idx);
   return ttisvector3(o);
@@ -329,6 +334,17 @@ LUA_API lua_Number lua_tonumber (lua_State *L, int idx) {
     return 0;
 }
 
+
+LUA_API void lua_checkvector2 (lua_State *L, int idx, float *x, float *y) {
+  const TValue *o = index2adr(L, idx);
+  if (ttisvector2(o)) {
+    lua_Float4 f4 = v3value(o);
+    *x = f4.x;
+    *y = f4.y;
+  } else {
+    luaG_runerror(L, "Not a vector2");
+  }
+}
 
 LUA_API void lua_checkvector3 (lua_State *L, int idx, float *x, float *y, float *z) {
   const TValue *o = index2adr(L, idx);
@@ -470,8 +486,22 @@ LUA_API void lua_pushnumber (lua_State *L, lua_Number n) {
 }
 
 
+LUA_API void lua_pushvector2 (lua_State *L, float x, float y) {
+  lua_Float4 f4 = { 0, 0, 0, 0 };
+  f4.x = x;
+  f4.y = y;
+  lua_lock(L);
+  setv2value(L->top, f4);
+  api_incr_top(L);
+  lua_unlock(L);
+}
+
+
 LUA_API void lua_pushvector3 (lua_State *L, float x, float y, float z) {
-  lua_Float4 f4 = { 0, x, y, z };
+  lua_Float4 f4 = { 0, 0, 0, 0 };
+  f4.x = x;
+  f4.y = y;
+  f4.z = z;
   lua_lock(L);
   setv3value(L->top, f4);
   api_incr_top(L);
@@ -480,7 +510,11 @@ LUA_API void lua_pushvector3 (lua_State *L, float x, float y, float z) {
 
 
 LUA_API void lua_pushquat (lua_State *L, float w, float x, float y, float z) {
-  lua_Float4 f4 = { w, x, y, z };
+  lua_Float4 f4 = { 0, 0, 0, 0 };
+  f4.w = w;
+  f4.x = x;
+  f4.y = y;
+  f4.z = z;
   lua_lock(L);
   setqvalue(L->top, f4);
   api_incr_top(L);

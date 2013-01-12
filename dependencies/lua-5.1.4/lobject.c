@@ -226,6 +226,19 @@ lua_Float4 lua_str2quat (char *s, char *p)
   return stupid; /* shut up msvc */
 }
 
+int lua_vector22str (char *s, lua_Float4 n) {
+  return sprintf(s, "vector2(%.7g, %.7g)", n.x, n.y);
+}
+
+lua_Float4 lua_str2vector2 (char *s, char *p)
+{
+  lua_Float4 stupid = {0.0f,0.0f,0.0f,0.0f};
+  (void)s; (void)p;
+  fprintf(stderr, "lua_str2vector2 not yet implemented\n");
+  abort();
+  return stupid; /* shut up msvc */
+}
+
 int lua_vector32str (char *s, lua_Float4 n) {
   return sprintf(s, "vector3(%.7g, %.7g, %.7g)", n.x, n.y, n.z);
 }
