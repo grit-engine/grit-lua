@@ -84,7 +84,23 @@ static int math_ceil (lua_State *L) {
 }
 
 static int math_floor (lua_State *L) {
-  lua_pushnumber(L, floor(luaL_checknumber(L, 1)));
+  lua_Number v;
+  float x, y, z;
+  switch (lua_type(L,1)) {
+    case LUA_TNUMBER:
+    v = lua_tonumber(L,1);
+    lua_pushnumber(L,floor(v));
+    return 1;
+    case LUA_TVECTOR2:
+    lua_checkvector2(L,1,&x,&y);
+    lua_pushvector2(L,floorf(x),floorf(y));
+    return 1;
+    case LUA_TVECTOR3:
+    lua_checkvector3(L,1,&x,&y,&z);
+    lua_pushvector3(L,floorf(x),floorf(y),floorf(z));
+    return 1;
+  }
+  luaL_error(L, "floor takes a number, vector2, or vector3.");
   return 1;
 }
 
