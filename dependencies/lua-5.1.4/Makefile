@@ -1,15 +1,15 @@
 # makefile for building Lua
 
+ROOT=../..
+
 include ../../common.mk
 
-LUA_CFLAGS = -DLUA_USE_MKSTEMP -DLUA_USE_APICHECK
-
-# == END OF USER SETTINGS. NO NEED TO CHANGE ANYTHING BELOW THIS LINE =========
+CFLAGS = -DLUA_USE_MKSTEMP -DLUA_USE_APICHECK
 
 LUA_A= liblua.a
 
 $(LUA_A): mega.c
-	$(CC) $(CFLAGS) $(LUA_CFLAGS) -c $< -o mega.o
+	$(CC) $(GRIT_CXX_CODEGEN) $(CFLAGS) -c $< -o mega.o
 	ar -rcus $@ mega.o
 
 interpreter: interpreter.c $(LUA_A)
