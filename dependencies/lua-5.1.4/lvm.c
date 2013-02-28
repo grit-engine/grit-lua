@@ -453,7 +453,7 @@ static void Arith (lua_State *L, StkId ra, const TValue *rb,
       case TM_SUB: PW2(subf); break;
       case TM_MUL: PW2(mulf); break;
       case TM_DIV:
-        if (nc.x==0.0 || nc.y==0.0 || nc.z==0.0) {
+        if (nc.x==0.0 || nc.y==0.0) {
           luaG_runerror(L, "division by zero");
         }
         PW2(divf);
