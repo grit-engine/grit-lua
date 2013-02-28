@@ -4,19 +4,17 @@ ROOT=../..
 
 include ../../common.mk
 
-CFLAGS = -DLUA_USE_MKSTEMP -DLUA_USE_APICHECK
-
 LUA_A= liblua.a
 
 $(LUA_A): mega.c
-	$(CC) $(GRIT_CXX_CODEGEN) $(CFLAGS) -c $< -o mega.o
+	$(CC) $(GRIT_CXX_CODEGEN) $(LUA_CONF_FLAGS) -c $< -o mega.o
 	ar -rcus $@ mega.o
 
 interpreter: interpreter.c $(LUA_A)
-	$(CC) $(CFLAGS) $< $(LUA_A) -lm -o $@
+	$(CC) $(LUA_CONF_FLAGS) $< $(LUA_A) -lm -o $@
 
 test: test.c $(LUA_A)
-	$(CC) $(CFLAGS) $< $(LUA_A) -lm -o $@
+	$(CC) $(LUA_CONF_FLAGS) $< $(LUA_A) -lm -o $@
 
 
 %.o: %.cpp
