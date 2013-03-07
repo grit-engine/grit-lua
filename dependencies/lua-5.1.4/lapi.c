@@ -273,6 +273,11 @@ LUA_API int lua_isvector3 (lua_State *L, int idx) {
   return ttisvector3(o);
 }
 
+LUA_API int lua_isvector4 (lua_State *L, int idx) {
+  const TValue *o = index2adr(L, idx);
+  return ttisvector4(o);
+}
+
 LUA_API int lua_isquat (lua_State *L, int idx) {
   const TValue *o = index2adr(L, idx);
   return ttisquat(o);
@@ -355,6 +360,19 @@ LUA_API void lua_checkvector3 (lua_State *L, int idx, float *x, float *y, float 
     *z = f4.z;
   } else {
     luaG_runerror(L, "Not a vector3");
+  }
+}
+
+LUA_API void lua_checkvector4 (lua_State *L, int idx, float *x, float *y, float *z, float *w) {
+  const TValue *o = index2adr(L, idx);
+  if (ttisvector4(o)) {
+    lua_Float4 f4 = v4value(o);
+    *x = f4.x;
+    *y = f4.y;
+    *z = f4.z;
+    *w = f4.w;
+  } else {
+    luaG_runerror(L, "Not a vector4");
   }
 }
 
@@ -504,6 +522,19 @@ LUA_API void lua_pushvector3 (lua_State *L, float x, float y, float z) {
   f4.z = z;
   lua_lock(L);
   setv3value(L->top, f4);
+  api_incr_top(L);
+  lua_unlock(L);
+}
+
+
+LUA_API void lua_pushvector4 (lua_State *L, float x, float y, float z, float w) {
+  lua_Float4 f4 = { 0, 0, 0, 0 };
+  f4.x = x;
+  f4.y = y;
+  f4.z = z;
+  f4.w = w;
+  lua_lock(L);
+  setv4value(L->top, f4);
   api_incr_top(L);
   lua_unlock(L);
 }

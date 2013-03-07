@@ -24,7 +24,27 @@
 
 
 static int math_abs (lua_State *L) {
-  lua_pushnumber(L, fabs(luaL_checknumber(L, 1)));
+  lua_Number v;
+  float x, y, z, w;
+  switch (lua_type(L,1)) {
+    case LUA_TNUMBER:
+    v = lua_tonumber(L,1);
+    lua_pushnumber(L,fabs(v));
+    return 1;
+    case LUA_TVECTOR2:
+    lua_checkvector2(L,1,&x,&y);
+    lua_pushvector2(L,fabsf(x),fabsf(y));
+    return 1;
+    case LUA_TVECTOR3:
+    lua_checkvector3(L,1,&x,&y,&z);
+    lua_pushvector3(L,fabsf(x),fabsf(y),fabsf(z));
+    return 1;
+    case LUA_TVECTOR4:
+    lua_checkvector4(L,1,&x,&y,&z,&w);
+    lua_pushvector4(L,fabsf(x),fabsf(y),fabsf(z),fabsf(w));
+    return 1;
+  }
+  luaL_error(L, "ceil takes a number, vector2, vector3, or vector4.");
   return 1;
 }
 
@@ -79,13 +99,33 @@ static int math_atan2 (lua_State *L) {
 }
 
 static int math_ceil (lua_State *L) {
-  lua_pushnumber(L, ceil(luaL_checknumber(L, 1)));
+  lua_Number v;
+  float x, y, z, w;
+  switch (lua_type(L,1)) {
+    case LUA_TNUMBER:
+    v = lua_tonumber(L,1);
+    lua_pushnumber(L,ceil(v));
+    return 1;
+    case LUA_TVECTOR2:
+    lua_checkvector2(L,1,&x,&y);
+    lua_pushvector2(L,ceilf(x),ceilf(y));
+    return 1;
+    case LUA_TVECTOR3:
+    lua_checkvector3(L,1,&x,&y,&z);
+    lua_pushvector3(L,ceilf(x),ceilf(y),ceilf(z));
+    return 1;
+    case LUA_TVECTOR4:
+    lua_checkvector4(L,1,&x,&y,&z,&w);
+    lua_pushvector4(L,ceilf(x),ceilf(y),ceilf(z),ceilf(w));
+    return 1;
+  }
+  luaL_error(L, "ceil takes a number, vector2, vector3, or vector4.");
   return 1;
 }
 
 static int math_floor (lua_State *L) {
   lua_Number v;
-  float x, y, z;
+  float x, y, z, w;
   switch (lua_type(L,1)) {
     case LUA_TNUMBER:
     v = lua_tonumber(L,1);
@@ -99,8 +139,12 @@ static int math_floor (lua_State *L) {
     lua_checkvector3(L,1,&x,&y,&z);
     lua_pushvector3(L,floorf(x),floorf(y),floorf(z));
     return 1;
+    case LUA_TVECTOR4:
+    lua_checkvector4(L,1,&x,&y,&z,&w);
+    lua_pushvector4(L,floorf(x),floorf(y),floorf(z),floorf(w));
+    return 1;
   }
-  luaL_error(L, "floor takes a number, vector2, or vector3.");
+  luaL_error(L, "floor takes a number, vector2, vector3, or vector4.");
   return 1;
 }
 
@@ -224,6 +268,17 @@ static int math_max (lua_State *L) {
   return 1;
 }
 
+static int math_clamp (lua_State *L) {
+  if (lua_gettop(L)!=3) return luaL_error(L, "wrong number of arguments");
+  lua_Number a = luaL_checknumber(L,1);
+  lua_Number b = luaL_checknumber(L,2);
+  lua_Number c = luaL_checknumber(L,3);
+  if (a<b) a = b;
+  if (a>c) a = c;
+  lua_pushnumber(L, a);
+  return 1;
+}
+
 
 static int math_random (lua_State *L) {
   /* the `%' avoids the (rare) case of r==1, and is needed also because on
@@ -278,6 +333,7 @@ static const luaL_Reg mathlib[] = {
   {"log",   math_log},
   {"max",   math_max},
   {"min",   math_min},
+  {"clamp", math_clamp},
   {"modf",   math_modf},
   {"pow",   math_pow},
   {"rad",   math_rad},
