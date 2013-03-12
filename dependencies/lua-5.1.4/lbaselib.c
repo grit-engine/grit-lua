@@ -475,8 +475,8 @@ static int luaB_newproxy (lua_State *L) {
 }
 
 static int luaB_vectorn (lua_State *L, int sz, float *input) {
-  unsigned counter = 0;
-  unsigned i;
+  int counter = 0;
+  int i;
   for (i=1; i<=lua_gettop(L) ; ++i) {
     switch (lua_type(L, i)) {
       case LUA_TVECTOR4:
