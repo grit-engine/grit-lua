@@ -269,10 +269,11 @@ static int math_max (lua_State *L) {
 }
 
 static int math_clamp (lua_State *L) {
+  lua_Number a, b, c;
   if (lua_gettop(L)!=3) return luaL_error(L, "wrong number of arguments");
-  lua_Number a = luaL_checknumber(L,1);
-  lua_Number b = luaL_checknumber(L,2);
-  lua_Number c = luaL_checknumber(L,3);
+  a = luaL_checknumber(L,1);
+  b = luaL_checknumber(L,2);
+  c = luaL_checknumber(L,3);
   if (a<b) a = b;
   if (a>c) a = c;
   lua_pushnumber(L, a);
