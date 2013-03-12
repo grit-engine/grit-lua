@@ -522,7 +522,7 @@ static int luaB_vectorn (lua_State *L, int sz, float *input) {
 
       default: {
         char msg[1024];
-        snprintf(msg, sizeof(msg), "vector%d(...) argument %d had type %s", sz, i, lua_typename(L, lua_type(L,i)));
+        sprintf(msg, "vector%d(...) argument %d had type %s", sz, i, lua_typename(L, lua_type(L,i)));
         luaL_error(L, msg);
       }
     }
