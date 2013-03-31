@@ -528,7 +528,7 @@ static void Arith (lua_State *L, StkId ra, const TValue *rb,
         break;
       case TM_MOD: SCALAR2(fmodf); break;
       case TM_POW: SCALAR2(powf); break;
-      default: luaG_runerror(L, "Cannot use that op with vector3 and number");
+      default: luaG_runerror(L, "Cannot use that op with vector2 and number");
     }
     setv2value(ra, r);
   } else if (ttisvector3(rb) && ttisnumber(rc)) {
@@ -571,7 +571,7 @@ static void Arith (lua_State *L, StkId ra, const TValue *rb,
     lua_Float4 r;
     switch (op) {
       case TM_MUL: SCALAR2(mulf); break;
-      default: luaG_runerror(L, "Cannot use that op with number and vector3");
+      default: luaG_runerror(L, "Cannot use that op with number and vector2");
     }
     setv2value(ra, r);
   } else if (ttisnumber(rb) && ttisvector3(rc)) {
