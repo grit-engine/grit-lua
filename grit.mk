@@ -20,18 +20,44 @@ LUA_WEAK_C_SRCS= \
 	lvm.c \
 	lzio.c \
 	\
-	lauxlib.c\
-	lbaselib.c\
-	lbitlib.c\
-	lcorolib.c\
-	ldblib.c\
-	liolib.c\
-	lmathlib.c\
-	loslib.c\
-	lstrlib.c\
-	ltablib.c\
-	loadlib.c\
-	linit.c\
+	lauxlib.c \
+	lbaselib.c \
+	lbitlib.c \
+	lcorolib.c \
+	ldblib.c \
+	liolib.c \
+	lmathlib.c \
+	loslib.c \
+	lstrlib.c \
+	ltablib.c \
+	loadlib.c \
+	linit.c \
+
+LUA_INCLUDE_SRCS= \
+	lapi.h \
+	lauxlib.h \
+	lcode.h \
+	lctype.h \
+	ldebug.h \
+	ldo.h \
+	lfunc.h \
+	lgc.h \
+	llex.h \
+	llimits.h \
+	lmem.h \
+	lobject.h \
+	lopcodes.h \
+	lparser.h \
+	lstate.h \
+	lstring.h \
+	ltable.h \
+	ltm.h \
+	luaconf.h \
+	lua.h \
+	lualib.h \
+	lundump.h \
+	lvm.h \
+	lzio.h \
 
 LUA_INCLUDE_DIRS= \
 	.
