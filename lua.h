@@ -448,6 +448,10 @@ struct lua_Debug {
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+// readline has a silly macro that can break users of lua.h.
+#ifdef RETURN
+#undef RETURN
+#endif
 #define lua_readline(L,b,p)	((void)L, ((b)=readline(p)) != NULL)
 #define lua_saveline(L,idx) \
         if (lua_rawlen(L,idx) > 0)  /* non-empty line? */ \
