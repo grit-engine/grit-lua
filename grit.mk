@@ -33,32 +33,6 @@ LUA_WEAK_C_SRCS= \
 	loadlib.c \
 	linit.c \
 
-LUA_INCLUDE_SRCS= \
-	lapi.h \
-	lauxlib.h \
-	lcode.h \
-	lctype.h \
-	ldebug.h \
-	ldo.h \
-	lfunc.h \
-	lgc.h \
-	llex.h \
-	llimits.h \
-	lmem.h \
-	lobject.h \
-	lopcodes.h \
-	lparser.h \
-	lstate.h \
-	lstring.h \
-	ltable.h \
-	ltm.h \
-	luaconf.h \
-	lua.h \
-	lualib.h \
-	lundump.h \
-	lvm.h \
-	lzio.h \
-
 LUA_INCLUDE_DIRS= \
 	.
 
