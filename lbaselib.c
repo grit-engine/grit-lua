@@ -696,8 +696,13 @@ static int luaB_slerp (lua_State *L) {
 
   /* dot > 0 now */
     
-  theta = acosf(dot);
-  if (dot != 1) {
+  /* Due to rounding errors, even when vectors are normalised in Lua, dot can be > 1.
+   * We treat this case as if dot == 1 as it can only happen when the quats are very
+   * similar.
+   */
+
+  if (dot < 1) {
+    theta = acosf(dot);
     float d = 1.0f / sinf(theta);
     float s0 = sinf((1.0f - t) * theta);
     float s1 = sinf(t * theta);
